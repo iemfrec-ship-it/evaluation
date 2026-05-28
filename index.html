@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OralCheck</title>
+<style>
+:root{
+  --primary:#1a3a5c;--accent:#2e86de;--bg:#f0f4f8;--card:#fff;
+  --text:#1e2d3d;--muted:#6b7c93;
+  --c1:#7b0000;--c2:#c0392b;--c3:#e67e22;--c4:#27ae60;--c5:#1a6b3c;
+  --radius:14px;--shadow:0 4px 20px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.screen{display:none;min-height:100vh;padding-bottom:40px;}
+.screen.active{display:flex;flex-direction:column;align-items:center;}
+
+/* HEROES */
+.hero{width:100%;padding:34px 20px 50px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:-20px;left:0;right:0;height:40px;background:var(--bg);border-radius:50% 50% 0 0/40px 40px 0 0;}
+.hero-blue{background:linear-gradient(135deg,#1a3a5c,#2e86de);}
+.hero-green{background:linear-gradient(135deg,#27ae60,#52d68a);}
+.hero-icon{font-size:3rem;display:block;margin-bottom:8px;}
+.hero-logo{font-size:2.6rem;font-weight:900;color:#fff;letter-spacing:-1px;}
+.hero-logo span{color:#a8d8ff;}
+.hero-sub{color:rgba(255,255,255,.75);font-size:.92rem;margin-top:5px;}
+.hero-title{font-size:1.5rem;font-weight:800;color:#fff;}
+.hero-context{color:rgba(255,255,255,.8);font-size:.84rem;margin-top:4px;}
+
+/* CONTENT */
+.content{width:100%;max-width:500px;padding:20px 16px 0;}
+
+/* CARDS */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 18px;margin-bottom:14px;}
+.card h2{font-size:1rem;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+/* HOME */
+.home-cards{width:100%;max-width:500px;padding:28px 16px 0;display:flex;flex-direction:column;gap:12px;}
+.hcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 18px;display:flex;align-items:center;gap:16px;cursor:pointer;border:2px solid transparent;transition:all .2s;}
+.hcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 28px rgba(46,134,222,.18);}
+.hcard-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.ic-blue{background:linear-gradient(135deg,#1a3a5c,#2e86de);}
+.ic-green{background:linear-gradient(135deg,#27ae60,#52d68a);}
+.hcard-label{font-size:1rem;font-weight:700;color:var(--primary);}
+.hcard-desc{font-size:.8rem;color:var(--muted);margin-top:2px;}
+.hcard-arrow{margin-left:auto;color:var(--accent);font-size:1.4rem;}
+
+/* SELECTION */
+.sel-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;}
+.sel-btn{background:var(--card);border:2px solid #dde3ec;border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .18s;font-size:.88rem;font-weight:600;color:var(--primary);}
+.sel-btn:hover{border-color:var(--accent);background:#f0f7ff;}
+.sb-icon{font-size:1.4rem;display:block;margin-bottom:5px;}
+.session-card{background:var(--card);border:2px solid #dde3ec;border-radius:12px;padding:15px;cursor:pointer;transition:all .18s;margin-bottom:10px;}
+.session-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(46,134,222,.15);}
+.session-theme{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin-bottom:4px;}
+.session-title{font-size:.96rem;font-weight:700;color:var(--primary);}
+.session-meta{font-size:.77rem;color:var(--muted);margin-top:4px;}
+
+/* FORM */
+label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
+input,textarea{width:100%;padding:11px 13px;border:1.5px solid #dde3ec;border-radius:9px;font-size:.93rem;background:#f8fafc;color:var(--text);margin-bottom:13px;transition:border-color .2s;font-family:inherit;}
+input:focus,textarea:focus{outline:none;border-color:var(--accent);background:#fff;}
+.code-input{letter-spacing:4px;font-weight:700;font-size:1.05rem;text-transform:uppercase;}
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+textarea{resize:vertical;min-height:80px;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:9px;border:none;cursor:pointer;font-size:.93rem;font-weight:700;transition:filter .15s,transform .1s;width:100%;}
+.btn:hover{filter:brightness(1.07);transform:translateY(-1px);}
+.btn:active{transform:translateY(0);}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#1a6bbf);color:#fff;}
+.btn-green{background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;}
+.btn-secondary{background:#f0f4f8;color:var(--primary);border:2px solid #dde3ec;margin-top:8px;}
+.btn-danger{background:#c0392b;color:#fff;}
+.btn-small{padding:7px 12px;font-size:.8rem;width:auto;}
+.btn-add{background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border-radius:50px;padding:12px 22px;font-size:.9rem;margin-bottom:14px;border:none;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:8px;}
+
+/* ALERTS */
+.alert{border-radius:9px;padding:11px 14px;font-size:.86rem;margin-bottom:12px;}
+.alert-info{background:#e8f4fd;color:#1a6ea8;border-left:4px solid var(--accent);}
+.alert-warn{background:#fff3e0;color:#b05f00;border-left:4px solid #e67e22;}
+.alert-error{background:#fdecea;color:#c0392b;border-left:4px solid #c0392b;}
+.alert-success{background:#e6f9ef;color:#1a6b3c;border-left:4px solid #27ae60;}
+
+/* PROGRESS */
+.progress-wrap{width:100%;margin-bottom:16px;}
+.progress-note{font-size:.78rem;color:var(--muted);text-align:right;margin-bottom:4px;}
+.progress-bar{height:7px;background:#e0e8f0;border-radius:10px;}
+.progress-fill{height:7px;background:linear-gradient(90deg,var(--accent),#27ae60);border-radius:10px;transition:width .4s;}
+
+/* EVAL BLOCK */
+.eval-block{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 15px;margin-bottom:14px;border-top:4px solid var(--accent);}
+.eval-block.prof-block{border-top-color:#7b0000;}
+.eval-block-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;}
+.eval-block-num{font-weight:800;font-size:.92rem;color:var(--primary);}
+.btn-remove{background:none;border:none;color:#c0392b;font-size:1.1rem;cursor:pointer;padding:4px 8px;border-radius:6px;}
+.btn-remove:hover{background:#fdecea;}
+
+/* SECTION DIVIDER */
+.section-divider{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-bottom:1.5px solid #e0e8f0;padding-bottom:6px;margin:16px 0 12px;}
+.section-divider.prof-extra{color:#7b0000;}
+
+/* CRITERIA */
+.criteria-item{margin-bottom:13px;}
+.criteria-label{font-size:.87rem;font-weight:600;color:var(--text);margin-bottom:6px;}
+
+/* COLOR BUTTONS — 5 niveaux, lisibles en N&B */
+.color-btns{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
+.cbtn{
+  padding:8px 3px;border:3px solid transparent;border-radius:8px;
+  font-size:.66rem;font-weight:700;color:#fff;cursor:pointer;
+  opacity:.28;transition:opacity .15s,transform .15s,box-shadow .15s,border-color .15s;
+  text-align:center;line-height:1.3;position:relative;
+}
+.cbtn.selected{
+  opacity:1;transform:scale(1.07);
+  box-shadow:0 3px 10px rgba(0,0,0,.25);
+  border-color:#000 !important;   /* contour noir épais → visible en N&B */
+}
+/* hachures pour impression N&B : pattern via outline inset */
+.cbtn.selected::after{
+  content:'✓';position:absolute;bottom:2px;right:3px;
+  font-size:.6rem;color:rgba(255,255,255,.9);font-weight:900;
+}
+.cbtn-1{background:var(--c1);}
+.cbtn-2{background:var(--c2);}
+.cbtn-3{background:var(--c3);}
+.cbtn-4{background:var(--c4);}
+.cbtn-5{background:var(--c5);}
+
+/* NOTE INPUT */
+.note-input-wrap{display:flex;align-items:center;gap:10px;margin-bottom:13px;}
+.note-input-wrap input{margin:0;width:80px;text-align:center;font-weight:700;font-size:1rem;}
+.note-label{font-size:.87rem;font-weight:600;color:var(--text);}
+
+/* BADGE */
+.s-badge{background:linear-gradient(135deg,#1a3a5c,#2e86de);color:#fff;border-radius:10px;padding:10px 15px;font-size:.84rem;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;width:100%;}
+
+/* BREADCRUMB */
+.breadcrumb{font-size:.78rem;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.breadcrumb span{color:var(--accent);font-weight:600;}
+
+/* FOOTER */
+.footer{margin-top:20px;text-align:center;font-size:.76rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:6px;}
+.btn-rgpd{background:none;border:1px solid #ccd3de;border-radius:20px;padding:5px 15px;font-size:.74rem;color:var(--muted);cursor:pointer;}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:var(--radius);padding:26px 22px;max-width:400px;width:100%;}
+.modal h3{margin-bottom:10px;color:var(--primary);}
+.modal-actions{display:flex;gap:10px;margin-top:16px;}
+
+/* DONE */
+.done-hero{background:linear-gradient(135deg,#27ae60,#1a6b3c);width:100%;padding:38px 20px 50px;text-align:center;position:relative;overflow:hidden;}
+.done-hero::after{content:'';position:absolute;bottom:-20px;left:0;right:0;height:40px;background:var(--bg);border-radius:50% 50% 0 0/40px 40px 0 0;}
+
+@media(max-width:380px){.color-btns{grid-template-columns:repeat(3,1fr);}.sel-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ══ HOME ══════════════════════════════════════════ -->
+<div id="screen-home" class="screen active">
+  <div class="hero hero-blue">
+    <span class="hero-icon">🎤</span>
+    <div class="hero-logo">Oral<span>Check</span></div>
+    <div class="hero-sub">Évaluation des présentations orales</div>
+  </div>
+  <div class="home-cards">
+    <div class="hcard" onclick="goTo('screen-prof-login')">
+      <div class="hcard-icon ic-blue">🎓</div>
+      <div><div class="hcard-label">Espace Professeur</div><div class="hcard-desc">Évaluer et gérer les paramètres</div></div>
+      <div class="hcard-arrow">›</div>
+    </div>
+    <div class="hcard" onclick="goTo('screen-student-login')">
+      <div class="hcard-icon ic-green">📝</div>
+      <div><div class="hcard-label">Espace Élève</div><div class="hcard-desc">Évaluer les présentations</div></div>
+      <div class="hcard-arrow">›</div>
+    </div>
+    <div class="footer">
+      <div>Créé par <strong>C. Iemfre</strong></div>
+      <button class="btn-rgpd" onclick="goTo('screen-rgpd')">🔒 Politique RGPD</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RGPD ══════════════════════════════════════════ -->
+<div id="screen-rgpd" class="screen">
+  <div class="hero hero-blue" style="padding:26px 20px 42px">
+    <div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div>
+    <div class="hero-sub">Politique de confidentialité</div>
+  </div>
+  <div class="content">
+    <div class="card"><h2>🔒 RGPD</h2>
+      <p style="color:var(--muted);font-size:.88rem;line-height:1.6"><em>Cette page sera complétée ultérieurement par l'auteur de l'application.</em></p>
+    </div>
+    <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
+  </div>
+</div>
+
+<!-- ══ PROF LOGIN ════════════════════════════════════ -->
+<div id="screen-prof-login" class="screen">
+  <div class="hero hero-blue" style="padding:26px 20px 42px">
+    <div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div>
+    <div class="hero-sub">Espace Professeur</div>
+  </div>
+  <div class="content">
+    <div class="card"><h2>🔐 Connexion</h2>
+      <label>Code professeur</label>
+      <input id="prof-pin-input" type="password" maxlength="6" placeholder="••••" class="code-input">
+      <div id="prof-login-error" class="alert alert-error" style="display:none">Code incorrect.</div>
+      <button class="btn btn-primary" onclick="profLogin()">Accéder →</button>
+      <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROF DASHBOARD ════════════════════════════════ -->
+<div id="screen-prof-dashboard" class="screen">
+  <div class="hero hero-blue" style="padding:22px 20px 38px">
+    <div class="hero-logo" style="font-size:1.4rem">Oral<span>Check</span></div>
+    <div class="hero-sub">Tableau de bord professeur</div>
+  </div>
+  <div class="content">
+    <!-- Codes -->
+    <div class="card"><h2>⚙️ Codes d'accès</h2>
+      <label>Nouveau code professeur (vide = inchangé)</label>
+      <input id="new-prof-code" type="password" maxlength="6" placeholder="••••" class="code-input">
+      <label>Code élèves (actuel : <span id="display-student-code"></span>)</label>
+      <input id="new-student-code" type="text" maxlength="10" placeholder="Code élèves" class="code-input">
+      <button class="btn btn-primary" onclick="saveCodes()">💾 Enregistrer</button>
+      <div id="codes-saved-msg" class="alert alert-success" style="display:none;margin-top:10px">Codes mis à jour ✓</div>
+    </div>
+    <!-- Évaluation prof -->
+    <div class="card"><h2>📋 Mes évaluations</h2>
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Sélectionnez une session pour commencer vos évaluations.</p>
+      <div id="prof-session-list"></div>
+    </div>
+    <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour à l'accueil</button>
+  </div>
+</div>
+
+<!-- ══ PROF EVAL ═════════════════════════════════════ -->
+<div id="screen-prof-eval" class="screen">
+  <div class="hero hero-blue" style="padding:20px 20px 40px">
+    <div class="hero-title" style="font-size:1.15rem" id="prof-eval-hero-title"></div>
+    <div class="hero-context" id="prof-eval-hero-context"></div>
+  </div>
+  <div class="content">
+    <div class="s-badge" id="prof-badge-bar">🎓 Évaluateur : Professeur</div>
+    <div class="progress-wrap">
+      <div class="progress-note" id="prof-progress-note"></div>
+      <div class="progress-bar"><div class="progress-fill" id="prof-progress-fill" style="width:0%"></div></div>
+    </div>
+    <div id="prof-eval-blocks-container"></div>
+    <button class="btn-add" onclick="addProfEvalBlock()">+ Évaluer un autre élève</button>
+    <button class="btn btn-primary" style="margin-bottom:8px" onclick="generateProfPDF()">🖨️ Télécharger le rapport PDF</button>
+    <button class="btn btn-secondary" onclick="goTo('screen-prof-dashboard')">← Retour au tableau de bord</button>
+  </div>
+</div>
+
+<!-- ══ STUDENT LOGIN ═════════════════════════════════ -->
+<div id="screen-student-login" class="screen">
+  <div class="hero hero-green">
+    <span class="hero-icon">📝</span>
+    <div class="hero-title">Espace Élève</div>
+    <div class="hero-sub">Évaluation des présentations orales</div>
+  </div>
+  <div class="content">
+    <div class="card"><h2>🔑 Code d'accès</h2>
+      <p style="font-size:.84rem;color:var(--muted);margin-bottom:13px">Code fourni par votre professeur.</p>
+      <label>Code d'accès</label>
+      <input id="student-access-code" type="text" maxlength="10" placeholder="Code d'accès" class="code-input">
+      <div id="student-access-error" class="alert alert-error" style="display:none">Code incorrect.</div>
+      <button class="btn btn-green" onclick="studentAccessCheck()">Continuer →</button>
+      <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STUDENT : FILIÈRE ═════════════════════════════ -->
+<div id="screen-choose-filiere" class="screen">
+  <div class="hero hero-green" style="padding:22px 20px 38px">
+    <div class="hero-title">Ma filière</div>
+  </div>
+  <div class="content">
+    <div class="card"><h2>🏫 Votre filière</h2>
+      <div class="sel-grid" id="filiere-grid"></div>
+    </div>
+    <button class="btn btn-secondary" onclick="goTo('screen-student-login')">← Retour</button>
+  </div>
+</div>
+
+<!-- ══ STUDENT : CLASSE ══════════════════════════════ -->
+<div id="screen-choose-classe" class="screen">
+  <div class="hero hero-green" style="padding:22px 20px 38px">
+    <div class="hero-title">Ma classe</div>
+    <div class="hero-context" id="sub-filiere-selected"></div>
+  </div>
+  <div class="content">
+    <div class="card"><h2>🎒 Votre classe</h2>
+      <div class="sel-grid" id="classe-grid"></div>
+    </div>
+    <button class="btn btn-secondary" onclick="goTo('screen-choose-filiere')">← Retour</button>
+  </div>
+</div>
+
+<!-- ══ STUDENT : SESSION ═════════════════════════════ -->
+<div id="screen-choose-session" class="screen">
+  <div class="hero hero-green" style="padding:22px 20px 38px">
+    <div class="hero-title">Mon évaluation</div>
+    <div class="hero-context" id="sub-classe-selected"></div>
+  </div>
+  <div class="content">
+    <div class="card"><h2>📋 Quelle évaluation ?</h2>
+      <div id="session-list"></div>
+    </div>
+    <button class="btn btn-secondary" onclick="goTo('screen-choose-classe')">← Retour</button>
+  </div>
+</div>
+
+<!-- ══ STUDENT : IDENTIFICATION ══════════════════════ -->
+<div id="screen-student-identify" class="screen">
+  <div class="hero hero-green" style="padding:22px 20px 38px">
+    <span class="hero-icon" style="font-size:2rem">👤</span>
+    <div class="hero-title">Identification</div>
+    <div class="hero-sub">Ces initiales figureront dans votre rapport</div>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="breadcrumb" id="id-breadcrumb"></div>
+      <h2>👤 Qui êtes-vous ?</h2>
+      <div class="input-grid">
+        <div>
+          <label>2 premières lettres du prénom</label>
+          <input id="s-firstname" type="text" maxlength="2" placeholder="MA" class="code-input" oninput="this.value=this.value.toUpperCase()">
+        </div>
+        <div>
+          <label>2 premières lettres du nom</label>
+          <input id="s-lastname" type="text" maxlength="2" placeholder="DU" class="code-input" oninput="this.value=this.value.toUpperCase()">
+        </div>
+      </div>
+      <div id="identify-error" class="alert alert-error" style="display:none">Veuillez remplir les deux champs.</div>
+      <button class="btn btn-green" onclick="studentIdentify()">Accéder à l'évaluation →</button>
+      <button class="btn btn-secondary" onclick="goTo('screen-choose-session')">← Retour</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STUDENT EVAL ══════════════════════════════════ -->
+<div id="screen-student-eval" class="screen">
+  <div class="hero hero-green" style="padding:18px 20px 40px">
+    <div class="hero-title" style="font-size:1.15rem" id="eval-hero-title"></div>
+    <div class="hero-context" id="eval-hero-context"></div>
+  </div>
+  <div class="content">
+    <div class="s-badge" id="student-badge-bar"></div>
+    <div class="progress-wrap">
+      <div class="progress-note" id="progress-note"></div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div id="eval-blocks-container"></div>
+    <button class="btn-add" onclick="addEvalBlock()">+ Évaluer un autre camarade</button>
+    <div class="alert alert-warn" style="margin-bottom:14px">
+      <strong>📬 Rappel :</strong> Ce travail sera <strong>noté</strong>. Générez votre rapport et envoyez-le via <strong>Ecole Directe</strong>.
+    </div>
+    <button class="btn btn-primary" onclick="generateStudentPDF()">📄 Générer mon rapport PDF</button>
+    <button class="btn btn-secondary" onclick="confirmReset()">← Recommencer</button>
+  </div>
+</div>
+
+<!-- ══ DONE STUDENT ═══════════════════════════════════ -->
+<div id="screen-done" class="screen">
+  <div class="done-hero">
+    <span style="font-size:3rem;display:block;margin-bottom:8px">✅</span>
+    <div style="font-size:1.5rem;font-weight:900;color:#fff">Rapport généré !</div>
+    <div style="color:rgba(255,255,255,.8);font-size:.88rem;margin-top:4px">Pensez à l'envoyer sur Ecole Directe</div>
+  </div>
+  <div class="content" style="margin-top:30px">
+    <div class="card">
+      <div class="alert alert-warn" style="margin-bottom:0">
+        📬 <strong>Ecole Directe → Messages → Pièce jointe</strong><br>
+        <span style="font-size:.82rem">Envoyez le fichier à votre professeur. Ce travail sera noté.</span>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="goTo('screen-home')">🏠 Retour à l'accueil</button>
+  </div>
+</div>
+
+<!-- ══ MODAL RESET ════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-reset">
+  <div class="modal">
+    <h3>⚠️ Recommencer ?</h3>
+    <p style="font-size:.88rem;color:var(--muted)">Toutes vos évaluations seront perdues.</p>
+    <div class="modal-actions">
+      <button class="btn btn-danger" style="flex:1" onclick="doReset()">Oui</button>
+      <button class="btn btn-secondary" style="flex:1;margin:0" onclick="closeModal('modal-reset')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════
+//  SESSIONS
+// ════════════════════════════════════════════════════
+const SESSIONS = [
+  {
+    filiere: 'AEPA',
+    classe:  '2nde',
+    theme:   'My work placement',
+    titre:   'Final task',
+    criteres: [
+      {id:'c1', label:'1/ Présentation de l\'entreprise : nom, lieu, type d\'activité, nombre d\'employés'},
+      {id:'c2', label:'2/ Présentation mission 1'},
+      {id:'c3', label:'3/ Présentation mission 2'},
+      {id:'c4', label:'4/ Présentation mission 3'},
+      {id:'c5', label:'5/ Ce que l\'élève a apprécié et pas apprécié (4 verbes de goût différents)'},
+    ],
+    criteresProf: [
+      {id:'a', label:'a/ Structure des phrases (syntaxe)'},
+      {id:'b', label:'b/ Respect du prétérit'},
+      {id:'c', label:'c/ Construction du prétérit'},
+      {id:'d', label:'d/ Anglais intelligible / compréhensible (prononciation)'},
+      {id:'e', label:'e/ Vocabulaire adapté'},
+      {id:'f', label:'f/ Fluidité'},
+    ]
+  },
+  {
+    filiere: 'AEPA',
+    classe:  'Terminale',
+    theme:   'Gap years',
+    titre:   'Final task',
+    criteres: [
+      {id:'c1', label:'1/ Présentation du pays'},
+      {id:'c2', label:'2/ Les raisons de ce choix'},
+      {id:'c3', label:'3/ Ce que l\'élève souhaite y faire'},
+      {id:'c4', label:'4/ Les motivations'},
+      {id:'c5', label:'5/ Les expériences'},
+      {id:'c6', label:'6/ Avantages'},
+      {id:'c7', label:'7/ Inquiétudes'},
+      {id:'c8', label:'8/ Clarté de la carte mentale'},
+    ],
+    criteresProf: [
+      {id:'a', label:'a/ Structure des phrases (syntaxe)'},
+      {id:'b', label:'b/ Respect des temps (conjugaison)'},
+      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)'},
+      {id:'d', label:'d/ Vocabulaire adapté'},
+      {id:'e', label:'e/ Fluidité'},
+    ]
+  },
+  {
+    filiere: 'AEPA',
+    classe:  '1ère',
+    theme:   'Working conditions',
+    titre:   'Final task',
+    criteres: [
+      {id:'c1', label:'1/ Présentation de l\'entreprise'},
+      {id:'c2', label:'2/ Description des conditions de travail'},
+      {id:'c3', label:'3/ Points positifs'},
+      {id:'c4', label:'4/ Points négatifs'},
+      {id:'c5', label:'5/ Ce qui se passe dans l\'entreprise (actions qui démontrent les conditions de travail)'},
+      {id:'c6', label:'6/ Améliorations possibles'},
+      {id:'c7', label:'7/ Respect du temps de parole'},
+      {id:'c8', label:'8/ Clarté du diaporama'},
+      {id:'c9', label:'9/ Respect du nombre de mots dans le diapo'},
+    ],
+    criteresProf: [
+      {id:'a', label:'a/ Structure des phrases (syntaxe)'},
+      {id:'b', label:'b/ Respect des temps (conjugaison présent et présent be+ing)'},
+      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)'},
+      {id:'d', label:'d/ Vocabulaire adapté'},
+      {id:'e', label:'e/ Fluidité'},
+    ]
+  },
+];
+
+// ════════════════════════════════════════════════════
+const LEVELS = [
+  {cls:'cbtn-1', label:'✗✗ Insuffisant', v:1, txt:'Insuffisant'},
+  {cls:'cbtn-2', label:'✗ Pas OK',       v:2, txt:'Pas OK'    },
+  {cls:'cbtn-3', label:'~ Moyen',        v:3, txt:'Moyen'     },
+  {cls:'cbtn-4', label:'✓ Bien',         v:4, txt:'Bien'      },
+  {cls:'cbtn-5', label:'★ Très bien',    v:5, txt:'Très bien' },
+];
+
+const ST = {
+  profCode:'0504', studentCode:'ELEVE01',
+  filiere:'', classe:'', session:null,
+  student:{id:'', classe:''},
+  evals:[], profEvals:[], profSession:null
+};
+
+// ── NAV ──────────────────────────────────────────────
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function unique(arr){return [...new Set(arr)];}
+
+// ── PROF ─────────────────────────────────────────────
+function profLogin(){
+  const v=document.getElementById('prof-pin-input').value.trim();
+  if(v===ST.profCode){
+    document.getElementById('prof-login-error').style.display='none';
+    document.getElementById('prof-pin-input').value='';
+    document.getElementById('display-student-code').textContent=ST.studentCode;
+    document.getElementById('new-student-code').value=ST.studentCode;
+    renderProfSessionList();
+    goTo('screen-prof-dashboard');
+  } else {
+    document.getElementById('prof-login-error').style.display='block';
+  }
+}
+function saveCodes(){
+  const np=document.getElementById('new-prof-code').value.trim();
+  const ns=document.getElementById('new-student-code').value.trim();
+  if(np) ST.profCode=np;
+  if(ns) ST.studentCode=ns;
+  document.getElementById('new-prof-code').value='';
+  document.getElementById('display-student-code').textContent=ST.studentCode;
+  const m=document.getElementById('codes-saved-msg');
+  m.style.display='block'; setTimeout(()=>m.style.display='none',2500);
+}
+function renderProfSessionList(){
+  const el=document.getElementById('prof-session-list');
+  if(!SESSIONS.length){el.innerHTML='<p style="color:var(--muted);font-size:.85rem">Aucune session définie.</p>';return;}
+  el.innerHTML=SESSIONS.map((s,i)=>`
+    <div class="session-card" onclick="startProfEval(${i})">
+      <div class="session-theme">📚 ${s.filiere} · ${s.classe}</div>
+      <div class="session-title">${s.titre}</div>
+      <div class="session-meta">Thème : ${s.theme} · ${s.criteres.length} critère(s) commun(s) + ${s.criteresProf.length} critère(s) prof</div>
+    </div>`).join('');
+}
+
+// ── PROF EVAL ────────────────────────────────────────
+let profBlockCounter=0;
+function startProfEval(idx){
+  ST.profSession=SESSIONS[idx];
+  ST.profEvals=[];
+  profBlockCounter=0;
+  document.getElementById('prof-eval-hero-title').textContent=ST.profSession.titre;
+  document.getElementById('prof-eval-hero-context').textContent=`${ST.profSession.filiere} · ${ST.profSession.classe} · ${ST.profSession.theme}`;
+  document.getElementById('prof-eval-blocks-container').innerHTML='';
+  addProfEvalBlock();
+  goTo('screen-prof-eval');
+}
+
+function addProfEvalBlock(){
+  profBlockCounter++;
+  const idx=profBlockCounter;
+  const evalObj={
+    presenterCode:'',
+    criteria: ST.profSession.criteres.map(c=>({id:c.id,label:c.label,value:null})),
+    criteriaProf: ST.profSession.criteresProf.map(c=>({id:c.id,label:c.label,value:null})),
+    note:'', appreciation:''
+  };
+  ST.profEvals.push(evalObj);
+  const eIdx=ST.profEvals.length-1;
+
+  const commonHTML=ST.profSession.criteres.map((c,ci)=>`
+    <div class="criteria-item">
+      <div class="criteria-label">${c.label}</div>
+      <div class="color-btns">
+        ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
+          onclick="selectProfColor(this,${eIdx},'common',${ci},${lv.v})">${lv.label}</button>`).join('')}
+      </div>
+    </div>`).join('');
+
+  const profHTML=ST.profSession.criteresProf.map((c,ci)=>`
+    <div class="criteria-item">
+      <div class="criteria-label">${c.label}</div>
+      <div class="color-btns">
+        ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
+          onclick="selectProfColor(this,${eIdx},'prof',${ci},${lv.v})">${lv.label}</button>`).join('')}
+      </div>
+    </div>`).join('');
+
+  const div=document.createElement('div');
+  div.className='eval-block prof-block'; div.id=`peb-${idx}`;
+  div.innerHTML=`
+    <div class="eval-block-header">
+      <div class="eval-block-num">🎤 Élève #${idx}</div>
+      ${idx>1?`<button class="btn-remove" onclick="removeProfBlock(${idx},${eIdx})">✕</button>`:''}
+    </div>
+    <label>Code participant (fourni à l'élève)</label>
+    <input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:16px"
+      oninput="ST.profEvals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">
+    <div class="section-divider">Critères communs élèves / prof</div>
+    ${commonHTML}
+    <div class="section-divider prof-extra">Critères supplémentaires professeur</div>
+    ${profHTML}
+    <div class="section-divider">Note &amp; appréciation générale</div>
+    <div class="note-input-wrap">
+      <span class="note-label">Note :</span>
+      <input type="text" maxlength="6" placeholder="ex : 14/20"
+        oninput="ST.profEvals[${eIdx}].note=this.value" style="margin:0;width:100px">
+    </div>
+    <label>Appréciation &amp; remarques générales</label>
+    <textarea placeholder="Saisissez votre appréciation ici…"
+      oninput="ST.profEvals[${eIdx}].appreciation=this.value"></textarea>
+  `;
+  document.getElementById('prof-eval-blocks-container').appendChild(div);
+  updateProfProgress();
+  div.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function removeProfBlock(blockId,eIdx){
+  const el=document.getElementById(`peb-${blockId}`);
+  if(el) el.remove();
+  ST.profEvals[eIdx]=null;
+  updateProfProgress();
+}
+function selectProfColor(btn,eIdx,type,ci,val){
+  btn.closest('.color-btns').querySelectorAll('.cbtn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  if(type==='common') ST.profEvals[eIdx].criteria[ci].value=val;
+  else ST.profEvals[eIdx].criteriaProf[ci].value=val;
+  updateProfProgress();
+}
+function updateProfProgress(){
+  const active=ST.profEvals.filter(e=>e!==null);
+  const total=active.reduce((s,e)=>s+e.criteria.length+e.criteriaProf.length,0);
+  const filled=active.reduce((s,e)=>
+    s+e.criteria.filter(c=>c.value!==null).length+e.criteriaProf.filter(c=>c.value!==null).length,0);
+  const pct=total>0?Math.round(filled/total*100):0;
+  document.getElementById('prof-progress-fill').style.width=pct+'%';
+  document.getElementById('prof-progress-note').textContent=`Progression : ${filled} / ${total} critères renseignés`;
+}
+
+// ── STUDENT FLOW ─────────────────────────────────────
+function studentAccessCheck(){
+  const v=document.getElementById('student-access-code').value.trim().toUpperCase();
+  if(v===ST.studentCode.toUpperCase()){
+    document.getElementById('student-access-error').style.display='none';
+    buildFiliereScreen();
+    goTo('screen-choose-filiere');
+  } else {
+    document.getElementById('student-access-error').style.display='block';
+  }
+}
+function buildFiliereScreen(){
+  const filieres=unique(SESSIONS.map(s=>s.filiere));
+  const grid=document.getElementById('filiere-grid');
+  grid.innerHTML=filieres.map(f=>`<div class="sel-btn" onclick="selectFiliere('${f}')"><span class="sb-icon">🏫</span>${f}</div>`).join('');
+}
+function selectFiliere(f){
+  ST.filiere=f;
+  document.getElementById('sub-filiere-selected').textContent=f;
+  const classes=unique(SESSIONS.filter(s=>s.filiere===f).map(s=>s.classe));
+  document.getElementById('classe-grid').innerHTML=classes.map(c=>`<div class="sel-btn" onclick="selectClasse('${c}')"><span class="sb-icon">🎒</span>${c}</div>`).join('');
+  goTo('screen-choose-classe');
+}
+function selectClasse(c){
+  ST.classe=c;
+  document.getElementById('sub-classe-selected').textContent=`${ST.filiere} · ${c}`;
+  const sessions=SESSIONS.filter(s=>s.filiere===ST.filiere&&s.classe===c);
+  document.getElementById('session-list').innerHTML=sessions.map(s=>`
+    <div class="session-card" onclick="selectSession(${SESSIONS.indexOf(s)})">
+      <div class="session-theme">📚 ${s.theme}</div>
+      <div class="session-title">${s.titre}</div>
+      <div class="session-meta">${s.criteres.length} critère(s)</div>
+    </div>`).join('');
+  goTo('screen-choose-session');
+}
+function selectSession(idx){
+  ST.session=SESSIONS[idx];
+  document.getElementById('id-breadcrumb').innerHTML=`${ST.filiere} <span>›</span> ${ST.classe} <span>›</span> ${ST.session.titre}`;
+  goTo('screen-student-identify');
+}
+function studentIdentify(){
+  const fn=document.getElementById('s-firstname').value.trim().toUpperCase();
+  const ln=document.getElementById('s-lastname').value.trim().toUpperCase();
+  if(!fn||!ln){document.getElementById('identify-error').style.display='block';return;}
+  ST.student={id:fn+ln, classe:ST.classe};
+  ST.evals=[];
+  blockCounter=0;
+  document.getElementById('eval-hero-title').textContent=ST.session.titre;
+  document.getElementById('eval-hero-context').textContent=`${ST.filiere} · ${ST.classe} · ${ST.session.theme}`;
+  document.getElementById('student-badge-bar').innerHTML=`<strong>🎓 ${fn+ln}</strong><span style="opacity:.4">|</span>${ST.classe}<span style="opacity:.4">|</span>${ST.session.titre}`;
+  document.getElementById('eval-blocks-container').innerHTML='';
+  addEvalBlock();
+  goTo('screen-student-eval');
+}
+
+// ── STUDENT EVAL BLOCKS ──────────────────────────────
+let blockCounter=0;
+function addEvalBlock(){
+  blockCounter++;
+  const idx=blockCounter;
+  const evalObj={presenterCode:'',criteria:ST.session.criteres.map(c=>({id:c.id,label:c.label,value:null}))};
+  ST.evals.push(evalObj);
+  const eIdx=ST.evals.length-1;
+  const cHTML=ST.session.criteres.map((c,ci)=>`
+    <div class="criteria-item">
+      <div class="criteria-label">${c.label}</div>
+      <div class="color-btns">
+        ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
+          onclick="selectColor(this,${eIdx},${ci},${lv.v})">${lv.label}</button>`).join('')}
+      </div>
+    </div>`).join('');
+  const div=document.createElement('div');
+  div.className='eval-block'; div.id=`eb-${idx}`;
+  div.innerHTML=`
+    <div class="eval-block-header">
+      <div class="eval-block-num">🎤 Présentateur #${idx}</div>
+      ${idx>1?`<button class="btn-remove" onclick="removeBlock(${idx},${eIdx})">✕</button>`:''}
+    </div>
+    <label>Code du présentateur</label>
+    <input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:16px"
+      oninput="ST.evals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">
+    ${cHTML}`;
+  document.getElementById('eval-blocks-container').appendChild(div);
+  updateProgress();
+  div.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function removeBlock(blockId,eIdx){
+  const el=document.getElementById(`eb-${blockId}`);
+  if(el) el.remove();
+  ST.evals[eIdx]=null;
+  updateProgress();
+}
+function selectColor(btn,eIdx,ci,val){
+  btn.closest('.color-btns').querySelectorAll('.cbtn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  ST.evals[eIdx].criteria[ci].value=val;
+  updateProgress();
+}
+function updateProgress(){
+  const active=ST.evals.filter(e=>e!==null);
+  const total=active.reduce((s,e)=>s+e.criteria.length,0);
+  const filled=active.reduce((s,e)=>s+e.criteria.filter(c=>c.value!==null).length,0);
+  const pct=total>0?Math.round(filled/total*100):0;
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-note').textContent=`Progression : ${filled} / ${total} critères renseignés`;
+}
+
+// ── MODAL ────────────────────────────────────────────
+function confirmReset(){document.getElementById('modal-reset').classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function doReset(){closeModal('modal-reset');ST.evals=[];blockCounter=0;goTo('screen-home');}
+
+// ── PDF HELPERS ──────────────────────────────────────
+const LTXT={1:'Insuffisant',2:'Pas OK',3:'Moyen',4:'Bien',5:'Très bien'};
+
+// Niveaux de gris pour impression N&B + contour épais si sélectionné
+function cellStyle(val){
+  const grays={1:'#1a1a1a',2:'#555',3:'#888',4:'#aaa',5:'#ccc'};
+  return val
+    ? `background:${grays[val]};color:#fff;border:2px solid #000;border-radius:5px;padding:2px 8px;font-weight:700;font-size:11px;display:inline-block`
+    : `color:#bbb;font-size:11px`;
+}
+
+function buildStudentBlock(ev, num){
+  const rows=ev.criteria.map(cr=>`
+    <tr>
+      <td style="padding:5px 8px;font-size:11px;border-bottom:1px solid #ddd;width:70%">${cr.label}</td>
+      <td style="padding:5px 8px;text-align:center;border-bottom:1px solid #ddd;width:30%">
+        ${cr.value?`<span style="${cellStyle(cr.value)}">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:11px">—</span>'}
+      </td>
+    </tr>`).join('');
+  return `
+    <div style="margin-bottom:6px;border-radius:8px;overflow:hidden;border:1.5px solid #333;">
+      <div style="background:#1a3a5c;color:#fff;padding:7px 12px;font-weight:700;font-size:12px;display:flex;justify-content:space-between">
+        <span>🎤 Présentateur #${num} — Code : <strong>${ev.presenterCode||'—'}</strong></span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;background:#fff">${rows}</table>
+    </div>`;
+}
+
+function buildProfBlock(ev, num, session){
+  const commonRows=ev.criteria.map(cr=>`
+    <tr>
+      <td style="padding:5px 8px;font-size:11px;border-bottom:1px solid #ddd;width:70%">${cr.label}</td>
+      <td style="padding:5px 8px;text-align:center;border-bottom:1px solid #ddd">
+        ${cr.value?`<span style="${cellStyle(cr.value)}">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:11px">—</span>'}
+      </td>
+    </tr>`).join('');
+  const profRows=ev.criteriaProf.map(cr=>`
+    <tr style="background:#f8f8f8">
+      <td style="padding:5px 8px;font-size:11px;border-bottom:1px solid #ddd;font-style:italic">${cr.label}</td>
+      <td style="padding:5px 8px;text-align:center;border-bottom:1px solid #ddd">
+        ${cr.value?`<span style="${cellStyle(cr.value)}">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:11px">—</span>'}
+      </td>
+    </tr>`).join('');
+  return `
+    <div style="border:2px solid #1a3a5c;border-radius:8px;overflow:hidden;margin-bottom:4px">
+      <div style="background:#1a3a5c;color:#fff;padding:7px 12px;font-weight:700;font-size:12px;display:flex;justify-content:space-between;align-items:center">
+        <span>Élève #${num} — Code : <strong>${ev.presenterCode||'—'}</strong></span>
+        <span style="background:#fff;color:#1a3a5c;border-radius:4px;padding:2px 8px;font-size:11px">Note : ${ev.note||'___'}</span>
+      </div>
+      <div style="padding:4px 0;background:#eef2f7;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-left:10px;color:#555">Critères communs</div>
+      <table style="width:100%;border-collapse:collapse;background:#fff">${commonRows}</table>
+      <div style="padding:4px 0;background:#f0e8e8;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-left:10px;color:#7b0000">Critères supplémentaires prof</div>
+      <table style="width:100%;border-collapse:collapse;background:#fff">${profRows}</table>
+      <div style="padding:8px 10px;background:#fffbe6;border-top:1px solid #ddd">
+        <div style="font-size:10px;font-weight:700;color:#555;margin-bottom:3px;text-transform:uppercase">Appréciation générale</div>
+        <div style="font-size:11px;color:#333;min-height:30px">${ev.appreciation||'&nbsp;'}</div>
+      </div>
+    </div>`;
+}
+
+// ── STUDENT PDF ──────────────────────────────────────
+function generateStudentPDF(){
+  const active=ST.evals.filter(e=>e!==null);
+  if(!active.length){alert('Ajoutez au moins une évaluation.');return;}
+  const dateStr=new Date().toLocaleDateString('fr-FR');
+  const blocks=active.map((ev,i)=>buildStudentBlock(ev,i+1)).join('');
+  const legend=LEVELS.map(lv=>`<span style="margin-right:10px;font-size:10px"><span style="${cellStyle(lv.v)}">${lv.txt}</span></span>`).join('');
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>OralCheck – ${ST.student.id}</title>
+  <style>body{font-family:'Segoe UI',Arial,sans-serif;max-width:680px;margin:0 auto;padding:16px;color:#1e2d3d;font-size:12px;}
+  @media print{body{padding:0;max-width:100%;}}</style></head><body>
+  <div style="background:#1a3a5c;color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
+    <div><div style="font-size:18px;font-weight:900">OralCheck</div><div style="font-size:11px;opacity:.8">Rapport élève</div></div>
+    <div style="text-align:right;font-size:11px;opacity:.85">${dateStr}</div>
+  </div>
+  <div style="background:#f0f4f8;border-radius:7px;padding:9px 14px;margin-bottom:10px;display:flex;gap:16px;flex-wrap:wrap;font-size:11px">
+    <span>🎓 <strong>${ST.student.id}</strong></span>
+    <span>📚 ${ST.classe}</span>
+    <span>📋 ${ST.session.titre} — ${ST.session.theme}</span>
+  </div>
+  <div style="margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+    <span style="font-size:10px;font-weight:700;color:#555;text-transform:uppercase">Légende :</span>${legend}
+  </div>
+  ${blocks}
+  <div style="background:#fff3e0;border-left:3px solid #e67e22;border-radius:5px;padding:9px 12px;margin-top:10px;font-size:11px">
+    ⚠️ <strong>Ce travail sera noté.</strong> Envoyez ce rapport via <strong>Ecole Directe → Messages → Pièce jointe</strong>.
+  </div>
+  <p style="text-align:center;color:#bbb;font-size:10px;margin-top:14px">Créé par C. Iemfre — OralCheck</p>
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`;
+  openPrint(html,`OralCheck_${ST.student.id}_${ST.classe}`);
+  goTo('screen-done');
+}
+
+// ── PROF PDF (2 élèves / page A4) ────────────────────
+function generateProfPDF(){
+  const active=ST.profEvals.filter(e=>e!==null);
+  if(!active.length){alert('Aucune évaluation à exporter.');return;}
+  const dateStr=new Date().toLocaleDateString('fr-FR');
+  const legend=LEVELS.map(lv=>`<span style="margin-right:8px;font-size:10px"><span style="${cellStyle(lv.v)}">${lv.txt}</span></span>`).join('');
+
+  // Grouper par paires pour 2 élèves / page
+  let pages='';
+  for(let i=0;i<active.length;i+=2){
+    const pair=[active[i], active[i+1]].filter(Boolean);
+    const blocks=pair.map((ev,j)=>buildProfBlock(ev,i+j+1,ST.profSession)).join('');
+    pages+=`<div style="page-break-after:always;padding:12px 0">${blocks}</div>`;
+  }
+
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>OralCheck – Rapport Professeur</title>
+  <style>
+    body{font-family:'Segoe UI',Arial,sans-serif;max-width:720px;margin:0 auto;padding:16px;color:#1e2d3d;font-size:12px;}
+    @media print{body{padding:0;max-width:100%;} .no-print{display:none}}
+  </style></head><body>
+  <div style="background:#1a3a5c;color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+    <div><div style="font-size:18px;font-weight:900">OralCheck — Rapport Professeur</div>
+    <div style="font-size:11px;opacity:.8">${ST.profSession.filiere} · ${ST.profSession.classe} · ${ST.profSession.titre} · ${ST.profSession.theme}</div></div>
+    <div style="font-size:11px;opacity:.85">${dateStr}</div>
+  </div>
+  <div style="margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+    <span style="font-size:10px;font-weight:700;color:#555;text-transform:uppercase">Légende :</span>${legend}
+  </div>
+  ${pages}
+  <p style="text-align:center;color:#bbb;font-size:10px;margin-top:10px">Créé par C. Iemfre — OralCheck</p>
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`;
+  openPrint(html,'OralCheck_Rapport_Professeur');
+}
+
+function openPrint(html, fname){
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const w=window.open(url,'_blank');
+  if(!w){
+    const a=document.createElement('a');
+    a.href=url; a.download=fname+'.html'; a.click();
+  }
+}
+</script>
+</body>
+</html>
