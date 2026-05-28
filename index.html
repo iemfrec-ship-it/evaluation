@@ -836,37 +836,88 @@ function generateStudentPDF(){
   goTo('screen-done');
 }
 
-// ── PROF PDF (2 élèves / page A4) ────────────────────
+// ── PROF PDF — 1 élève par page A4, garanti sans coupure ─
 function generateProfPDF(){
   const active=ST.profEvals.filter(e=>e!==null);
   if(!active.length){alert('Aucune évaluation à exporter.');return;}
   const dateStr=new Date().toLocaleDateString('fr-FR');
-  const legend=LEVELS.map(lv=>`<span style="margin-right:8px;font-size:10px"><span style="${cellStyle(lv.v)}">${lv.txt}</span></span>`).join('');
+  const legend=LEVELS.map(lv=>`<span style="margin-right:6px"><span style="background:${['#1a1a1a','#555','#888','#aaa','#ccc'][lv.v-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 6px;font-size:9px;font-weight:700">${lv.txt}</span></span>`).join('');
+  const sessionInfo=`${ST.profSession.filiere} · ${ST.profSession.classe} · ${ST.profSession.titre} · ${ST.profSession.theme}`;
 
-  // Grouper par paires pour 2 élèves / page
-  let pages='';
-  for(let i=0;i<active.length;i+=2){
-    const pair=[active[i], active[i+1]].filter(Boolean);
-    const blocks=pair.map((ev,j)=>buildProfBlock(ev,i+j+1,ST.profSession)).join('');
-    pages+=`<div style="page-break-after:always;padding:12px 0">${blocks}</div>`;
-  }
+  const pages=active.map((ev,i)=>{
+    const commonRows=ev.criteria.map(cr=>`
+      <tr>
+        <td style="padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;width:68%">${cr.label}</td>
+        <td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd;width:32%">
+          ${cr.value?`<span style="background:${['#1a1a1a','#555','#888','#aaa','#ccc'][cr.value-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 8px;font-size:9px;font-weight:700">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:9px">—</span>'}
+        </td>
+      </tr>`).join('');
+    const profRows=ev.criteriaProf.map(cr=>`
+      <tr style="background:#fafafa">
+        <td style="padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;font-style:italic">${cr.label}</td>
+        <td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd">
+          ${cr.value?`<span style="background:${['#1a1a1a','#555','#888','#aaa','#ccc'][cr.value-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 8px;font-size:9px;font-weight:700">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:9px">—</span>'}
+        </td>
+      </tr>`).join('');
+    return `
+      <div class="page">
+        <!-- En-tête compact -->
+        <div style="background:#1a3a5c;color:#fff;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;border-radius:5px">
+          <div>
+            <div style="font-size:13px;font-weight:900">OralCheck — Rapport Professeur</div>
+            <div style="font-size:9px;opacity:.85">${sessionInfo}</div>
+          </div>
+          <div style="text-align:right;font-size:9px;opacity:.85">${dateStr}<br>Élève ${i+1}/${active.length}</div>
+        </div>
+        <!-- Identité élève + note -->
+        <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4f8;border-radius:5px;padding:6px 12px;margin-bottom:6px;border:1.5px solid #1a3a5c">
+          <div style="font-size:11px;font-weight:700">Code participant : <span style="letter-spacing:2px;font-size:13px">${ev.presenterCode||'—'}</span></div>
+          <div style="font-size:11px;font-weight:700">Note : <span style="border-bottom:1.5px solid #333;padding:0 16px;font-size:12px">${ev.note||''}</span> / 20</div>
+        </div>
+        <!-- Légende -->
+        <div style="margin-bottom:5px;font-size:9px;display:flex;align-items:center;gap:4px;flex-wrap:wrap">
+          <strong style="color:#555;text-transform:uppercase;letter-spacing:.4px">Légende :</strong>${legend}
+        </div>
+        <!-- Critères communs -->
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:#2e5f8a;padding:3px 8px;border-radius:3px 3px 0 0">Critères communs élèves / professeur</div>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:6px">
+          ${commonRows}
+        </table>
+        <!-- Critères prof -->
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:#7b0000;padding:3px 8px;border-radius:3px 3px 0 0">Critères supplémentaires professeur</div>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:6px">
+          ${profRows}
+        </table>
+        <!-- Appréciation -->
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#555;margin-bottom:3px">Appréciation générale &amp; remarques</div>
+        <div style="border:1.5px solid #999;border-radius:4px;padding:7px 10px;min-height:52px;font-size:10px;color:#333;background:#fff;line-height:1.5">${ev.appreciation||''}</div>
+        <!-- Pied de page -->
+        <div style="margin-top:8px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div>
+      </div>`;
+  }).join('');
 
   const html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
   <title>OralCheck – Rapport Professeur</title>
   <style>
-    body{font-family:'Segoe UI',Arial,sans-serif;max-width:720px;margin:0 auto;padding:16px;color:#1e2d3d;font-size:12px;}
-    @media print{body{padding:0;max-width:100%;} .no-print{display:none}}
+    *{box-sizing:border-box;}
+    body{font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:0;color:#1e2d3d;}
+    .page{
+      width:190mm;
+      min-height:267mm;
+      max-height:267mm;
+      margin:0 auto;
+      padding:8mm 10mm;
+      overflow:hidden;
+      page-break-after:always;
+      page-break-inside:avoid;
+    }
+    @page{size:A4 portrait;margin:10mm;}
+    @media print{
+      body{margin:0;padding:0;}
+      .page{margin:0;width:100%;padding:6mm 8mm;page-break-after:always;page-break-inside:avoid;}
+    }
   </style></head><body>
-  <div style="background:#1a3a5c;color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
-    <div><div style="font-size:18px;font-weight:900">OralCheck — Rapport Professeur</div>
-    <div style="font-size:11px;opacity:.8">${ST.profSession.filiere} · ${ST.profSession.classe} · ${ST.profSession.titre} · ${ST.profSession.theme}</div></div>
-    <div style="font-size:11px;opacity:.85">${dateStr}</div>
-  </div>
-  <div style="margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-    <span style="font-size:10px;font-weight:700;color:#555;text-transform:uppercase">Légende :</span>${legend}
-  </div>
   ${pages}
-  <p style="text-align:center;color:#bbb;font-size:10px;margin-top:10px">Créé par C. Iemfre — OralCheck</p>
   <script>window.onload=function(){window.print();}<\/script>
   </body></html>`;
   openPrint(html,'OralCheck_Rapport_Professeur');
