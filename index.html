@@ -329,19 +329,39 @@ textarea{resize:vertical;min-height:80px;}
     <div class="hero-sub">Ces initiales figureront dans votre rapport</div>
   </div>
   <div class="content">
-    <div class="card">
-      <div class="breadcrumb" id="id-breadcrumb"></div>
-      <h2>👤 Qui êtes-vous ?</h2>
-      <div class="input-grid">
-        <div>
-          <label>2 premières lettres du prénom</label>
-          <input id="s-firstname" type="text" maxlength="2" placeholder="MA" class="code-input" oninput="this.value=this.value.toUpperCase()">
+    <div class="breadcrumb" id="id-breadcrumb" style="margin-bottom:10px"></div>
+
+    <!-- Avatar preview -->
+    <div style="display:flex;justify-content:center;margin-bottom:18px">
+      <div id="avatar-circle" style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#27ae60,#1a6b3c);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:2px;transition:all .2s">??</div>
+    </div>
+
+    <div class="card" style="padding:24px 20px">
+      <p style="font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:20px;line-height:1.5">Saisissez les <strong>2 premières lettres</strong> de votre prénom et de votre nom.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+        <!-- Prénom -->
+        <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center;transition:border-color .2s" id="box-fn">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Prénom</div>
+          <input id="s-firstname" type="text" maxlength="2" placeholder="MA"
+            style="width:100%;border:none;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:0"
+            oninput="this.value=this.value.toUpperCase();updateAvatar()"
+            onfocus="document.getElementById('box-fn').style.borderColor='#27ae60'"
+            onblur="document.getElementById('box-fn').style.borderColor='#dde3ec'">
+          <div style="margin-top:6px;font-size:.72rem;color:var(--muted)">ex : MA</div>
         </div>
-        <div>
-          <label>2 premières lettres du nom</label>
-          <input id="s-lastname" type="text" maxlength="2" placeholder="DU" class="code-input" oninput="this.value=this.value.toUpperCase()">
+        <!-- Nom -->
+        <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center;transition:border-color .2s" id="box-ln">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Nom</div>
+          <input id="s-lastname" type="text" maxlength="2" placeholder="DU"
+            style="width:100%;border:none;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:0"
+            oninput="this.value=this.value.toUpperCase();updateAvatar()"
+            onfocus="document.getElementById('box-ln').style.borderColor='#27ae60'"
+            onblur="document.getElementById('box-ln').style.borderColor='#dde3ec'">
+          <div style="margin-top:6px;font-size:.72rem;color:var(--muted)">ex : DU</div>
         </div>
       </div>
+
       <div id="identify-error" class="alert alert-error" style="display:none">Veuillez remplir les deux champs.</div>
       <button class="btn btn-green" onclick="studentIdentify()">Accéder à l'évaluation →</button>
       <button class="btn btn-secondary" onclick="goTo('screen-choose-session')">← Retour</button>
@@ -451,7 +471,31 @@ const SESSIONS = [
     ]
   },
   {
-    filiere: 'AEPA',
+    filiere: 'CVA',
+    classe:  '1ère',
+    theme:   'Working conditions',
+    titre:   'Final task',
+    criteres: [
+      {id:'c1', label:'1/ Présentation de l\'entreprise'},
+      {id:'c2', label:'2/ Description des conditions de travail'},
+      {id:'c3', label:'3/ Points positifs'},
+      {id:'c4', label:'4/ Points négatifs'},
+      {id:'c5', label:'5/ Ce qui se passe dans l\'entreprise (actions qui démontrent les conditions de travail)'},
+      {id:'c6', label:'6/ Améliorations possibles'},
+      {id:'c7', label:'7/ Respect du temps de parole'},
+      {id:'c8', label:'8/ Clarté du diaporama'},
+      {id:'c9', label:'9/ Respect du nombre de mots dans le diapo'},
+    ],
+    criteresProf: [
+      {id:'a', label:'a/ Structure des phrases (syntaxe)'},
+      {id:'b', label:'b/ Respect des temps (conjugaison présent et présent be+ing)'},
+      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)'},
+      {id:'d', label:'d/ Vocabulaire adapté'},
+      {id:'e', label:'e/ Fluidité'},
+    ]
+  },
+  {
+    filiere: 'MDA',
     classe:  '1ère',
     theme:   'Working conditions',
     titre:   'Final task',
@@ -735,6 +779,14 @@ function updateProgress(){
   const pct=total>0?Math.round(filled/total*100):0;
   document.getElementById('progress-fill').style.width=pct+'%';
   document.getElementById('progress-note').textContent=`Progression : ${filled} / ${total} critères renseignés`;
+}
+
+// ── AVATAR PREVIEW ───────────────────────────────────
+function updateAvatar(){
+  const fn=document.getElementById('s-firstname').value.toUpperCase();
+  const ln=document.getElementById('s-lastname').value.toUpperCase();
+  const av=document.getElementById('avatar-circle');
+  if(av) av.textContent=(fn||'?')+(ln||'?');
 }
 
 // ── MODAL ────────────────────────────────────────────
