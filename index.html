@@ -344,7 +344,7 @@ textarea{resize:vertical;min-height:80px;}
         <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center;transition:border-color .2s" id="box-fn">
           <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Prénom</div>
           <input id="s-firstname" type="text" maxlength="2" placeholder="MA"
-            style="width:100%;border:none;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:0"
+            style="width:100%;border:1.5px solid transparent;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:4px 0;margin:0;border-radius:6px"
             oninput="this.value=this.value.toUpperCase();updateAvatar()"
             onfocus="document.getElementById('box-fn').style.borderColor='#27ae60'"
             onblur="document.getElementById('box-fn').style.borderColor='#dde3ec'">
@@ -354,7 +354,7 @@ textarea{resize:vertical;min-height:80px;}
         <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center;transition:border-color .2s" id="box-ln">
           <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Nom</div>
           <input id="s-lastname" type="text" maxlength="2" placeholder="DU"
-            style="width:100%;border:none;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:0"
+            style="width:100%;border:1.5px solid transparent;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:4px 0;margin:0;border-radius:6px"
             oninput="this.value=this.value.toUpperCase();updateAvatar()"
             onfocus="document.getElementById('box-ln').style.borderColor='#27ae60'"
             onblur="document.getElementById('box-ln').style.borderColor='#dde3ec'">
@@ -718,7 +718,7 @@ function studentIdentify(){
   const fn=document.getElementById('s-firstname').value.trim().toUpperCase();
   const ln=document.getElementById('s-lastname').value.trim().toUpperCase();
   if(!fn||!ln){document.getElementById('identify-error').style.display='block';return;}
-  ST.student={id:fn+ln, classe:ST.classe};
+  ST.student={id:fn+'-'+ln, classe:ST.classe};
   ST.evals=[];
   blockCounter=0;
   document.getElementById('eval-hero-title').textContent=ST.session.titre;
@@ -786,7 +786,7 @@ function updateAvatar(){
   const fn=document.getElementById('s-firstname').value.toUpperCase();
   const ln=document.getElementById('s-lastname').value.toUpperCase();
   const av=document.getElementById('avatar-circle');
-  if(av) av.textContent=(fn||'?')+(ln||'?');
+  if(av) av.textContent=(fn||'?')+'-'+(ln||'?');
 }
 
 // ── MODAL ────────────────────────────────────────────
