@@ -429,6 +429,27 @@ const SESSIONS = [
   {
     filiere: 'AEPA',
     classe:  '2nde',
+    theme:   'Talking about me (TF1)',
+    titre:   'Final task',
+    criteres: [
+      {id:'c1', label:'1/ Présentation personnelle'},
+      {id:'c2', label:'2/ Présentation de la famille'},
+      {id:'c3', label:'3/ Animaux'},
+      {id:'c4', label:'4/ Hobbies / intérêts / talent'},
+      {id:'c5', label:'5/ Utilisation de 4 adjectifs d\'apparence'},
+      {id:'c6', label:'6/ Utilisation de 3 adjectifs de personnalité'},
+    ],
+    criteresProf: [
+      {id:'a', label:'a/ Respect de la durée (1\'30)'},
+      {id:'b', label:'b/ Conjugaison To Be'},
+      {id:'c', label:'c/ Conjugaison To Have'},
+      {id:'d', label:'d/ Présent simple'},
+      {id:'e', label:'e/ Créativité et originalité'},
+    ]
+  },
+  {
+    filiere: 'AEPA',
+    classe:  '2nde',
     theme:   'My work placement',
     titre:   'Final task',
     criteres: [
@@ -518,6 +539,46 @@ const SESSIONS = [
       {id:'e', label:'e/ Fluidité'},
     ]
   },
+  {
+    filiere: 'MOS',
+    classe:  'MOS1',
+    theme:   'Job interview',
+    titre:   'Final task',
+    double:  true,  // session binôme recruteur + candidat
+    criteres: [
+      // RECRUTEUR
+      {id:'r1', label:'1/ Accueil du candidat',              role:'Recruteur'},
+      {id:'r2', label:'2/ Description du poste',             role:'Recruteur'},
+      {id:'r3', label:'3/ Missions principales (au moins 4)',role:'Recruteur'},
+      {id:'r4', label:'4/ Responsabilités',                  role:'Recruteur'},
+      {id:'r5', label:'5/ Compétences et qualités',          role:'Recruteur'},
+      {id:'r6', label:'6/ Attitude professionnelle',         role:'Recruteur'},
+      // CANDIDAT
+      {id:'c1', label:'1/ Présentation personnelle',                  role:'Candidat'},
+      {id:'c2', label:'2/ Parcours scolaire et professionnel',        role:'Candidat'},
+      {id:'c3', label:'3/ Exposé des compétences et qualités',        role:'Candidat'},
+      {id:'c4', label:'4/ Attitude professionnelle',                  role:'Candidat'},
+      {id:'c5', label:'5/ Réactivité aux questions',                  role:'Candidat'},
+    ],
+    criteresProf: [
+      // RECRUTEUR
+      {id:'ra', label:'a/ Construction des phrases',              role:'Recruteur'},
+      {id:'rb', label:'b/ Construction des questions',            role:'Recruteur'},
+      {id:'rc', label:'c/ Vocabulaire adapté',                    role:'Recruteur'},
+      {id:'rd', label:'d/ Pertinence',                            role:'Recruteur'},
+      {id:'re', label:'e/ Intelligibilité (anglais compréhensible)',role:'Recruteur'},
+      {id:'rf', label:'f/ Attitude professionnelle',              role:'Recruteur'},
+      {id:'rg', label:'g/ Réactivité',                            role:'Recruteur'},
+      // CANDIDAT
+      {id:'ca', label:'a/ Construction des phrases',              role:'Candidat'},
+      {id:'cb', label:'b/ Construction des questions',            role:'Candidat'},
+      {id:'cc', label:'c/ Vocabulaire adapté',                    role:'Candidat'},
+      {id:'cd', label:'d/ Pertinence',                            role:'Candidat'},
+      {id:'ce', label:'e/ Intelligibilité (anglais compréhensible)',role:'Candidat'},
+      {id:'cf', label:'f/ Attitude professionnelle',              role:'Candidat'},
+      {id:'cg', label:'g/ Réactivité',                            role:'Candidat'},
+    ]
+  },
 ];
 
 // ════════════════════════════════════════════════════
@@ -595,57 +656,128 @@ function startProfEval(idx){
 function addProfEvalBlock(){
   profBlockCounter++;
   const idx=profBlockCounter;
+  const isDouble=ST.profSession.double===true;
   const evalObj={
-    presenterCode:'',
-    criteria: ST.profSession.criteres.map(c=>({id:c.id,label:c.label,value:null})),
-    criteriaProf: ST.profSession.criteresProf.map(c=>({id:c.id,label:c.label,value:null})),
-    note:'', appreciation:''
+    presenterCode:'', codeCandidat:'',
+    criteria: ST.profSession.criteres.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null})),
+    criteriaProf: ST.profSession.criteresProf.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null})),
+    note:'', noteCandidat:'', appreciation:'', appreciationCandidat:''
   };
   ST.profEvals.push(evalObj);
   const eIdx=ST.profEvals.length-1;
 
-  const commonHTML=ST.profSession.criteres.map((c,ci)=>`
-    <div class="criteria-item">
-      <div class="criteria-label">${c.label}</div>
-      <div class="color-btns">
-        ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
-          onclick="selectProfColor(this,${eIdx},'common',${ci},${lv.v})">${lv.label}</button>`).join('')}
-      </div>
-    </div>`).join('');
+  const makeSection=(items, type, role, roleLabel, roleColor, roleIcon)=>{
+    const filtered=items.filter(c=>!c.role||c.role===role);
+    return filtered.map((c,ci)=>{
+      const globalCi=items.indexOf(c);
+      const fn=type==='common'?`selectProfColor(this,${eIdx},'common',${globalCi},v)`:`selectProfColor(this,${eIdx},'prof',${globalCi},v)`;
+      return `<div class="criteria-item">
+        <div class="criteria-label">${c.label}</div>
+        <div class="color-btns">
+          ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
+            onclick="selectProfColor(this,${eIdx},'${type}',${globalCi},${lv.v})">${lv.label}</button>`).join('')}
+        </div>
+      </div>`;}).join('');
+  };
 
-  const profHTML=ST.profSession.criteresProf.map((c,ci)=>`
-    <div class="criteria-item">
-      <div class="criteria-label">${c.label}</div>
-      <div class="color-btns">
-        ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
-          onclick="selectProfColor(this,${eIdx},'prof',${ci},${lv.v})">${lv.label}</button>`).join('')}
+  let bodyHTML='';
+  if(isDouble){
+    const makeProfCol=(role,icon,col)=>{
+      const commonItems=ST.profSession.criteres.filter(c=>c.role===role);
+      const profItems=ST.profSession.criteresProf.filter(c=>c.role===role);
+      const noteField=role==='Recruteur'?'note':'noteCandidat';
+      const appField=role==='Recruteur'?'appreciation':'appreciationCandidat';
+      const code=role==='Recruteur'?`ST.profEvals[${eIdx}].presenterCode`:`ST.profEvals[${eIdx}].codeCandidat`;
+      const placeholder=role==='Recruteur'?'Ex : R1':'Ex : C1';
+
+      const commonRows=commonItems.map(c=>{
+        const gi=ST.profSession.criteres.indexOf(c);
+        return `<div class="criteria-item" style="margin-bottom:9px">
+          <div class="criteria-label" style="font-size:.76rem">${c.label}</div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}" style="padding:5px 4px;font-size:.65rem;border-radius:5px;text-align:left;padding-left:6px"
+              onclick="selectProfColor(this,${eIdx},'common',${gi},${lv.v})">${lv.label}</button>`).join('')}
+          </div>
+        </div>`;}).join('');
+
+      const profRows=profItems.map(c=>{
+        const gi=ST.profSession.criteresProf.indexOf(c);
+        return `<div class="criteria-item" style="margin-bottom:9px">
+          <div class="criteria-label" style="font-size:.76rem;font-style:italic">${c.label}</div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}" style="padding:5px 4px;font-size:.65rem;border-radius:5px;text-align:left;padding-left:6px"
+              onclick="selectProfColor(this,${eIdx},'prof',${gi},${lv.v})">${lv.label}</button>`).join('')}
+          </div>
+        </div>`;}).join('');
+
+      return `<div style="flex:1;min-width:0;background:#f8fafc;border:2px solid ${col};border-radius:10px;padding:12px 10px">
+        <div style="font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:${col};margin-bottom:8px">${icon} ${role}</div>
+        <label style="font-size:.7rem">Code</label>
+        <input type="text" maxlength="8" placeholder="${placeholder}" class="code-input"
+          style="margin-bottom:10px;font-size:.85rem;padding:7px 10px"
+          oninput="${code}=this.value.toUpperCase();this.value=this.value.toUpperCase()">
+        <label style="font-size:.7rem">Note</label>
+        <input type="text" maxlength="6" placeholder="—/20"
+          style="margin-bottom:10px;font-size:.85rem;padding:7px 10px;text-align:center;font-weight:700"
+          oninput="ST.profEvals[${eIdx}].${noteField}=this.value">
+        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin:8px 0 5px">Critères communs</div>
+        ${commonRows}
+        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:8px 0 5px">Critères prof</div>
+        ${profRows}
+        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:#555;margin:8px 0 4px">Appréciation</div>
+        <textarea placeholder="Appréciation ${role.toLowerCase()}…" style="font-size:.8rem;min-height:60px"
+          oninput="ST.profEvals[${eIdx}].${appField}=this.value"></textarea>
+      </div>`;
+    };
+
+    bodyHTML=`<div style="display:flex;gap:10px;align-items:flex-start">
+      ${makeProfCol('Recruteur','🧑‍💼','var(--primary)')}
+      ${makeProfCol('Candidat','👤','#27ae60')}
+    </div>`;
+  } else {
+    const commonHTML=ST.profSession.criteres.map((c,ci)=>`
+      <div class="criteria-item">
+        <div class="criteria-label">${c.label}</div>
+        <div class="color-btns">
+          ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
+            onclick="selectProfColor(this,${eIdx},'common',${ci},${lv.v})">${lv.label}</button>`).join('')}
+        </div>
+      </div>`).join('');
+    const profHTML=ST.profSession.criteresProf.map((c,ci)=>`
+      <div class="criteria-item">
+        <div class="criteria-label">${c.label}</div>
+        <div class="color-btns">
+          ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
+            onclick="selectProfColor(this,${eIdx},'prof',${ci},${lv.v})">${lv.label}</button>`).join('')}
+        </div>
+      </div>`).join('');
+    bodyHTML=`
+      <div class="section-divider">Critères communs élèves / prof</div>${commonHTML}
+      <div class="section-divider prof-extra">Critères supplémentaires professeur</div>${profHTML}
+      <div class="section-divider">Note &amp; appréciation générale</div>
+      <div class="note-input-wrap">
+        <span class="note-label">Note :</span>
+        <input type="text" maxlength="6" placeholder="ex : 14/20"
+          oninput="ST.profEvals[${eIdx}].note=this.value" style="margin:0;width:100px">
       </div>
-    </div>`).join('');
+      <label>Appréciation &amp; remarques générales</label>
+      <textarea placeholder="Saisissez votre appréciation ici…"
+        oninput="ST.profEvals[${eIdx}].appreciation=this.value"></textarea>`;
+  }
+
+  const codeFields=isDouble?'':`
+    <label>Code participant</label>
+    <input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:16px"
+      oninput="ST.profEvals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">`;
 
   const div=document.createElement('div');
   div.className='eval-block prof-block'; div.id=`peb-${idx}`;
   div.innerHTML=`
     <div class="eval-block-header">
-      <div class="eval-block-num">🎤 Élève #${idx}</div>
+      <div class="eval-block-num">🎤 ${isDouble?'Binôme':'Élève'} #${idx}</div>
       ${idx>1?`<button class="btn-remove" onclick="removeProfBlock(${idx},${eIdx})">✕</button>`:''}
     </div>
-    <label>Code participant (fourni à l'élève)</label>
-    <input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:16px"
-      oninput="ST.profEvals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">
-    <div class="section-divider">Critères communs élèves / prof</div>
-    ${commonHTML}
-    <div class="section-divider prof-extra">Critères supplémentaires professeur</div>
-    ${profHTML}
-    <div class="section-divider">Note &amp; appréciation générale</div>
-    <div class="note-input-wrap">
-      <span class="note-label">Note :</span>
-      <input type="text" maxlength="6" placeholder="ex : 14/20"
-        oninput="ST.profEvals[${eIdx}].note=this.value" style="margin:0;width:100px">
-    </div>
-    <label>Appréciation &amp; remarques générales</label>
-    <textarea placeholder="Saisissez votre appréciation ici…"
-      oninput="ST.profEvals[${eIdx}].appreciation=this.value"></textarea>
-  `;
+    ${codeFields}${bodyHTML}`;
   document.getElementById('prof-eval-blocks-container').appendChild(div);
   updateProfProgress();
   div.scrollIntoView({behavior:'smooth',block:'start'});
@@ -734,28 +866,67 @@ let blockCounter=0;
 function addEvalBlock(){
   blockCounter++;
   const idx=blockCounter;
-  const evalObj={presenterCode:'',criteria:ST.session.criteres.map(c=>({id:c.id,label:c.label,value:null}))};
+  const isDouble=ST.session.double===true;
+  const evalObj={
+    presenterCode:'', codeCandidat:'',
+    criteria:ST.session.criteres.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null}))
+  };
   ST.evals.push(evalObj);
   const eIdx=ST.evals.length-1;
-  const cHTML=ST.session.criteres.map((c,ci)=>`
-    <div class="criteria-item">
-      <div class="criteria-label">${c.label}</div>
-      <div class="color-btns">
-        ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
-          onclick="selectColor(this,${eIdx},${ci},${lv.v})">${lv.label}</button>`).join('')}
+
+  // Grouper par rôle si session double
+  let cHTML='';
+  if(isDouble){
+    const roles=['Recruteur','Candidat'];
+    roles.forEach(role=>{
+      const items=ST.session.criteres.filter(c=>c.role===role);
+      cHTML+=`<div class="section-divider" style="color:${role==='Recruteur'?'var(--primary)':'#27ae60'}">${role==='Recruteur'?'🧑‍💼':'👤'} ${role}</div>`;
+      cHTML+=items.map((c,ci)=>{
+        const globalCi=ST.session.criteres.indexOf(c);
+        return `<div class="criteria-item">
+          <div class="criteria-label">${c.label}</div>
+          <div class="color-btns">
+            ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
+              onclick="selectColor(this,${eIdx},${globalCi},${lv.v})">${lv.label}</button>`).join('')}
+          </div>
+        </div>`;}).join('');
+    });
+  } else {
+    cHTML=ST.session.criteres.map((c,ci)=>`
+      <div class="criteria-item">
+        <div class="criteria-label">${c.label}</div>
+        <div class="color-btns">
+          ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
+            onclick="selectColor(this,${eIdx},${ci},${lv.v})">${lv.label}</button>`).join('')}
+        </div>
+      </div>`).join('');
+  }
+
+  const codeFields = isDouble ? `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      <div>
+        <label>Code Recruteur</label>
+        <input type="text" maxlength="8" placeholder="Ex : R1" class="code-input"
+          oninput="ST.evals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">
       </div>
-    </div>`).join('');
+      <div>
+        <label>Code Candidat</label>
+        <input type="text" maxlength="8" placeholder="Ex : C1" class="code-input"
+          oninput="ST.evals[${eIdx}].codeCandidat=this.value.toUpperCase();this.value=this.value.toUpperCase()">
+      </div>
+    </div>` : `
+    <label>Code du présentateur</label>
+    <input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:16px"
+      oninput="ST.evals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">`;
+
   const div=document.createElement('div');
   div.className='eval-block'; div.id=`eb-${idx}`;
   div.innerHTML=`
     <div class="eval-block-header">
-      <div class="eval-block-num">🎤 Présentateur #${idx}</div>
+      <div class="eval-block-num">🎤 ${isDouble?'Binôme':'Présentateur'} #${idx}</div>
       ${idx>1?`<button class="btn-remove" onclick="removeBlock(${idx},${eIdx})">✕</button>`:''}
     </div>
-    <label>Code du présentateur</label>
-    <input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:16px"
-      oninput="ST.evals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">
-    ${cHTML}`;
+    ${codeFields}${cHTML}`;
   document.getElementById('eval-blocks-container').appendChild(div);
   updateProgress();
   div.scrollIntoView({behavior:'smooth',block:'start'});
@@ -888,86 +1059,91 @@ function generateStudentPDF(){
   goTo('screen-done');
 }
 
-// ── PROF PDF — 1 élève par page A4, garanti sans coupure ─
+// ── PROF PDF — 1 page par élève (ou 2 pages par binôme) ─
 function generateProfPDF(){
   const active=ST.profEvals.filter(e=>e!==null);
   if(!active.length){alert('Aucune évaluation à exporter.');return;}
+  const isDouble=ST.profSession.double===true;
   const dateStr=new Date().toLocaleDateString('fr-FR');
-  const legend=LEVELS.map(lv=>`<span style="margin-right:6px"><span style="background:${['#1a1a1a','#555','#888','#aaa','#ccc'][lv.v-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 6px;font-size:9px;font-weight:700">${lv.txt}</span></span>`).join('');
   const sessionInfo=`${ST.profSession.filiere} · ${ST.profSession.classe} · ${ST.profSession.titre} · ${ST.profSession.theme}`;
+  const grays=['#1a1a1a','#555','#888','#aaa','#ccc'];
+  const legend=LEVELS.map(lv=>`<span style="margin-right:6px"><span style="background:${grays[lv.v-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 6px;font-size:9px;font-weight:700">${lv.txt}</span></span>`).join('');
 
-  const pages=active.map((ev,i)=>{
-    const commonRows=ev.criteria.map(cr=>`
-      <tr>
-        <td style="padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;width:68%">${cr.label}</td>
-        <td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd;width:32%">
-          ${cr.value?`<span style="background:${['#1a1a1a','#555','#888','#aaa','#ccc'][cr.value-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 8px;font-size:9px;font-weight:700">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:9px">—</span>'}
-        </td>
-      </tr>`).join('');
-    const profRows=ev.criteriaProf.map(cr=>`
-      <tr style="background:#fafafa">
-        <td style="padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;font-style:italic">${cr.label}</td>
-        <td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd">
-          ${cr.value?`<span style="background:${['#1a1a1a','#555','#888','#aaa','#ccc'][cr.value-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 8px;font-size:9px;font-weight:700">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:9px">—</span>'}
-        </td>
-      </tr>`).join('');
-    return `
-      <div class="page">
-        <!-- En-tête compact -->
-        <div style="background:#1a3a5c;color:#fff;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;border-radius:5px">
-          <div>
-            <div style="font-size:13px;font-weight:900">OralCheck — Rapport Professeur</div>
-            <div style="font-size:9px;opacity:.85">${sessionInfo}</div>
-          </div>
-          <div style="text-align:right;font-size:9px;opacity:.85">${dateStr}<br>Élève ${i+1}/${active.length}</div>
-        </div>
-        <!-- Identité élève + note -->
-        <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4f8;border-radius:5px;padding:6px 12px;margin-bottom:6px;border:1.5px solid #1a3a5c">
-          <div style="font-size:11px;font-weight:700">Code participant : <span style="letter-spacing:2px;font-size:13px">${ev.presenterCode||'—'}</span></div>
-          <div style="font-size:11px;font-weight:700">Note : <span style="border-bottom:1.5px solid #333;padding:0 16px;font-size:12px">${ev.note||''}</span> / 20</div>
-        </div>
-        <!-- Légende -->
-        <div style="margin-bottom:5px;font-size:9px;display:flex;align-items:center;gap:4px;flex-wrap:wrap">
-          <strong style="color:#555;text-transform:uppercase;letter-spacing:.4px">Légende :</strong>${legend}
-        </div>
-        <!-- Critères communs -->
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:#2e5f8a;padding:3px 8px;border-radius:3px 3px 0 0">Critères communs élèves / professeur</div>
-        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:6px">
-          ${commonRows}
-        </table>
-        <!-- Critères prof -->
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:#7b0000;padding:3px 8px;border-radius:3px 3px 0 0">Critères supplémentaires professeur</div>
-        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:6px">
-          ${profRows}
-        </table>
-        <!-- Appréciation -->
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#555;margin-bottom:3px">Appréciation générale &amp; remarques</div>
-        <div style="border:1.5px solid #999;border-radius:4px;padding:7px 10px;min-height:52px;font-size:10px;color:#333;background:#fff;line-height:1.5">${ev.appreciation||''}</div>
-        <!-- Pied de page -->
+  const makeRows=(items,vals)=>items.map(c=>{
+    const v=vals.find(x=>x.id===c.id);
+    return `<tr>
+      <td style="padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;width:68%">${c.label}</td>
+      <td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd">
+        ${v&&v.value?`<span style="background:${grays[v.value-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 8px;font-size:9px;font-weight:700">${LTXT[v.value]}</span>`:'<span style="color:#bbb;font-size:9px">—</span>'}
+      </td></tr>`;}).join('');
+
+  const makePageHeader=(subtitle,code,note)=>`
+    <div style="background:#1a3a5c;color:#fff;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;border-radius:5px">
+      <div><div style="font-size:13px;font-weight:900">OralCheck — Rapport Professeur</div>
+      <div style="font-size:9px;opacity:.85">${sessionInfo} · ${subtitle}</div></div>
+      <div style="text-align:right;font-size:9px;opacity:.85">${dateStr}</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4f8;border-radius:5px;padding:6px 12px;margin-bottom:6px;border:1.5px solid #1a3a5c">
+      <div style="font-size:11px;font-weight:700">Code : <span style="letter-spacing:2px;font-size:13px">${code||'—'}</span></div>
+      <div style="font-size:11px;font-weight:700">Note : <span style="border-bottom:1.5px solid #333;padding:0 16px">${note||''}</span> / 20</div>
+    </div>
+    <div style="margin-bottom:5px;font-size:9px;display:flex;align-items:center;gap:4px;flex-wrap:wrap">
+      <strong style="color:#555;text-transform:uppercase;letter-spacing:.4px">Légende :</strong>${legend}
+    </div>`;
+
+  let pages='';
+  active.forEach((ev,i)=>{
+    if(isDouble){
+      // Page Recruteur
+      const rCommon=ev.criteria.filter(c=>c.role==='Recruteur');
+      const rProf=ev.criteriaProf.filter(c=>c.role==='Recruteur');
+      pages+=`<div class="page">
+        ${makePageHeader('🧑‍💼 Recruteur',ev.presenterCode,ev.note)}
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#2e5f8a;padding:3px 8px;border-radius:3px 3px 0 0">Critères communs</div>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${makeRows(rCommon,ev.criteria)}</table>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#7b0000;padding:3px 8px;border-radius:3px 3px 0 0">Critères supplémentaires prof</div>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${makeRows(rProf,ev.criteriaProf)}</table>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px">Appréciation générale</div>
+        <div style="border:1.5px solid #999;border-radius:4px;padding:7px 10px;min-height:52px;font-size:10px;background:#fff">${ev.appreciation||''}</div>
         <div style="margin-top:8px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div>
       </div>`;
-  }).join('');
+      // Page Candidat
+      const cCommon=ev.criteria.filter(c=>c.role==='Candidat');
+      const cProf=ev.criteriaProf.filter(c=>c.role==='Candidat');
+      pages+=`<div class="page">
+        ${makePageHeader('👤 Candidat',ev.codeCandidat,ev.noteCandidat)}
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#2e5f8a;padding:3px 8px;border-radius:3px 3px 0 0">Critères communs</div>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${makeRows(cCommon,ev.criteria)}</table>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#7b0000;padding:3px 8px;border-radius:3px 3px 0 0">Critères supplémentaires prof</div>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${makeRows(cProf,ev.criteriaProf)}</table>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px">Appréciation générale</div>
+        <div style="border:1.5px solid #999;border-radius:4px;padding:7px 10px;min-height:52px;font-size:10px;background:#fff">${ev.appreciationCandidat||''}</div>
+        <div style="margin-top:8px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div>
+      </div>`;
+    } else {
+      const commonRows=makeRows(ST.profSession.criteres,ev.criteria);
+      const profRows=makeRows(ST.profSession.criteresProf,ev.criteriaProf);
+      pages+=`<div class="page">
+        ${makePageHeader('',ev.presenterCode,ev.note)}
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#2e5f8a;padding:3px 8px;border-radius:3px 3px 0 0">Critères communs élèves / professeur</div>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${commonRows}</table>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#7b0000;padding:3px 8px;border-radius:3px 3px 0 0">Critères supplémentaires professeur</div>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${profRows}</table>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px">Appréciation générale &amp; remarques</div>
+        <div style="border:1.5px solid #999;border-radius:4px;padding:7px 10px;min-height:52px;font-size:10px;background:#fff">${ev.appreciation||''}</div>
+        <div style="margin-top:8px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div>
+      </div>`;
+    }
+  });
 
   const html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
   <title>OralCheck – Rapport Professeur</title>
   <style>
     *{box-sizing:border-box;}
     body{font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:0;color:#1e2d3d;}
-    .page{
-      width:190mm;
-      min-height:267mm;
-      max-height:267mm;
-      margin:0 auto;
-      padding:8mm 10mm;
-      overflow:hidden;
-      page-break-after:always;
-      page-break-inside:avoid;
-    }
+    .page{width:190mm;min-height:267mm;max-height:267mm;margin:0 auto;padding:8mm 10mm;overflow:hidden;page-break-after:always;page-break-inside:avoid;}
     @page{size:A4 portrait;margin:10mm;}
-    @media print{
-      body{margin:0;padding:0;}
-      .page{margin:0;width:100%;padding:6mm 8mm;page-break-after:always;page-break-inside:avoid;}
-    }
+    @media print{body{margin:0;padding:0;}.page{margin:0;width:100%;padding:6mm 8mm;page-break-after:always;page-break-inside:avoid;}}
   </style></head><body>
   ${pages}
   <script>window.onload=function(){window.print();}<\/script>
