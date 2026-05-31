@@ -432,19 +432,19 @@ const SESSIONS = [
     theme:   'Talking about me (TF1)',
     titre:   'Final task',
     criteres: [
-      {id:'c1', label:'1/ Présentation personnelle'},
-      {id:'c2', label:'2/ Présentation de la famille'},
-      {id:'c3', label:'3/ Animaux'},
-      {id:'c4', label:'4/ Hobbies / intérêts / talent'},
-      {id:'c5', label:'5/ Utilisation de 4 adjectifs d\'apparence'},
-      {id:'c6', label:'6/ Utilisation de 3 adjectifs de personnalité'},
+      {id:'c1', label:'1/ Présentation personnelle',                   min:0, max:2},
+      {id:'c2', label:'2/ Présentation de la famille',                 min:0, max:2},
+      {id:'c3', label:'3/ Animaux',                                    min:0, max:1},
+      {id:'c4', label:'4/ Hobbies / intérêts / talent',               min:0, max:2},
+      {id:'c5', label:'5/ Utilisation de 4 adjectifs d\'apparence',   min:0, max:4},
+      {id:'c6', label:'6/ Utilisation de 3 adjectifs de personnalité',min:0, max:3},
     ],
     criteresProf: [
-      {id:'a', label:'a/ Respect de la durée (1\'30)'},
-      {id:'b', label:'b/ Conjugaison To Be'},
-      {id:'c', label:'c/ Conjugaison To Have'},
-      {id:'d', label:'d/ Présent simple'},
-      {id:'e', label:'e/ Créativité et originalité'},
+      {id:'a', label:'a/ Respect de la durée (1\'30)', min:0, max:1},
+      {id:'b', label:'b/ Conjugaison To Be',           min:0, max:2},
+      {id:'c', label:'c/ Conjugaison To Have',         min:0, max:2},
+      {id:'d', label:'d/ Présent simple',              min:0, max:3},
+      {id:'e', label:'e/ Créativité et originalité',   min:0, max:2},
     ]
   },
   {
@@ -453,19 +453,19 @@ const SESSIONS = [
     theme:   'My work placement',
     titre:   'Final task',
     criteres: [
-      {id:'c1', label:'1/ Présentation de l\'entreprise : nom, lieu, type d\'activité, nombre d\'employés'},
-      {id:'c2', label:'2/ Présentation mission 1'},
-      {id:'c3', label:'3/ Présentation mission 2'},
-      {id:'c4', label:'4/ Présentation mission 3'},
-      {id:'c5', label:'5/ Ce que l\'élève a apprécié et pas apprécié (4 verbes de goût différents)'},
+      {id:'c1', label:'1/ Présentation de l\'entreprise : nom, lieu, type d\'activité, nombre d\'employés', min:0, max:4},
+      {id:'c2', label:'2/ Présentation mission 1', min:0, max:2},
+      {id:'c3', label:'3/ Présentation mission 2', min:0, max:2},
+      {id:'c4', label:'4/ Présentation mission 3', min:0, max:2},
+      {id:'c5', label:'5/ Ce que l\'élève a apprécié et pas apprécié (4 verbes de goût différents)', min:0, max:4},
     ],
     criteresProf: [
-      {id:'a', label:'a/ Structure des phrases (syntaxe)'},
-      {id:'b', label:'b/ Respect du prétérit'},
-      {id:'c', label:'c/ Construction du prétérit'},
-      {id:'d', label:'d/ Anglais intelligible / compréhensible (prononciation)'},
-      {id:'e', label:'e/ Vocabulaire adapté'},
-      {id:'f', label:'f/ Fluidité'},
+      {id:'a', label:'a/ Structure des phrases (syntaxe)',                        min:0, max:3},
+      {id:'b', label:'b/ Respect du prétérit',                                   min:0, max:2},
+      {id:'c', label:'c/ Construction du prétérit',                              min:0, max:3},
+      {id:'d', label:'d/ Anglais intelligible / compréhensible (prononciation)', min:0, max:3},
+      {id:'e', label:'e/ Vocabulaire adapté',                                    min:0, max:2},
+      {id:'f', label:'f/ Fluidité',                                              min:0, max:2},
     ]
   },
   {
@@ -474,21 +474,21 @@ const SESSIONS = [
     theme:   'Gap years',
     titre:   'Final task',
     criteres: [
-      {id:'c1', label:'1/ Présentation du pays'},
-      {id:'c2', label:'2/ Les raisons de ce choix'},
-      {id:'c3', label:'3/ Ce que l\'élève souhaite y faire'},
-      {id:'c4', label:'4/ Les motivations'},
-      {id:'c5', label:'5/ Les expériences'},
-      {id:'c6', label:'6/ Avantages'},
-      {id:'c7', label:'7/ Inquiétudes'},
-      {id:'c8', label:'8/ Clarté de la carte mentale'},
+      {id:'c1', label:'1/ Présentation du pays',           min:0, max:1},
+      {id:'c2', label:'2/ Les raisons de ce choix',        min:0, max:2},
+      {id:'c3', label:'3/ Ce que l\'élève souhaite y faire',min:0, max:2},
+      {id:'c4', label:'4/ Les motivations',                min:0, max:2},
+      {id:'c5', label:'5/ Les expériences',                min:0, max:3},
+      {id:'c6', label:'6/ Avantages',                      min:0, max:2},
+      {id:'c7', label:'7/ Inquiétudes',                    min:0, max:2},
+      {id:'c8', label:'8/ Clarté de la carte mentale',     min:0, max:2},
     ],
     criteresProf: [
-      {id:'a', label:'a/ Structure des phrases (syntaxe)'},
-      {id:'b', label:'b/ Respect des temps (conjugaison)'},
-      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)'},
-      {id:'d', label:'d/ Vocabulaire adapté'},
-      {id:'e', label:'e/ Fluidité'},
+      {id:'a', label:'a/ Structure des phrases (syntaxe)',                        min:0, max:3},
+      {id:'b', label:'b/ Respect des temps (conjugaison)',                        min:0, max:4},
+      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)', min:0, max:4},
+      {id:'d', label:'d/ Vocabulaire adapté',                                    min:0, max:3},
+      {id:'e', label:'e/ Fluidité',                                              min:0, max:3},
     ]
   },
   {
@@ -497,22 +497,22 @@ const SESSIONS = [
     theme:   'Working conditions',
     titre:   'Final task',
     criteres: [
-      {id:'c1', label:'1/ Présentation de l\'entreprise'},
-      {id:'c2', label:'2/ Description des conditions de travail'},
-      {id:'c3', label:'3/ Points positifs'},
-      {id:'c4', label:'4/ Points négatifs'},
-      {id:'c5', label:'5/ Ce qui se passe dans l\'entreprise (actions qui démontrent les conditions de travail)'},
-      {id:'c6', label:'6/ Améliorations possibles'},
-      {id:'c7', label:'7/ Respect du temps de parole'},
-      {id:'c8', label:'8/ Clarté du diaporama'},
-      {id:'c9', label:'9/ Respect du nombre de mots dans le diapo'},
+      {id:'c1', label:'1/ Présentation de l\'entreprise',          min:0, max:2},
+      {id:'c2', label:'2/ Description des conditions de travail',  min:0, max:2},
+      {id:'c3', label:'3/ Points positifs',                        min:0, max:2},
+      {id:'c4', label:'4/ Points négatifs',                        min:0, max:2},
+      {id:'c5', label:'5/ Ce qui se passe dans l\'entreprise (actions qui démontrent les conditions de travail)', min:0, max:2},
+      {id:'c6', label:'6/ Améliorations possibles',                min:0, max:2},
+      {id:'c7', label:'7/ Respect du temps de parole',             min:0, max:1},
+      {id:'c8', label:'8/ Clarté du diaporama',                    min:0, max:2},
+      {id:'c9', label:'9/ Respect du nombre de mots dans le diapo',min:0, max:2},
     ],
     criteresProf: [
-      {id:'a', label:'a/ Structure des phrases (syntaxe)'},
-      {id:'b', label:'b/ Respect des temps (conjugaison présent et présent be+ing)'},
-      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)'},
-      {id:'d', label:'d/ Vocabulaire adapté'},
-      {id:'e', label:'e/ Fluidité'},
+      {id:'a', label:'a/ Structure des phrases (syntaxe)',                        min:0, max:4},
+      {id:'b', label:'b/ Respect des temps (conjugaison présent et présent be+ing)', min:0, max:4},
+      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)', min:0, max:4},
+      {id:'d', label:'d/ Vocabulaire adapté',                                    min:0, max:3},
+      {id:'e', label:'e/ Fluidité',                                              min:0, max:2},
     ]
   },
   {
@@ -521,22 +521,22 @@ const SESSIONS = [
     theme:   'Working conditions',
     titre:   'Final task',
     criteres: [
-      {id:'c1', label:'1/ Présentation de l\'entreprise'},
-      {id:'c2', label:'2/ Description des conditions de travail'},
-      {id:'c3', label:'3/ Points positifs'},
-      {id:'c4', label:'4/ Points négatifs'},
-      {id:'c5', label:'5/ Ce qui se passe dans l\'entreprise (actions qui démontrent les conditions de travail)'},
-      {id:'c6', label:'6/ Améliorations possibles'},
-      {id:'c7', label:'7/ Respect du temps de parole'},
-      {id:'c8', label:'8/ Clarté du diaporama'},
-      {id:'c9', label:'9/ Respect du nombre de mots dans le diapo'},
+      {id:'c1', label:'1/ Présentation de l\'entreprise',          min:0, max:2},
+      {id:'c2', label:'2/ Description des conditions de travail',  min:0, max:2},
+      {id:'c3', label:'3/ Points positifs',                        min:0, max:2},
+      {id:'c4', label:'4/ Points négatifs',                        min:0, max:2},
+      {id:'c5', label:'5/ Ce qui se passe dans l\'entreprise (actions qui démontrent les conditions de travail)', min:0, max:2},
+      {id:'c6', label:'6/ Améliorations possibles',                min:0, max:2},
+      {id:'c7', label:'7/ Respect du temps de parole',             min:0, max:1},
+      {id:'c8', label:'8/ Clarté du diaporama',                    min:0, max:2},
+      {id:'c9', label:'9/ Respect du nombre de mots dans le diapo',min:0, max:2},
     ],
     criteresProf: [
-      {id:'a', label:'a/ Structure des phrases (syntaxe)'},
-      {id:'b', label:'b/ Respect des temps (conjugaison présent et présent be+ing)'},
-      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)'},
-      {id:'d', label:'d/ Vocabulaire adapté'},
-      {id:'e', label:'e/ Fluidité'},
+      {id:'a', label:'a/ Structure des phrases (syntaxe)',                        min:0, max:4},
+      {id:'b', label:'b/ Respect des temps (conjugaison présent et présent be+ing)', min:0, max:4},
+      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)', min:0, max:4},
+      {id:'d', label:'d/ Vocabulaire adapté',                                    min:0, max:3},
+      {id:'e', label:'e/ Fluidité',                                              min:0, max:2},
     ]
   },
   {
@@ -659,8 +659,8 @@ function addProfEvalBlock(){
   const isDouble=ST.profSession.double===true;
   const evalObj={
     presenterCode:'', codeCandidat:'',
-    criteria: ST.profSession.criteres.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null})),
-    criteriaProf: ST.profSession.criteresProf.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null})),
+    criteria: ST.profSession.criteres.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null,score:null,min:c.min||0,max:c.max||0})),
+    criteriaProf: ST.profSession.criteresProf.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null,score:null,min:c.min||0,max:c.max||0})),
     note:'', noteCandidat:'', appreciation:'', appreciationCandidat:''
   };
   ST.profEvals.push(evalObj);
@@ -733,34 +733,33 @@ function addProfEvalBlock(){
     bodyHTML=`<div style="display:flex;gap:10px;align-items:flex-start">
       ${makeProfCol('Recruteur','🧑‍💼','var(--primary)')}
       ${makeProfCol('Candidat','👤','#27ae60')}
-    </div>`;
+    </div>
+    <div id="prof-total-${eIdx}" style="background:#1a3a5c;color:#fff;border-radius:8px;padding:10px 16px;margin-top:12px;font-weight:800;font-size:1rem;text-align:center">Total : 0 / ${[...ST.profSession.criteres,...ST.profSession.criteresProf].reduce((s,c)=>s+(c.max||0),0)}</div>`;
   } else {
     const commonHTML=ST.profSession.criteres.map((c,ci)=>`
       <div class="criteria-item">
-        <div class="criteria-label">${c.label}</div>
+        <div class="criteria-label">${c.label}${c.max!==undefined?` <span style="color:var(--muted);font-size:.8rem;font-weight:400">(/${c.max})</span>`:''}</div>
         <div class="color-btns">
           ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
             onclick="selectProfColor(this,${eIdx},'common',${ci},${lv.v})">${lv.label}</button>`).join('')}
         </div>
+        ${c.max!==undefined?makeScoreSelect(eIdx,'common',ci,c.min||0,c.max,true):''}
       </div>`).join('');
     const profHTML=ST.profSession.criteresProf.map((c,ci)=>`
       <div class="criteria-item">
-        <div class="criteria-label">${c.label}</div>
+        <div class="criteria-label">${c.label}${c.max!==undefined?` <span style="color:var(--muted);font-size:.8rem;font-weight:400">(/${c.max})</span>`:''}</div>
         <div class="color-btns">
           ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
             onclick="selectProfColor(this,${eIdx},'prof',${ci},${lv.v})">${lv.label}</button>`).join('')}
         </div>
+        ${c.max!==undefined?makeScoreSelect(eIdx,'prof',ci,c.min||0,c.max,true):''}
       </div>`).join('');
+    const maxTotal=[...ST.profSession.criteres,...ST.profSession.criteresProf].reduce((s,c)=>s+(c.max||0),0);
     bodyHTML=`
       <div class="section-divider">Critères communs élèves / prof</div>${commonHTML}
       <div class="section-divider prof-extra">Critères supplémentaires professeur</div>${profHTML}
-      <div class="section-divider">Note &amp; appréciation générale</div>
-      <div class="note-input-wrap">
-        <span class="note-label">Note :</span>
-        <input type="text" maxlength="6" placeholder="ex : 14/20"
-          oninput="ST.profEvals[${eIdx}].note=this.value" style="margin:0;width:100px">
-      </div>
-      <label>Appréciation &amp; remarques générales</label>
+      <div id="prof-total-${eIdx}" style="background:#1a3a5c;color:#fff;border-radius:8px;padding:10px 16px;margin:12px 0 8px;font-weight:800;font-size:1rem;text-align:center">Total : 0 / ${maxTotal}</div>
+      <div class="section-divider">Appréciation générale</div>
       <textarea placeholder="Saisissez votre appréciation ici…"
         oninput="ST.profEvals[${eIdx}].appreciation=this.value"></textarea>`;
   }
@@ -960,7 +959,46 @@ function updateAvatar(){
   if(av) av.textContent=(fn||'?')+'-'+(ln||'?');
 }
 
-// ── MODAL ────────────────────────────────────────────
+// ── SCORE SELECTOR (prof only) ───────────────────────
+function makeScoreSelect(eIdx, type, ci, min, max, isProf){
+  const steps=[];
+  for(let v=min;v<=max;v+=0.5) steps.push(v);
+  const arr = isProf ? `ST.profEvals[${eIdx}].${type}[${ci}].score` : '';
+  return `<div style="display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap">
+    <span style="font-size:.72rem;color:var(--muted);font-weight:600">Note :</span>
+    ${steps.map(v=>`<button onclick="setProfScore(this,${eIdx},'${type}',${ci},${v})"
+      style="padding:3px 7px;border-radius:5px;border:1.5px solid #ccd3de;background:#f8fafc;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .15s"
+      data-score="${v}">${v}</button>`).join('')}
+    <span style="font-size:.72rem;color:var(--muted)">/ ${max}</span>
+  </div>`;
+}
+
+function setProfScore(btn, eIdx, type, ci, val){
+  const wrap=btn.parentElement;
+  wrap.querySelectorAll('button').forEach(b=>{
+    b.style.background='#f8fafc';
+    b.style.color='#1e2d3d';
+    b.style.borderColor='#ccd3de';
+  });
+  btn.style.background='#1a3a5c';
+  btn.style.color='#fff';
+  btn.style.borderColor='#1a3a5c';
+  if(type==='common') ST.profEvals[eIdx].criteria[ci].score=val;
+  else ST.profEvals[eIdx].criteriaProf[ci].score=val;
+  updateProfTotal(eIdx);
+}
+
+function updateProfTotal(eIdx){
+  const ev=ST.profEvals[eIdx];
+  if(!ev) return;
+  const allC=[...ev.criteria,...ev.criteriaProf];
+  const maxTotal=allC.reduce((s,c)=>s+(c.max||0),0);
+  const obtained=allC.reduce((s,c)=>s+(c.score||0),0);
+  const el=document.getElementById(`prof-total-${eIdx}`);
+  if(el) el.textContent=`Total : ${obtained} / ${maxTotal}`;
+}
+
+
 function confirmReset(){document.getElementById('modal-reset').classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 function doReset(){closeModal('modal-reset');ST.evals=[];blockCounter=0;goTo('screen-home');}
