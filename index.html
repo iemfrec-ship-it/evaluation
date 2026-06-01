@@ -15,8 +15,6 @@
 body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 .screen{display:none;min-height:100vh;padding-bottom:40px;}
 .screen.active{display:flex;flex-direction:column;align-items:center;}
-
-/* HEROES */
 .hero{width:100%;padding:34px 20px 50px;text-align:center;position:relative;overflow:hidden;}
 .hero::after{content:'';position:absolute;bottom:-20px;left:0;right:0;height:40px;background:var(--bg);border-radius:50% 50% 0 0/40px 40px 0 0;}
 .hero-blue{background:linear-gradient(135deg,#1a3a5c,#2e86de);}
@@ -27,141 +25,85 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--te
 .hero-sub{color:rgba(255,255,255,.75);font-size:.92rem;margin-top:5px;}
 .hero-title{font-size:1.5rem;font-weight:800;color:#fff;}
 .hero-context{color:rgba(255,255,255,.8);font-size:.84rem;margin-top:4px;}
-
-/* CONTENT */
 .content{width:100%;max-width:500px;padding:20px 16px 0;}
-
-/* CARDS */
 .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 18px;margin-bottom:14px;}
 .card h2{font-size:1rem;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-
-/* HOME */
 .home-cards{width:100%;max-width:500px;padding:28px 16px 0;display:flex;flex-direction:column;gap:12px;}
 .hcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 18px;display:flex;align-items:center;gap:16px;cursor:pointer;border:2px solid transparent;transition:all .2s;}
-.hcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 28px rgba(46,134,222,.18);}
+.hcard:hover{border-color:var(--accent);transform:translateY(-3px);}
 .hcard-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
 .ic-blue{background:linear-gradient(135deg,#1a3a5c,#2e86de);}
 .ic-green{background:linear-gradient(135deg,#27ae60,#52d68a);}
 .hcard-label{font-size:1rem;font-weight:700;color:var(--primary);}
 .hcard-desc{font-size:.8rem;color:var(--muted);margin-top:2px;}
 .hcard-arrow{margin-left:auto;color:var(--accent);font-size:1.4rem;}
-
-/* SELECTION */
 .sel-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;}
 .sel-btn{background:var(--card);border:2px solid #dde3ec;border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .18s;font-size:.88rem;font-weight:600;color:var(--primary);}
 .sel-btn:hover{border-color:var(--accent);background:#f0f7ff;}
 .sb-icon{font-size:1.4rem;display:block;margin-bottom:5px;}
 .session-card{background:var(--card);border:2px solid #dde3ec;border-radius:12px;padding:15px;cursor:pointer;transition:all .18s;margin-bottom:10px;}
-.session-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(46,134,222,.15);}
+.session-card:hover{border-color:var(--accent);transform:translateY(-2px);}
 .session-theme{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin-bottom:4px;}
 .session-title{font-size:.96rem;font-weight:700;color:var(--primary);}
 .session-meta{font-size:.77rem;color:var(--muted);margin-top:4px;}
-
-/* FORM */
 label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
 input,textarea{width:100%;padding:11px 13px;border:1.5px solid #dde3ec;border-radius:9px;font-size:.93rem;background:#f8fafc;color:var(--text);margin-bottom:13px;transition:border-color .2s;font-family:inherit;}
 input:focus,textarea:focus{outline:none;border-color:var(--accent);background:#fff;}
 .code-input{letter-spacing:4px;font-weight:700;font-size:1.05rem;text-transform:uppercase;}
-.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 textarea{resize:vertical;min-height:80px;}
-
-/* BUTTONS */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:9px;border:none;cursor:pointer;font-size:.93rem;font-weight:700;transition:filter .15s,transform .1s;width:100%;}
 .btn:hover{filter:brightness(1.07);transform:translateY(-1px);}
-.btn:active{transform:translateY(0);}
 .btn-primary{background:linear-gradient(135deg,var(--accent),#1a6bbf);color:#fff;}
 .btn-green{background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;}
 .btn-secondary{background:#f0f4f8;color:var(--primary);border:2px solid #dde3ec;margin-top:8px;}
 .btn-danger{background:#c0392b;color:#fff;}
 .btn-small{padding:7px 12px;font-size:.8rem;width:auto;}
 .btn-add{background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border-radius:50px;padding:12px 22px;font-size:.9rem;margin-bottom:14px;border:none;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:8px;}
-
-/* ALERTS */
 .alert{border-radius:9px;padding:11px 14px;font-size:.86rem;margin-bottom:12px;}
 .alert-info{background:#e8f4fd;color:#1a6ea8;border-left:4px solid var(--accent);}
 .alert-warn{background:#fff3e0;color:#b05f00;border-left:4px solid #e67e22;}
 .alert-error{background:#fdecea;color:#c0392b;border-left:4px solid #c0392b;}
 .alert-success{background:#e6f9ef;color:#1a6b3c;border-left:4px solid #27ae60;}
-
-/* PROGRESS */
 .progress-wrap{width:100%;margin-bottom:16px;}
 .progress-note{font-size:.78rem;color:var(--muted);text-align:right;margin-bottom:4px;}
 .progress-bar{height:7px;background:#e0e8f0;border-radius:10px;}
 .progress-fill{height:7px;background:linear-gradient(90deg,var(--accent),#27ae60);border-radius:10px;transition:width .4s;}
-
-/* EVAL BLOCK */
 .eval-block{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 15px;margin-bottom:14px;border-top:4px solid var(--accent);}
 .eval-block.prof-block{border-top-color:#7b0000;}
 .eval-block-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;}
 .eval-block-num{font-weight:800;font-size:.92rem;color:var(--primary);}
 .btn-remove{background:none;border:none;color:#c0392b;font-size:1.1rem;cursor:pointer;padding:4px 8px;border-radius:6px;}
-.btn-remove:hover{background:#fdecea;}
-
-/* SECTION DIVIDER */
 .section-divider{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-bottom:1.5px solid #e0e8f0;padding-bottom:6px;margin:16px 0 12px;}
 .section-divider.prof-extra{color:#7b0000;}
-
-/* CRITERIA */
 .criteria-item{margin-bottom:13px;}
 .criteria-label{font-size:.87rem;font-weight:600;color:var(--text);margin-bottom:6px;}
-
-/* COLOR BUTTONS — 5 niveaux, lisibles en N&B */
 .color-btns{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
-.cbtn{
-  padding:8px 3px;border:3px solid transparent;border-radius:8px;
-  font-size:.66rem;font-weight:700;color:#fff;cursor:pointer;
-  opacity:.28;transition:opacity .15s,transform .15s,box-shadow .15s,border-color .15s;
-  text-align:center;line-height:1.3;position:relative;
-}
-.cbtn.selected{
-  opacity:1;transform:scale(1.07);
-  box-shadow:0 3px 10px rgba(0,0,0,.25);
-  border-color:#000 !important;   /* contour noir épais → visible en N&B */
-}
-/* hachures pour impression N&B : pattern via outline inset */
-.cbtn.selected::after{
-  content:'✓';position:absolute;bottom:2px;right:3px;
-  font-size:.6rem;color:rgba(255,255,255,.9);font-weight:900;
-}
+.cbtn{padding:8px 3px;border:3px solid transparent;border-radius:8px;font-size:.66rem;font-weight:700;color:#fff;cursor:pointer;opacity:.28;transition:opacity .15s,transform .15s,box-shadow .15s;text-align:center;line-height:1.3;position:relative;}
+.cbtn.selected{opacity:1;transform:scale(1.07);box-shadow:0 3px 10px rgba(0,0,0,.25);border-color:#000 !important;}
+.cbtn.selected::after{content:'✓';position:absolute;bottom:2px;right:3px;font-size:.6rem;color:rgba(255,255,255,.9);font-weight:900;}
 .cbtn-1{background:var(--c1);}
 .cbtn-2{background:var(--c2);}
 .cbtn-3{background:var(--c3);}
 .cbtn-4{background:var(--c4);}
 .cbtn-5{background:var(--c5);}
-
-/* NOTE INPUT */
-.note-input-wrap{display:flex;align-items:center;gap:10px;margin-bottom:13px;}
-.note-input-wrap input{margin:0;width:80px;text-align:center;font-weight:700;font-size:1rem;}
-.note-label{font-size:.87rem;font-weight:600;color:var(--text);}
-
-/* BADGE */
 .s-badge{background:linear-gradient(135deg,#1a3a5c,#2e86de);color:#fff;border-radius:10px;padding:10px 15px;font-size:.84rem;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;width:100%;}
-
-/* BREADCRUMB */
 .breadcrumb{font-size:.78rem;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
 .breadcrumb span{color:var(--accent);font-weight:600;}
-
-/* FOOTER */
 .footer{margin-top:20px;text-align:center;font-size:.76rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:6px;}
 .btn-rgpd{background:none;border:1px solid #ccd3de;border-radius:20px;padding:5px 15px;font-size:.74rem;color:var(--muted);cursor:pointer;}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{display:flex;}
 .modal{background:#fff;border-radius:var(--radius);padding:26px 22px;max-width:400px;width:100%;}
 .modal h3{margin-bottom:10px;color:var(--primary);}
 .modal-actions{display:flex;gap:10px;margin-top:16px;}
-
-/* DONE */
 .done-hero{background:linear-gradient(135deg,#27ae60,#1a6b3c);width:100%;padding:38px 20px 50px;text-align:center;position:relative;overflow:hidden;}
 .done-hero::after{content:'';position:absolute;bottom:-20px;left:0;right:0;height:40px;background:var(--bg);border-radius:50% 50% 0 0/40px 40px 0 0;}
-
 @media(max-width:380px){.color-btns{grid-template-columns:repeat(3,1fr);}.sel-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- ══ HOME ══════════════════════════════════════════ -->
+<!-- HOME -->
 <div id="screen-home" class="screen active">
   <div class="hero hero-blue">
     <span class="hero-icon">🎤</span>
@@ -186,7 +128,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ RGPD ══════════════════════════════════════════ -->
+<!-- RGPD -->
 <div id="screen-rgpd" class="screen">
   <div class="hero hero-blue" style="padding:26px 20px 42px">
     <div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div>
@@ -194,13 +136,13 @@ textarea{resize:vertical;min-height:80px;}
   </div>
   <div class="content">
     <div class="card"><h2>🔒 RGPD</h2>
-      <p style="color:var(--muted);font-size:.88rem;line-height:1.6"><em>Cette page sera complétée ultérieurement par l'auteur de l'application.</em></p>
+      <p style="color:var(--muted);font-size:.88rem;line-height:1.6"><em>Cette page sera complétée ultérieurement.</em></p>
     </div>
     <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
   </div>
 </div>
 
-<!-- ══ PROF LOGIN ════════════════════════════════════ -->
+<!-- PROF LOGIN -->
 <div id="screen-prof-login" class="screen">
   <div class="hero hero-blue" style="padding:26px 20px 42px">
     <div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div>
@@ -217,14 +159,13 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ PROF DASHBOARD ════════════════════════════════ -->
+<!-- PROF DASHBOARD -->
 <div id="screen-prof-dashboard" class="screen">
   <div class="hero hero-blue" style="padding:22px 20px 38px">
     <div class="hero-logo" style="font-size:1.4rem">Oral<span>Check</span></div>
     <div class="hero-sub">Tableau de bord professeur</div>
   </div>
   <div class="content">
-    <!-- Codes -->
     <div class="card"><h2>⚙️ Codes d'accès</h2>
       <label>Nouveau code professeur (vide = inchangé)</label>
       <input id="new-prof-code" type="password" maxlength="6" placeholder="••••" class="code-input">
@@ -233,16 +174,15 @@ textarea{resize:vertical;min-height:80px;}
       <button class="btn btn-primary" onclick="saveCodes()">💾 Enregistrer</button>
       <div id="codes-saved-msg" class="alert alert-success" style="display:none;margin-top:10px">Codes mis à jour ✓</div>
     </div>
-    <!-- Évaluation prof -->
     <div class="card"><h2>📋 Mes évaluations</h2>
-      <p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Sélectionnez une session pour commencer vos évaluations.</p>
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Sélectionnez une session.</p>
       <div id="prof-session-list"></div>
     </div>
-    <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour à l'accueil</button>
+    <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
   </div>
 </div>
 
-<!-- ══ PROF EVAL ═════════════════════════════════════ -->
+<!-- PROF EVAL -->
 <div id="screen-prof-eval" class="screen">
   <div class="hero hero-blue" style="padding:20px 20px 40px">
     <div class="hero-title" style="font-size:1.15rem" id="prof-eval-hero-title"></div>
@@ -257,11 +197,11 @@ textarea{resize:vertical;min-height:80px;}
     <div id="prof-eval-blocks-container"></div>
     <button class="btn-add" onclick="addProfEvalBlock()">+ Évaluer un autre élève</button>
     <button class="btn btn-primary" style="margin-bottom:8px" onclick="generateProfPDF()">🖨️ Télécharger le rapport PDF</button>
-    <button class="btn btn-secondary" onclick="goTo('screen-prof-dashboard')">← Retour au tableau de bord</button>
+    <button class="btn btn-secondary" onclick="goTo('screen-prof-dashboard')">← Retour</button>
   </div>
 </div>
 
-<!-- ══ STUDENT LOGIN ═════════════════════════════════ -->
+<!-- STUDENT LOGIN -->
 <div id="screen-student-login" class="screen">
   <div class="hero hero-green">
     <span class="hero-icon">📝</span>
@@ -270,8 +210,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
   <div class="content">
     <div class="card"><h2>🔑 Code d'accès</h2>
-      <p style="font-size:.84rem;color:var(--muted);margin-bottom:13px">Code fourni par votre professeur.</p>
-      <label>Code d'accès</label>
+      <label>Code fourni par votre professeur</label>
       <input id="student-access-code" type="text" maxlength="10" placeholder="Code d'accès" class="code-input">
       <div id="student-access-error" class="alert alert-error" style="display:none">Code incorrect.</div>
       <button class="btn btn-green" onclick="studentAccessCheck()">Continuer →</button>
@@ -280,7 +219,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ STUDENT : FILIÈRE ═════════════════════════════ -->
+<!-- FILIERE -->
 <div id="screen-choose-filiere" class="screen">
   <div class="hero hero-green" style="padding:22px 20px 38px">
     <div class="hero-title">Ma filière</div>
@@ -293,7 +232,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ STUDENT : CLASSE ══════════════════════════════ -->
+<!-- CLASSE -->
 <div id="screen-choose-classe" class="screen">
   <div class="hero hero-green" style="padding:22px 20px 38px">
     <div class="hero-title">Ma classe</div>
@@ -307,7 +246,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ STUDENT : SESSION ═════════════════════════════ -->
+<!-- SESSION -->
 <div id="screen-choose-session" class="screen">
   <div class="hero hero-green" style="padding:22px 20px 38px">
     <div class="hero-title">Mon évaluation</div>
@@ -321,7 +260,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ STUDENT : IDENTIFICATION ══════════════════════ -->
+<!-- IDENTIFICATION -->
 <div id="screen-student-identify" class="screen">
   <div class="hero hero-green" style="padding:22px 20px 38px">
     <span class="hero-icon" style="font-size:2rem">👤</span>
@@ -330,18 +269,13 @@ textarea{resize:vertical;min-height:80px;}
   </div>
   <div class="content">
     <div class="breadcrumb" id="id-breadcrumb" style="margin-bottom:10px"></div>
-
-    <!-- Avatar preview -->
     <div style="display:flex;justify-content:center;margin-bottom:18px">
-      <div id="avatar-circle" style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#27ae60,#1a6b3c);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:2px;transition:all .2s">??</div>
+      <div id="avatar-circle" style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#27ae60,#1a6b3c);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:#fff;letter-spacing:2px">??</div>
     </div>
-
     <div class="card" style="padding:24px 20px">
-      <p style="font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:20px;line-height:1.5">Saisissez les <strong>2 premières lettres</strong> de votre prénom et de votre nom.</p>
-
+      <p style="font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:20px">Saisissez les <strong>2 premières lettres</strong> de votre prénom et de votre nom.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
-        <!-- Prénom -->
-        <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center;transition:border-color .2s" id="box-fn">
+        <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center" id="box-fn">
           <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Prénom</div>
           <input id="s-firstname" type="text" maxlength="2" placeholder="MA"
             style="width:100%;border:1.5px solid transparent;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:4px 0;margin:0;border-radius:6px"
@@ -350,8 +284,7 @@ textarea{resize:vertical;min-height:80px;}
             onblur="document.getElementById('box-fn').style.borderColor='#dde3ec'">
           <div style="margin-top:6px;font-size:.72rem;color:var(--muted)">ex : MA</div>
         </div>
-        <!-- Nom -->
-        <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center;transition:border-color .2s" id="box-ln">
+        <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center" id="box-ln">
           <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Nom</div>
           <input id="s-lastname" type="text" maxlength="2" placeholder="DU"
             style="width:100%;border:1.5px solid transparent;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:4px 0;margin:0;border-radius:6px"
@@ -361,7 +294,6 @@ textarea{resize:vertical;min-height:80px;}
           <div style="margin-top:6px;font-size:.72rem;color:var(--muted)">ex : DU</div>
         </div>
       </div>
-
       <div id="identify-error" class="alert alert-error" style="display:none">Veuillez remplir les deux champs.</div>
       <button class="btn btn-green" onclick="studentIdentify()">Accéder à l'évaluation →</button>
       <button class="btn btn-secondary" onclick="goTo('screen-choose-session')">← Retour</button>
@@ -369,7 +301,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ STUDENT EVAL ══════════════════════════════════ -->
+<!-- STUDENT EVAL -->
 <div id="screen-student-eval" class="screen">
   <div class="hero hero-green" style="padding:18px 20px 40px">
     <div class="hero-title" style="font-size:1.15rem" id="eval-hero-title"></div>
@@ -391,7 +323,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ DONE STUDENT ═══════════════════════════════════ -->
+<!-- DONE -->
 <div id="screen-done" class="screen">
   <div class="done-hero">
     <span style="font-size:3rem;display:block;margin-bottom:8px">✅</span>
@@ -409,7 +341,7 @@ textarea{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- ══ MODAL RESET ════════════════════════════════════ -->
+<!-- MODAL RESET -->
 <div class="modal-overlay" id="modal-reset">
   <div class="modal">
     <h3>⚠️ Recommencer ?</h3>
@@ -422,192 +354,170 @@ textarea{resize:vertical;min-height:80px;}
 </div>
 
 <script>
-// ════════════════════════════════════════════════════
-//  SESSIONS
-// ════════════════════════════════════════════════════
-const SESSIONS = [
+// ═══════════════════════════════════════════
+// SESSIONS
+// ═══════════════════════════════════════════
+var SESSIONS = [
   {
-    filiere: 'AEPA',
-    classe:  '2nde',
-    theme:   'Talking about me (TF1)',
-    titre:   'Final task',
-    criteres: [
-      {id:'c1', label:'1/ Présentation personnelle',                   min:0, max:2},
-      {id:'c2', label:'2/ Présentation de la famille',                 min:0, max:2},
-      {id:'c3', label:'3/ Animaux',                                    min:0, max:1},
-      {id:'c4', label:'4/ Hobbies / intérêts / talent',               min:0, max:2},
-      {id:'c5', label:'5/ Utilisation de 4 adjectifs d\'apparence',   min:0, max:4},
-      {id:'c6', label:'6/ Utilisation de 3 adjectifs de personnalité',min:0, max:3},
+    filiere:'AEPA', classe:'2nde', theme:'Talking about me (TF1)', titre:'Final task',
+    criteres:[
+      {id:'c1',label:'1/ Présentation personnelle',min:0,max:2},
+      {id:'c2',label:'2/ Présentation de la famille',min:0,max:2},
+      {id:'c3',label:'3/ Animaux',min:0,max:1},
+      {id:'c4',label:'4/ Hobbies / intérêts / talent',min:0,max:2},
+      {id:'c5',label:"5/ Utilisation de 4 adjectifs d'apparence",min:0,max:4},
+      {id:'c6',label:'6/ Utilisation de 3 adjectifs de personnalité',min:0,max:3}
     ],
-    criteresProf: [
-      {id:'a', label:'a/ Respect de la durée (1\'30)', min:0, max:1},
-      {id:'b', label:'b/ Conjugaison To Be',           min:0, max:2},
-      {id:'c', label:'c/ Conjugaison To Have',         min:0, max:2},
-      {id:'d', label:'d/ Présent simple',              min:0, max:3},
-      {id:'e', label:'e/ Créativité et originalité',   min:0, max:2},
+    criteresProf:[
+      {id:'a',label:"a/ Respect de la durée (1'30)",min:0,max:1},
+      {id:'b',label:'b/ Conjugaison To Be',min:0,max:2},
+      {id:'c',label:'c/ Conjugaison To Have',min:0,max:2},
+      {id:'d',label:'d/ Présent simple',min:0,max:3},
+      {id:'e',label:'e/ Créativité et originalité',min:0,max:2}
     ]
   },
   {
-    filiere: 'AEPA',
-    classe:  '2nde',
-    theme:   'My work placement',
-    titre:   'Final task',
-    criteres: [
-      {id:'c1', label:'1/ Présentation de l\'entreprise : nom, lieu, type d\'activité, nombre d\'employés', min:0, max:4},
-      {id:'c2', label:'2/ Présentation mission 1', min:0, max:2},
-      {id:'c3', label:'3/ Présentation mission 2', min:0, max:2},
-      {id:'c4', label:'4/ Présentation mission 3', min:0, max:2},
-      {id:'c5', label:'5/ Ce que l\'élève a apprécié et pas apprécié (4 verbes de goût différents)', min:0, max:4},
+    filiere:'AEPA', classe:'2nde', theme:'My work placement', titre:'Final task',
+    criteres:[
+      {id:'c1',label:"1/ Présentation de l'entreprise : nom, lieu, type d'activité, nombre d'employés",min:0,max:4},
+      {id:'c2',label:'2/ Présentation mission 1',min:0,max:2},
+      {id:'c3',label:'3/ Présentation mission 2',min:0,max:2},
+      {id:'c4',label:'4/ Présentation mission 3',min:0,max:2},
+      {id:'c5',label:"5/ Ce que l'élève a apprécié et pas apprécié (4 verbes de goût différents)",min:0,max:4}
     ],
-    criteresProf: [
-      {id:'a', label:'a/ Structure des phrases (syntaxe)',                        min:0, max:3},
-      {id:'b', label:'b/ Respect du prétérit',                                   min:0, max:2},
-      {id:'c', label:'c/ Construction du prétérit',                              min:0, max:3},
-      {id:'d', label:'d/ Anglais intelligible / compréhensible (prononciation)', min:0, max:3},
-      {id:'e', label:'e/ Vocabulaire adapté',                                    min:0, max:2},
-      {id:'f', label:'f/ Fluidité',                                              min:0, max:2},
+    criteresProf:[
+      {id:'a',label:'a/ Structure des phrases (syntaxe)',min:0,max:3},
+      {id:'b',label:'b/ Respect du prétérit',min:0,max:2},
+      {id:'c',label:'c/ Construction du prétérit',min:0,max:3},
+      {id:'d',label:'d/ Anglais intelligible / compréhensible (prononciation)',min:0,max:3},
+      {id:'e',label:'e/ Vocabulaire adapté',min:0,max:2},
+      {id:'f',label:'f/ Fluidité',min:0,max:2}
     ]
   },
   {
-    filiere: 'AEPA',
-    classe:  'Terminale',
-    theme:   'Gap years',
-    titre:   'Final task',
-    criteres: [
-      {id:'c1', label:'1/ Présentation du pays',           min:0, max:1},
-      {id:'c2', label:'2/ Les raisons de ce choix',        min:0, max:2},
-      {id:'c3', label:'3/ Ce que l\'élève souhaite y faire',min:0, max:2},
-      {id:'c4', label:'4/ Les motivations',                min:0, max:2},
-      {id:'c5', label:'5/ Les expériences',                min:0, max:3},
-      {id:'c6', label:'6/ Avantages',                      min:0, max:2},
-      {id:'c7', label:'7/ Inquiétudes',                    min:0, max:2},
-      {id:'c8', label:'8/ Clarté de la carte mentale',     min:0, max:2},
+    filiere:'AEPA', classe:'Terminale', theme:'Gap years', titre:'Final task',
+    criteres:[
+      {id:'c1',label:'1/ Présentation du pays',min:0,max:1},
+      {id:'c2',label:'2/ Les raisons de ce choix',min:0,max:2},
+      {id:'c3',label:"3/ Ce que l'élève souhaite y faire",min:0,max:2},
+      {id:'c4',label:'4/ Les motivations',min:0,max:2},
+      {id:'c5',label:'5/ Les expériences',min:0,max:3},
+      {id:'c6',label:'6/ Avantages',min:0,max:2},
+      {id:'c7',label:'7/ Inquiétudes',min:0,max:2},
+      {id:'c8',label:'8/ Clarté de la carte mentale',min:0,max:2}
     ],
-    criteresProf: [
-      {id:'a', label:'a/ Structure des phrases (syntaxe)',                        min:0, max:3},
-      {id:'b', label:'b/ Respect des temps (conjugaison)',                        min:0, max:4},
-      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)', min:0, max:4},
-      {id:'d', label:'d/ Vocabulaire adapté',                                    min:0, max:3},
-      {id:'e', label:'e/ Fluidité',                                              min:0, max:3},
+    criteresProf:[
+      {id:'a',label:'a/ Structure des phrases (syntaxe)',min:0,max:3},
+      {id:'b',label:'b/ Respect des temps (conjugaison)',min:0,max:4},
+      {id:'c',label:'c/ Anglais intelligible / compréhensible (prononciation)',min:0,max:4},
+      {id:'d',label:'d/ Vocabulaire adapté',min:0,max:3},
+      {id:'e',label:'e/ Fluidité',min:0,max:3}
     ]
   },
   {
-    filiere: 'CVA',
-    classe:  '1ère',
-    theme:   'Working conditions',
-    titre:   'Final task',
-    criteres: [
-      {id:'c1', label:'1/ Présentation de l\'entreprise',          min:0, max:2},
-      {id:'c2', label:'2/ Description des conditions de travail',  min:0, max:2},
-      {id:'c3', label:'3/ Points positifs',                        min:0, max:2},
-      {id:'c4', label:'4/ Points négatifs',                        min:0, max:2},
-      {id:'c5', label:'5/ Ce qui se passe dans l\'entreprise (actions qui démontrent les conditions de travail)', min:0, max:2},
-      {id:'c6', label:'6/ Améliorations possibles',                min:0, max:2},
-      {id:'c7', label:'7/ Respect du temps de parole',             min:0, max:1},
-      {id:'c8', label:'8/ Clarté du diaporama',                    min:0, max:2},
-      {id:'c9', label:'9/ Respect du nombre de mots dans le diapo',min:0, max:2},
+    filiere:'CVA', classe:'1ère', theme:'Working conditions', titre:'Final task',
+    criteres:[
+      {id:'c1',label:"1/ Présentation de l'entreprise",min:0,max:2},
+      {id:'c2',label:'2/ Description des conditions de travail',min:0,max:2},
+      {id:'c3',label:'3/ Points positifs',min:0,max:2},
+      {id:'c4',label:'4/ Points négatifs',min:0,max:2},
+      {id:'c5',label:"5/ Ce qui se passe dans l'entreprise (actions qui démontrent les conditions de travail)",min:0,max:2},
+      {id:'c6',label:'6/ Améliorations possibles',min:0,max:2},
+      {id:'c7',label:'7/ Respect du temps de parole',min:0,max:1},
+      {id:'c8',label:'8/ Clarté du diaporama',min:0,max:2},
+      {id:'c9',label:'9/ Respect du nombre de mots dans le diapo',min:0,max:2}
     ],
-    criteresProf: [
-      {id:'a', label:'a/ Structure des phrases (syntaxe)',                        min:0, max:4},
-      {id:'b', label:'b/ Respect des temps (conjugaison présent et présent be+ing)', min:0, max:4},
-      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)', min:0, max:4},
-      {id:'d', label:'d/ Vocabulaire adapté',                                    min:0, max:3},
-      {id:'e', label:'e/ Fluidité',                                              min:0, max:2},
+    criteresProf:[
+      {id:'a',label:'a/ Structure des phrases (syntaxe)',min:0,max:4},
+      {id:'b',label:'b/ Respect des temps (conjugaison présent et présent be+ing)',min:0,max:4},
+      {id:'c',label:'c/ Anglais intelligible / compréhensible (prononciation)',min:0,max:4},
+      {id:'d',label:'d/ Vocabulaire adapté',min:0,max:3},
+      {id:'e',label:'e/ Fluidité',min:0,max:2}
     ]
   },
   {
-    filiere: 'MDA',
-    classe:  '1ère',
-    theme:   'Working conditions',
-    titre:   'Final task',
-    criteres: [
-      {id:'c1', label:'1/ Présentation de l\'entreprise',          min:0, max:2},
-      {id:'c2', label:'2/ Description des conditions de travail',  min:0, max:2},
-      {id:'c3', label:'3/ Points positifs',                        min:0, max:2},
-      {id:'c4', label:'4/ Points négatifs',                        min:0, max:2},
-      {id:'c5', label:'5/ Ce qui se passe dans l\'entreprise (actions qui démontrent les conditions de travail)', min:0, max:2},
-      {id:'c6', label:'6/ Améliorations possibles',                min:0, max:2},
-      {id:'c7', label:'7/ Respect du temps de parole',             min:0, max:1},
-      {id:'c8', label:'8/ Clarté du diaporama',                    min:0, max:2},
-      {id:'c9', label:'9/ Respect du nombre de mots dans le diapo',min:0, max:2},
+    filiere:'MDA', classe:'1ère', theme:'Working conditions', titre:'Final task',
+    criteres:[
+      {id:'c1',label:"1/ Présentation de l'entreprise",min:0,max:2},
+      {id:'c2',label:'2/ Description des conditions de travail',min:0,max:2},
+      {id:'c3',label:'3/ Points positifs',min:0,max:2},
+      {id:'c4',label:'4/ Points négatifs',min:0,max:2},
+      {id:'c5',label:"5/ Ce qui se passe dans l'entreprise (actions qui démontrent les conditions de travail)",min:0,max:2},
+      {id:'c6',label:'6/ Améliorations possibles',min:0,max:2},
+      {id:'c7',label:'7/ Respect du temps de parole',min:0,max:1},
+      {id:'c8',label:'8/ Clarté du diaporama',min:0,max:2},
+      {id:'c9',label:'9/ Respect du nombre de mots dans le diapo',min:0,max:2}
     ],
-    criteresProf: [
-      {id:'a', label:'a/ Structure des phrases (syntaxe)',                        min:0, max:4},
-      {id:'b', label:'b/ Respect des temps (conjugaison présent et présent be+ing)', min:0, max:4},
-      {id:'c', label:'c/ Anglais intelligible / compréhensible (prononciation)', min:0, max:4},
-      {id:'d', label:'d/ Vocabulaire adapté',                                    min:0, max:3},
-      {id:'e', label:'e/ Fluidité',                                              min:0, max:2},
+    criteresProf:[
+      {id:'a',label:'a/ Structure des phrases (syntaxe)',min:0,max:4},
+      {id:'b',label:'b/ Respect des temps (conjugaison présent et présent be+ing)',min:0,max:4},
+      {id:'c',label:'c/ Anglais intelligible / compréhensible (prononciation)',min:0,max:4},
+      {id:'d',label:'d/ Vocabulaire adapté',min:0,max:3},
+      {id:'e',label:'e/ Fluidité',min:0,max:2}
     ]
   },
   {
-    filiere: 'MOS',
-    classe:  'MOS1',
-    theme:   'Job interview',
-    titre:   'Final task',
-    double:  true,  // session binôme recruteur + candidat
-    criteres: [
-      // RECRUTEUR
-      {id:'r1', label:'1/ Accueil du candidat',              role:'Recruteur'},
-      {id:'r2', label:'2/ Description du poste',             role:'Recruteur'},
-      {id:'r3', label:'3/ Missions principales (au moins 4)',role:'Recruteur'},
-      {id:'r4', label:'4/ Responsabilités',                  role:'Recruteur'},
-      {id:'r5', label:'5/ Compétences et qualités',          role:'Recruteur'},
-      {id:'r6', label:'6/ Attitude professionnelle',         role:'Recruteur'},
-      // CANDIDAT
-      {id:'c1', label:'1/ Présentation personnelle',                  role:'Candidat'},
-      {id:'c2', label:'2/ Parcours scolaire et professionnel',        role:'Candidat'},
-      {id:'c3', label:'3/ Exposé des compétences et qualités',        role:'Candidat'},
-      {id:'c4', label:'4/ Attitude professionnelle',                  role:'Candidat'},
-      {id:'c5', label:'5/ Réactivité aux questions',                  role:'Candidat'},
+    filiere:'MOS', classe:'MOS1', theme:'Job interview', titre:'Final task', double:true,
+    criteres:[
+      {id:'r1',label:'1/ Accueil du candidat',role:'Recruteur',min:0,max:2},
+      {id:'r2',label:'2/ Description du poste',role:'Recruteur',min:0,max:3},
+      {id:'r3',label:'3/ Missions principales (au moins 4)',role:'Recruteur',min:0,max:4},
+      {id:'r4',label:'4/ Responsabilités',role:'Recruteur',min:0,max:3},
+      {id:'r5',label:'5/ Compétences et qualités',role:'Recruteur',min:0,max:4},
+      {id:'r6',label:'6/ Attitude professionnelle',role:'Recruteur',min:0,max:2},
+      {id:'c1',label:'1/ Présentation personnelle',role:'Candidat',min:0,max:2},
+      {id:'c2',label:'2/ Parcours scolaire et professionnel',role:'Candidat',min:0,max:4},
+      {id:'c3',label:'3/ Exposé des compétences et qualités',role:'Candidat',min:0,max:4},
+      {id:'c4',label:'4/ Attitude professionnelle',role:'Candidat',min:0,max:2},
+      {id:'c5',label:'5/ Réactivité aux questions',role:'Candidat',min:0,max:3}
     ],
-    criteresProf: [
-      // RECRUTEUR
-      {id:'ra', label:'a/ Construction des phrases',              role:'Recruteur'},
-      {id:'rb', label:'b/ Construction des questions',            role:'Recruteur'},
-      {id:'rc', label:'c/ Vocabulaire adapté',                    role:'Recruteur'},
-      {id:'rd', label:'d/ Pertinence',                            role:'Recruteur'},
-      {id:'re', label:'e/ Intelligibilité (anglais compréhensible)',role:'Recruteur'},
-      {id:'rf', label:'f/ Attitude professionnelle',              role:'Recruteur'},
-      {id:'rg', label:'g/ Réactivité',                            role:'Recruteur'},
-      // CANDIDAT
-      {id:'ca', label:'a/ Construction des phrases',              role:'Candidat'},
-      {id:'cb', label:'b/ Construction des questions',            role:'Candidat'},
-      {id:'cc', label:'c/ Vocabulaire adapté',                    role:'Candidat'},
-      {id:'cd', label:'d/ Pertinence',                            role:'Candidat'},
-      {id:'ce', label:'e/ Intelligibilité (anglais compréhensible)',role:'Candidat'},
-      {id:'cf', label:'f/ Attitude professionnelle',              role:'Candidat'},
-      {id:'cg', label:'g/ Réactivité',                            role:'Candidat'},
+    criteresProf:[
+      {id:'ra',label:'a/ Construction des phrases',role:'Recruteur',min:0,max:4},
+      {id:'rb',label:'b/ Construction des questions',role:'Recruteur',min:0,max:4},
+      {id:'rc',label:'c/ Vocabulaire adapté',role:'Recruteur',min:0,max:3},
+      {id:'rd',label:'d/ Pertinence',role:'Recruteur',min:0,max:3},
+      {id:'re',label:'e/ Intelligibilité (anglais compréhensible)',role:'Recruteur',min:0,max:4},
+      {id:'rf',label:'f/ Attitude professionnelle',role:'Recruteur',min:0,max:2},
+      {id:'rg',label:'g/ Réactivité',role:'Recruteur',min:0,max:3},
+      {id:'ca',label:'a/ Construction des phrases',role:'Candidat',min:0,max:4},
+      {id:'cb',label:'b/ Construction des questions',role:'Candidat',min:0,max:4},
+      {id:'cc',label:'c/ Vocabulaire adapté',role:'Candidat',min:0,max:3},
+      {id:'cd',label:'d/ Pertinence',role:'Candidat',min:0,max:3},
+      {id:'ce',label:'e/ Intelligibilité (anglais compréhensible)',role:'Candidat',min:0,max:4},
+      {id:'cf',label:'f/ Attitude professionnelle',role:'Candidat',min:0,max:2},
+      {id:'cg',label:'g/ Réactivité',role:'Candidat',min:0,max:3}
     ]
-  },
+  }
 ];
 
-// ════════════════════════════════════════════════════
-const LEVELS = [
-  {cls:'cbtn-1', label:'✗✗ Insuffisant', v:1, txt:'Insuffisant'},
-  {cls:'cbtn-2', label:'✗ Pas OK',       v:2, txt:'Pas OK'    },
-  {cls:'cbtn-3', label:'~ Moyen',        v:3, txt:'Moyen'     },
-  {cls:'cbtn-4', label:'✓ Bien',         v:4, txt:'Bien'      },
-  {cls:'cbtn-5', label:'★ Très bien',    v:5, txt:'Très bien' },
+var LEVELS=[
+  {cls:'cbtn-1',label:'✗✗ Insuffisant',v:1,txt:'Insuffisant'},
+  {cls:'cbtn-2',label:'✗ Pas OK',v:2,txt:'Pas OK'},
+  {cls:'cbtn-3',label:'~ Moyen',v:3,txt:'Moyen'},
+  {cls:'cbtn-4',label:'✓ Bien',v:4,txt:'Bien'},
+  {cls:'cbtn-5',label:'★ Très bien',v:5,txt:'Très bien'}
 ];
+var LTXT={1:'Insuffisant',2:'Pas OK',3:'Moyen',4:'Bien',5:'Très bien'};
+var GRAYS=['#1a1a1a','#555','#888','#aaa','#ccc'];
 
-const ST = {
-  profCode:'0504', studentCode:'ELEVE01',
-  filiere:'', classe:'', session:null,
-  student:{id:'', classe:''},
-  evals:[], profEvals:[], profSession:null
+var ST={
+  profCode:'0504',studentCode:'ELEVE01',
+  filiere:'',classe:'',session:null,
+  student:{id:'',classe:''},
+  evals:[],profEvals:[],profSession:null
 };
 
-// ── NAV ──────────────────────────────────────────────
+// NAV
 function goTo(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
 }
-function unique(arr){return [...new Set(arr)];}
+function unique(arr){return arr.filter(function(v,i,a){return a.indexOf(v)===i;});}
 
-// ── PROF ─────────────────────────────────────────────
+// PROF LOGIN
 function profLogin(){
-  const v=document.getElementById('prof-pin-input').value.trim();
+  var v=document.getElementById('prof-pin-input').value.trim();
   if(v===ST.profCode){
     document.getElementById('prof-login-error').style.display='none';
     document.getElementById('prof-pin-input').value='';
@@ -620,34 +530,36 @@ function profLogin(){
   }
 }
 function saveCodes(){
-  const np=document.getElementById('new-prof-code').value.trim();
-  const ns=document.getElementById('new-student-code').value.trim();
+  var np=document.getElementById('new-prof-code').value.trim();
+  var ns=document.getElementById('new-student-code').value.trim();
   if(np) ST.profCode=np;
   if(ns) ST.studentCode=ns;
   document.getElementById('new-prof-code').value='';
   document.getElementById('display-student-code').textContent=ST.studentCode;
-  const m=document.getElementById('codes-saved-msg');
-  m.style.display='block'; setTimeout(()=>m.style.display='none',2500);
+  var m=document.getElementById('codes-saved-msg');
+  m.style.display='block';
+  setTimeout(function(){m.style.display='none';},2500);
 }
 function renderProfSessionList(){
-  const el=document.getElementById('prof-session-list');
-  if(!SESSIONS.length){el.innerHTML='<p style="color:var(--muted);font-size:.85rem">Aucune session définie.</p>';return;}
-  el.innerHTML=SESSIONS.map((s,i)=>`
-    <div class="session-card" onclick="startProfEval(${i})">
-      <div class="session-theme">📚 ${s.filiere} · ${s.classe}</div>
-      <div class="session-title">${s.titre}</div>
-      <div class="session-meta">Thème : ${s.theme} · ${s.criteres.length} critère(s) commun(s) + ${s.criteresProf.length} critère(s) prof</div>
-    </div>`).join('');
+  var el=document.getElementById('prof-session-list');
+  if(!SESSIONS.length){el.innerHTML='<p style="color:var(--muted);font-size:.85rem">Aucune session.</p>';return;}
+  el.innerHTML=SESSIONS.map(function(s,i){
+    return '<div class="session-card" onclick="startProfEval('+i+')">'
+      +'<div class="session-theme">'+s.filiere+' · '+s.classe+'</div>'
+      +'<div class="session-title">'+s.titre+'</div>'
+      +'<div class="session-meta">'+s.theme+' · '+s.criteres.length+' critère(s) + '+s.criteresProf.length+' prof</div>'
+      +'</div>';
+  }).join('');
 }
 
-// ── PROF EVAL ────────────────────────────────────────
-let profBlockCounter=0;
+// PROF EVAL
+var profBlockCounter=0;
 function startProfEval(idx){
   ST.profSession=SESSIONS[idx];
   ST.profEvals=[];
   profBlockCounter=0;
   document.getElementById('prof-eval-hero-title').textContent=ST.profSession.titre;
-  document.getElementById('prof-eval-hero-context').textContent=`${ST.profSession.filiere} · ${ST.profSession.classe} · ${ST.profSession.theme}`;
+  document.getElementById('prof-eval-hero-context').textContent=ST.profSession.filiere+' · '+ST.profSession.classe+' · '+ST.profSession.theme;
   document.getElementById('prof-eval-blocks-container').innerHTML='';
   addProfEvalBlock();
   goTo('screen-prof-eval');
@@ -655,548 +567,405 @@ function startProfEval(idx){
 
 function addProfEvalBlock(){
   profBlockCounter++;
-  const idx=profBlockCounter;
-  const isDouble=ST.profSession.double===true;
-  const evalObj={
-    presenterCode:'', codeCandidat:'',
-    criteria: ST.profSession.criteres.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null,score:null,min:c.min||0,max:c.max||0})),
-    criteriaProf: ST.profSession.criteresProf.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null,score:null,min:c.min||0,max:c.max||0})),
-    note:'', noteCandidat:'', appreciation:'', appreciationCandidat:''
+  var idx=profBlockCounter;
+  var isDouble=ST.profSession.double===true;
+  var evalObj={
+    presenterCode:'',codeCandidat:'',
+    criteria:ST.profSession.criteres.map(function(c){return {id:c.id,label:c.label,role:c.role||null,value:null,score:null,min:c.min||0,max:c.max||0};}),
+    criteriaProf:ST.profSession.criteresProf.map(function(c){return {id:c.id,label:c.label,role:c.role||null,value:null,score:null,min:c.min||0,max:c.max||0};}),
+    appreciation:'',appreciationCandidat:''
   };
   ST.profEvals.push(evalObj);
-  const eIdx=ST.profEvals.length-1;
+  var eIdx=ST.profEvals.length-1;
 
-  const makeSection=(items, type, role, roleLabel, roleColor, roleIcon)=>{
-    const filtered=items.filter(c=>!c.role||c.role===role);
-    return filtered.map((c,ci)=>{
-      const globalCi=items.indexOf(c);
-      const fn=type==='common'?`selectProfColor(this,${eIdx},'common',${globalCi},v)`:`selectProfColor(this,${eIdx},'prof',${globalCi},v)`;
-      return `<div class="criteria-item">
-        <div class="criteria-label">${c.label}</div>
-        <div class="color-btns">
-          ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
-            onclick="selectProfColor(this,${eIdx},'${type}',${globalCi},${lv.v})">${lv.label}</button>`).join('')}
-        </div>
-      </div>`;}).join('');
-  };
-
-  let bodyHTML='';
-  if(isDouble){
-    const makeProfCol=(role,icon,col)=>{
-      const commonItems=ST.profSession.criteres.filter(c=>c.role===role);
-      const profItems=ST.profSession.criteresProf.filter(c=>c.role===role);
-      const noteField=role==='Recruteur'?'note':'noteCandidat';
-      const appField=role==='Recruteur'?'appreciation':'appreciationCandidat';
-      const code=role==='Recruteur'?`ST.profEvals[${eIdx}].presenterCode`:`ST.profEvals[${eIdx}].codeCandidat`;
-      const placeholder=role==='Recruteur'?'Ex : R1':'Ex : C1';
-
-      const commonRows=commonItems.map(c=>{
-        const gi=ST.profSession.criteres.indexOf(c);
-        return `<div class="criteria-item" style="margin-bottom:9px">
-          <div class="criteria-label" style="font-size:.76rem">${c.label}</div>
-          <div style="display:flex;flex-direction:column;gap:3px">
-            ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}" style="padding:5px 4px;font-size:.65rem;border-radius:5px;text-align:left;padding-left:6px"
-              onclick="selectProfColor(this,${eIdx},'common',${gi},${lv.v})">${lv.label}</button>`).join('')}
-          </div>
-        </div>`;}).join('');
-
-      const profRows=profItems.map(c=>{
-        const gi=ST.profSession.criteresProf.indexOf(c);
-        return `<div class="criteria-item" style="margin-bottom:9px">
-          <div class="criteria-label" style="font-size:.76rem;font-style:italic">${c.label}</div>
-          <div style="display:flex;flex-direction:column;gap:3px">
-            ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}" style="padding:5px 4px;font-size:.65rem;border-radius:5px;text-align:left;padding-left:6px"
-              onclick="selectProfColor(this,${eIdx},'prof',${gi},${lv.v})">${lv.label}</button>`).join('')}
-          </div>
-        </div>`;}).join('');
-
-      return `<div style="flex:1;min-width:0;background:#f8fafc;border:2px solid ${col};border-radius:10px;padding:12px 10px">
-        <div style="font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:${col};margin-bottom:8px">${icon} ${role}</div>
-        <label style="font-size:.7rem">Code</label>
-        <input type="text" maxlength="8" placeholder="${placeholder}" class="code-input"
-          style="margin-bottom:10px;font-size:.85rem;padding:7px 10px"
-          oninput="${code}=this.value.toUpperCase();this.value=this.value.toUpperCase()">
-        <label style="font-size:.7rem">Note</label>
-        <input type="text" maxlength="6" placeholder="—/20"
-          style="margin-bottom:10px;font-size:.85rem;padding:7px 10px;text-align:center;font-weight:700"
-          oninput="ST.profEvals[${eIdx}].${noteField}=this.value">
-        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin:8px 0 5px">Critères communs</div>
-        ${commonRows}
-        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:8px 0 5px">Critères prof</div>
-        ${profRows}
-        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:#555;margin:8px 0 4px">Appréciation</div>
-        <textarea placeholder="Appréciation ${role.toLowerCase()}…" style="font-size:.8rem;min-height:60px"
-          oninput="ST.profEvals[${eIdx}].${appField}=this.value"></textarea>
-      </div>`;
-    };
-
-    bodyHTML=`<div style="display:flex;gap:10px;align-items:flex-start">
-      ${makeProfCol('Recruteur','🧑‍💼','var(--primary)')}
-      ${makeProfCol('Candidat','👤','#27ae60')}
-    </div>
-    <div id="prof-total-${eIdx}" style="background:#1a3a5c;color:#fff;border-radius:8px;padding:10px 16px;margin-top:12px;font-weight:800;font-size:1rem;text-align:center">Total : 0 / ${[...ST.profSession.criteres,...ST.profSession.criteresProf].reduce((s,c)=>s+(c.max||0),0)}</div>`;
-  } else {
-    const commonHTML=ST.profSession.criteres.map((c,ci)=>`
-      <div class="criteria-item">
-        <div class="criteria-label">${c.label}${c.max!==undefined?` <span style="color:var(--muted);font-size:.8rem;font-weight:400">(/${c.max})</span>`:''}</div>
-        <div class="color-btns">
-          ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
-            onclick="selectProfColor(this,${eIdx},'common',${ci},${lv.v})">${lv.label}</button>`).join('')}
-        </div>
-        ${c.max!==undefined?makeScoreSelect(eIdx,'common',ci,c.min||0,c.max,true):''}
-      </div>`).join('');
-    const profHTML=ST.profSession.criteresProf.map((c,ci)=>`
-      <div class="criteria-item">
-        <div class="criteria-label">${c.label}${c.max!==undefined?` <span style="color:var(--muted);font-size:.8rem;font-weight:400">(/${c.max})</span>`:''}</div>
-        <div class="color-btns">
-          ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
-            onclick="selectProfColor(this,${eIdx},'prof',${ci},${lv.v})">${lv.label}</button>`).join('')}
-        </div>
-        ${c.max!==undefined?makeScoreSelect(eIdx,'prof',ci,c.min||0,c.max,true):''}
-      </div>`).join('');
-    const maxTotal=[...ST.profSession.criteres,...ST.profSession.criteresProf].reduce((s,c)=>s+(c.max||0),0);
-    bodyHTML=`
-      <div class="section-divider">Critères communs élèves / prof</div>${commonHTML}
-      <div class="section-divider prof-extra">Critères supplémentaires professeur</div>${profHTML}
-      <div id="prof-total-${eIdx}" style="background:#1a3a5c;color:#fff;border-radius:8px;padding:10px 16px;margin:12px 0 8px;font-weight:800;font-size:1rem;text-align:center">Total : 0 / ${maxTotal}</div>
-      <div class="section-divider">Appréciation générale</div>
-      <textarea placeholder="Saisissez votre appréciation ici…"
-        oninput="ST.profEvals[${eIdx}].appreciation=this.value"></textarea>`;
+  function mkColorBtns(type,gi){
+    return LEVELS.map(function(lv){
+      return '<button class="cbtn '+lv.cls+'" style="padding:5px 4px;font-size:.62rem;border-radius:5px;text-align:left;padding-left:5px" onclick="selectProfColor(this,'+eIdx+',\''+type+'\','+gi+','+lv.v+')">'+lv.label+'</button>';
+    }).join('');
+  }
+  function mkScoreBtns(type,gi,min,max){
+    var s='<div style="display:flex;align-items:center;gap:3px;margin-top:4px;flex-wrap:wrap"><span style="font-size:.65rem;color:var(--muted);font-weight:600">Note:</span>';
+    for(var v=min;v<=max;v+=0.5){
+      s+='<button onclick="setProfScore(this,'+eIdx+',\''+type+'\','+gi+','+v+')" style="padding:2px 5px;border-radius:4px;border:1.5px solid #ccd3de;background:#f8fafc;font-size:.68rem;font-weight:700;cursor:pointer" data-score="'+v+'">'+v+'</button>';
+    }
+    s+='<span style="font-size:.65rem;color:var(--muted)">/ '+max+'</span></div>';
+    return s;
+  }
+  function mkCriteria(items,type,italic){
+    return items.map(function(c){
+      var gi=type==='common'?ST.profSession.criteres.indexOf(c):ST.profSession.criteresProf.indexOf(c);
+      return '<div class="criteria-item" style="margin-bottom:9px">'
+        +'<div class="criteria-label" style="font-size:.74rem'+(italic?';font-style:italic':'')+'">'+c.label+(c.max?' <span style="color:var(--muted);font-weight:400">(/' +c.max+')</span>':'')+'</div>'
+        +'<div style="display:flex;flex-direction:column;gap:2px">'+mkColorBtns(type,gi)+'</div>'
+        +(c.max?mkScoreBtns(type,gi,c.min||0,c.max):'')
+        +'</div>';
+    }).join('');
   }
 
-  const codeFields=isDouble?'':`
-    <label>Code participant</label>
-    <input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:16px"
-      oninput="ST.profEvals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">`;
+  var maxTotal=ST.profSession.criteres.concat(ST.profSession.criteresProf).reduce(function(s,c){return s+(c.max||0);},0);
+  var bodyHTML='';
 
-  const div=document.createElement('div');
-  div.className='eval-block prof-block'; div.id=`peb-${idx}`;
-  div.innerHTML=`
-    <div class="eval-block-header">
-      <div class="eval-block-num">🎤 ${isDouble?'Binôme':'Élève'} #${idx}</div>
-      ${idx>1?`<button class="btn-remove" onclick="removeProfBlock(${idx},${eIdx})">✕</button>`:''}
-    </div>
-    ${codeFields}${bodyHTML}`;
+  if(isDouble){
+    function mkCol(role,icon,col){
+      var ci=ST.profSession.criteres.filter(function(c){return c.role===role;});
+      var pi=ST.profSession.criteresProf.filter(function(c){return c.role===role;});
+      var cf=role==='Recruteur'?'presenterCode':'codeCandidat';
+      var af=role==='Recruteur'?'appreciation':'appreciationCandidat';
+      var ph=role==='Recruteur'?'Ex : R1':'Ex : C1';
+      return '<div style="flex:1;min-width:0;background:#f8fafc;border:2px solid '+col+';border-radius:10px;padding:10px 9px">'
+        +'<div style="font-size:.76rem;font-weight:800;text-transform:uppercase;color:'+col+';margin-bottom:7px">'+icon+' '+role+'</div>'
+        +'<label style="font-size:.68rem">Code</label>'
+        +'<input type="text" maxlength="8" placeholder="'+ph+'" class="code-input" style="margin-bottom:8px;font-size:.82rem;padding:6px 8px" oninput="ST.profEvals['+eIdx+'].'+cf+'=this.value.toUpperCase();this.value=this.value.toUpperCase()">'
+        +'<div style="font-size:.68rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin:6px 0 4px">Critères communs</div>'
+        +mkCriteria(ci,'common',false)
+        +'<div style="font-size:.68rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:6px 0 4px">Critères prof</div>'
+        +mkCriteria(pi,'prof',true)
+        +'<div style="font-size:.68rem;font-weight:700;text-transform:uppercase;color:#555;margin:6px 0 3px">Appréciation</div>'
+        +'<textarea placeholder="Appréciation '+role.toLowerCase()+'..." style="font-size:.78rem;min-height:55px" oninput="ST.profEvals['+eIdx+'].'+af+'=this.value"></textarea>'
+        +'</div>';
+    }
+    bodyHTML='<div style="display:flex;gap:8px;align-items:flex-start">'
+      +mkCol('Recruteur','🧑','var(--primary)')
+      +mkCol('Candidat','👤','#27ae60')
+      +'</div>'
+      +'<div id="prof-total-'+eIdx+'" style="background:#1a3a5c;color:#fff;border-radius:8px;padding:9px 14px;margin-top:10px;font-weight:800;font-size:.95rem;text-align:center">Total : 0 / '+maxTotal+'</div>';
+  } else {
+    bodyHTML='<div class="section-divider">Critères communs élèves / prof</div>'
+      +mkCriteria(ST.profSession.criteres,'common',false)
+      +'<div class="section-divider prof-extra">Critères supplémentaires professeur</div>'
+      +mkCriteria(ST.profSession.criteresProf,'prof',true)
+      +'<div id="prof-total-'+eIdx+'" style="background:#1a3a5c;color:#fff;border-radius:8px;padding:9px 14px;margin:10px 0 8px;font-weight:800;font-size:.95rem;text-align:center">Total : 0 / '+maxTotal+'</div>'
+      +'<div class="section-divider">Appréciation générale</div>'
+      +'<textarea placeholder="Saisissez votre appréciation..." oninput="ST.profEvals['+eIdx+'].appreciation=this.value"></textarea>';
+  }
+
+  var codeF=isDouble?'':'<label>Code participant</label><input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:14px" oninput="ST.profEvals['+eIdx+'].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">';
+  var rmBtn=idx>1?'<button class="btn-remove" onclick="removeProfBlock('+idx+','+eIdx+')">✕</button>':'';
+  var div=document.createElement('div');
+  div.className='eval-block prof-block';
+  div.id='peb-'+idx;
+  div.innerHTML='<div class="eval-block-header"><div class="eval-block-num">🎤 '+(isDouble?'Binôme':'Élève')+' #'+idx+'</div>'+rmBtn+'</div>'+codeF+bodyHTML;
   document.getElementById('prof-eval-blocks-container').appendChild(div);
   updateProfProgress();
   div.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function removeProfBlock(blockId,eIdx){
-  const el=document.getElementById(`peb-${blockId}`);
-  if(el) el.remove();
-  ST.profEvals[eIdx]=null;
-  updateProfProgress();
-}
 function selectProfColor(btn,eIdx,type,ci,val){
-  btn.closest('.color-btns').querySelectorAll('.cbtn').forEach(b=>b.classList.remove('selected'));
+  var wrap=btn.parentElement;
+  wrap.querySelectorAll('.cbtn').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
   if(type==='common') ST.profEvals[eIdx].criteria[ci].value=val;
   else ST.profEvals[eIdx].criteriaProf[ci].value=val;
   updateProfProgress();
 }
-function updateProfProgress(){
-  const active=ST.profEvals.filter(e=>e!==null);
-  const total=active.reduce((s,e)=>s+e.criteria.length+e.criteriaProf.length,0);
-  const filled=active.reduce((s,e)=>
-    s+e.criteria.filter(c=>c.value!==null).length+e.criteriaProf.filter(c=>c.value!==null).length,0);
-  const pct=total>0?Math.round(filled/total*100):0;
-  document.getElementById('prof-progress-fill').style.width=pct+'%';
-  document.getElementById('prof-progress-note').textContent=`Progression : ${filled} / ${total} critères renseignés`;
-}
-
-// ── STUDENT FLOW ─────────────────────────────────────
-function studentAccessCheck(){
-  const v=document.getElementById('student-access-code').value.trim().toUpperCase();
-  if(v===ST.studentCode.toUpperCase()){
-    document.getElementById('student-access-error').style.display='none';
-    buildFiliereScreen();
-    goTo('screen-choose-filiere');
-  } else {
-    document.getElementById('student-access-error').style.display='block';
-  }
-}
-function buildFiliereScreen(){
-  const filieres=unique(SESSIONS.map(s=>s.filiere));
-  const grid=document.getElementById('filiere-grid');
-  grid.innerHTML=filieres.map(f=>`<div class="sel-btn" onclick="selectFiliere('${f}')"><span class="sb-icon">🏫</span>${f}</div>`).join('');
-}
-function selectFiliere(f){
-  ST.filiere=f;
-  document.getElementById('sub-filiere-selected').textContent=f;
-  const classes=unique(SESSIONS.filter(s=>s.filiere===f).map(s=>s.classe));
-  document.getElementById('classe-grid').innerHTML=classes.map(c=>`<div class="sel-btn" onclick="selectClasse('${c}')"><span class="sb-icon">🎒</span>${c}</div>`).join('');
-  goTo('screen-choose-classe');
-}
-function selectClasse(c){
-  ST.classe=c;
-  document.getElementById('sub-classe-selected').textContent=`${ST.filiere} · ${c}`;
-  const sessions=SESSIONS.filter(s=>s.filiere===ST.filiere&&s.classe===c);
-  document.getElementById('session-list').innerHTML=sessions.map(s=>`
-    <div class="session-card" onclick="selectSession(${SESSIONS.indexOf(s)})">
-      <div class="session-theme">📚 ${s.theme}</div>
-      <div class="session-title">${s.titre}</div>
-      <div class="session-meta">${s.criteres.length} critère(s)</div>
-    </div>`).join('');
-  goTo('screen-choose-session');
-}
-function selectSession(idx){
-  ST.session=SESSIONS[idx];
-  document.getElementById('id-breadcrumb').innerHTML=`${ST.filiere} <span>›</span> ${ST.classe} <span>›</span> ${ST.session.titre}`;
-  goTo('screen-student-identify');
-}
-function studentIdentify(){
-  const fn=document.getElementById('s-firstname').value.trim().toUpperCase();
-  const ln=document.getElementById('s-lastname').value.trim().toUpperCase();
-  if(!fn||!ln){document.getElementById('identify-error').style.display='block';return;}
-  ST.student={id:fn+'-'+ln, classe:ST.classe};
-  ST.evals=[];
-  blockCounter=0;
-  document.getElementById('eval-hero-title').textContent=ST.session.titre;
-  document.getElementById('eval-hero-context').textContent=`${ST.filiere} · ${ST.classe} · ${ST.session.theme}`;
-  document.getElementById('student-badge-bar').innerHTML=`<strong>🎓 ${fn+ln}</strong><span style="opacity:.4">|</span>${ST.classe}<span style="opacity:.4">|</span>${ST.session.titre}`;
-  document.getElementById('eval-blocks-container').innerHTML='';
-  addEvalBlock();
-  goTo('screen-student-eval');
-}
-
-// ── STUDENT EVAL BLOCKS ──────────────────────────────
-let blockCounter=0;
-function addEvalBlock(){
-  blockCounter++;
-  const idx=blockCounter;
-  const isDouble=ST.session.double===true;
-  const evalObj={
-    presenterCode:'', codeCandidat:'',
-    criteria:ST.session.criteres.map(c=>({id:c.id,label:c.label,role:c.role||null,value:null}))
-  };
-  ST.evals.push(evalObj);
-  const eIdx=ST.evals.length-1;
-
-  // Grouper par rôle si session double
-  let cHTML='';
-  if(isDouble){
-    const roles=['Recruteur','Candidat'];
-    roles.forEach(role=>{
-      const items=ST.session.criteres.filter(c=>c.role===role);
-      cHTML+=`<div class="section-divider" style="color:${role==='Recruteur'?'var(--primary)':'#27ae60'}">${role==='Recruteur'?'🧑‍💼':'👤'} ${role}</div>`;
-      cHTML+=items.map((c,ci)=>{
-        const globalCi=ST.session.criteres.indexOf(c);
-        return `<div class="criteria-item">
-          <div class="criteria-label">${c.label}</div>
-          <div class="color-btns">
-            ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
-              onclick="selectColor(this,${eIdx},${globalCi},${lv.v})">${lv.label}</button>`).join('')}
-          </div>
-        </div>`;}).join('');
-    });
-  } else {
-    cHTML=ST.session.criteres.map((c,ci)=>`
-      <div class="criteria-item">
-        <div class="criteria-label">${c.label}</div>
-        <div class="color-btns">
-          ${LEVELS.map(lv=>`<button class="cbtn ${lv.cls}"
-            onclick="selectColor(this,${eIdx},${ci},${lv.v})">${lv.label}</button>`).join('')}
-        </div>
-      </div>`).join('');
-  }
-
-  const codeFields = isDouble ? `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
-      <div>
-        <label>Code Recruteur</label>
-        <input type="text" maxlength="8" placeholder="Ex : R1" class="code-input"
-          oninput="ST.evals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">
-      </div>
-      <div>
-        <label>Code Candidat</label>
-        <input type="text" maxlength="8" placeholder="Ex : C1" class="code-input"
-          oninput="ST.evals[${eIdx}].codeCandidat=this.value.toUpperCase();this.value=this.value.toUpperCase()">
-      </div>
-    </div>` : `
-    <label>Code du présentateur</label>
-    <input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:16px"
-      oninput="ST.evals[${eIdx}].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">`;
-
-  const div=document.createElement('div');
-  div.className='eval-block'; div.id=`eb-${idx}`;
-  div.innerHTML=`
-    <div class="eval-block-header">
-      <div class="eval-block-num">🎤 ${isDouble?'Binôme':'Présentateur'} #${idx}</div>
-      ${idx>1?`<button class="btn-remove" onclick="removeBlock(${idx},${eIdx})">✕</button>`:''}
-    </div>
-    ${codeFields}${cHTML}`;
-  document.getElementById('eval-blocks-container').appendChild(div);
-  updateProgress();
-  div.scrollIntoView({behavior:'smooth',block:'start'});
-}
-function removeBlock(blockId,eIdx){
-  const el=document.getElementById(`eb-${blockId}`);
-  if(el) el.remove();
-  ST.evals[eIdx]=null;
-  updateProgress();
-}
-function selectColor(btn,eIdx,ci,val){
-  btn.closest('.color-btns').querySelectorAll('.cbtn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  ST.evals[eIdx].criteria[ci].value=val;
-  updateProgress();
-}
-function updateProgress(){
-  const active=ST.evals.filter(e=>e!==null);
-  const total=active.reduce((s,e)=>s+e.criteria.length,0);
-  const filled=active.reduce((s,e)=>s+e.criteria.filter(c=>c.value!==null).length,0);
-  const pct=total>0?Math.round(filled/total*100):0;
-  document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('progress-note').textContent=`Progression : ${filled} / ${total} critères renseignés`;
-}
-
-// ── AVATAR PREVIEW ───────────────────────────────────
-function updateAvatar(){
-  const fn=document.getElementById('s-firstname').value.toUpperCase();
-  const ln=document.getElementById('s-lastname').value.toUpperCase();
-  const av=document.getElementById('avatar-circle');
-  if(av) av.textContent=(fn||'?')+'-'+(ln||'?');
-}
-
-// ── SCORE SELECTOR (prof only) ───────────────────────
-function makeScoreSelect(eIdx, type, ci, min, max, isProf){
-  const steps=[];
-  for(let v=min;v<=max;v+=0.5) steps.push(v);
-  const arr = isProf ? `ST.profEvals[${eIdx}].${type}[${ci}].score` : '';
-  return `<div style="display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap">
-    <span style="font-size:.72rem;color:var(--muted);font-weight:600">Note :</span>
-    ${steps.map(v=>`<button onclick="setProfScore(this,${eIdx},'${type}',${ci},${v})"
-      style="padding:3px 7px;border-radius:5px;border:1.5px solid #ccd3de;background:#f8fafc;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .15s"
-      data-score="${v}">${v}</button>`).join('')}
-    <span style="font-size:.72rem;color:var(--muted)">/ ${max}</span>
-  </div>`;
-}
-
-function setProfScore(btn, eIdx, type, ci, val){
-  const wrap=btn.parentElement;
-  wrap.querySelectorAll('button').forEach(b=>{
-    b.style.background='#f8fafc';
-    b.style.color='#1e2d3d';
-    b.style.borderColor='#ccd3de';
-  });
-  btn.style.background='#1a3a5c';
-  btn.style.color='#fff';
-  btn.style.borderColor='#1a3a5c';
+function setProfScore(btn,eIdx,type,ci,val){
+  var wrap=btn.parentElement;
+  wrap.querySelectorAll('button').forEach(function(b){b.style.background='#f8fafc';b.style.color='#1e2d3d';b.style.borderColor='#ccd3de';});
+  btn.style.background='#1a3a5c';btn.style.color='#fff';btn.style.borderColor='#1a3a5c';
   if(type==='common') ST.profEvals[eIdx].criteria[ci].score=val;
   else ST.profEvals[eIdx].criteriaProf[ci].score=val;
   updateProfTotal(eIdx);
 }
-
 function updateProfTotal(eIdx){
-  const ev=ST.profEvals[eIdx];
-  if(!ev) return;
-  const allC=[...ev.criteria,...ev.criteriaProf];
-  const maxTotal=allC.reduce((s,c)=>s+(c.max||0),0);
-  const obtained=allC.reduce((s,c)=>s+(c.score||0),0);
-  const el=document.getElementById(`prof-total-${eIdx}`);
-  if(el) el.textContent=`Total : ${obtained} / ${maxTotal}`;
+  var ev=ST.profEvals[eIdx]; if(!ev) return;
+  var all=ev.criteria.concat(ev.criteriaProf);
+  var maxT=all.reduce(function(s,c){return s+(c.max||0);},0);
+  var obt=all.reduce(function(s,c){return s+(c.score||0);},0);
+  var el=document.getElementById('prof-total-'+eIdx);
+  if(el) el.textContent='Total : '+obt+' / '+maxT;
+}
+function updateProfProgress(){
+  var active=ST.profEvals.filter(function(e){return e!==null;});
+  var total=active.reduce(function(s,e){return s+e.criteria.length+e.criteriaProf.length;},0);
+  var filled=active.reduce(function(s,e){
+    return s+e.criteria.filter(function(c){return c.value!==null;}).length
+            +e.criteriaProf.filter(function(c){return c.value!==null;}).length;
+  },0);
+  var pct=total>0?Math.round(filled/total*100):0;
+  document.getElementById('prof-progress-fill').style.width=pct+'%';
+  document.getElementById('prof-progress-note').textContent='Progression : '+filled+' / '+total+' critères renseignés';
+}
+function removeProfBlock(blockId,eIdx){
+  var el=document.getElementById('peb-'+blockId); if(el) el.remove();
+  ST.profEvals[eIdx]=null; updateProfProgress();
 }
 
+// STUDENT FLOW
+function studentAccessCheck(){
+  var v=document.getElementById('student-access-code').value.trim().toUpperCase();
+  if(v===ST.studentCode.toUpperCase()){
+    document.getElementById('student-access-error').style.display='none';
+    buildFiliereScreen(); goTo('screen-choose-filiere');
+  } else { document.getElementById('student-access-error').style.display='block'; }
+}
+function buildFiliereScreen(){
+  var filieres=unique(SESSIONS.map(function(s){return s.filiere;}));
+  document.getElementById('filiere-grid').innerHTML=filieres.map(function(f){
+    return '<div class="sel-btn" onclick="selectFiliere(\''+f+'\')"><span class="sb-icon">🏫</span>'+f+'</div>';
+  }).join('');
+}
+function selectFiliere(f){
+  ST.filiere=f;
+  document.getElementById('sub-filiere-selected').textContent=f;
+  var classes=unique(SESSIONS.filter(function(s){return s.filiere===f;}).map(function(s){return s.classe;}));
+  document.getElementById('classe-grid').innerHTML=classes.map(function(c){
+    return '<div class="sel-btn" onclick="selectClasse(\''+c+'\')"><span class="sb-icon">🎒</span>'+c+'</div>';
+  }).join('');
+  goTo('screen-choose-classe');
+}
+function selectClasse(c){
+  ST.classe=c;
+  document.getElementById('sub-classe-selected').textContent=ST.filiere+' · '+c;
+  var sessions=SESSIONS.filter(function(s){return s.filiere===ST.filiere&&s.classe===c;});
+  document.getElementById('session-list').innerHTML=sessions.map(function(s){
+    var i=SESSIONS.indexOf(s);
+    return '<div class="session-card" onclick="selectSession('+i+')">'
+      +'<div class="session-theme">'+s.theme+'</div>'
+      +'<div class="session-title">'+s.titre+'</div>'
+      +'<div class="session-meta">'+s.criteres.length+' critère(s)</div>'
+      +'</div>';
+  }).join('');
+  goTo('screen-choose-session');
+}
+function selectSession(idx){
+  ST.session=SESSIONS[idx];
+  document.getElementById('id-breadcrumb').innerHTML=ST.filiere+' <span>›</span> '+ST.classe+' <span>›</span> '+ST.session.titre;
+  goTo('screen-student-identify');
+}
+function updateAvatar(){
+  var fn=document.getElementById('s-firstname').value.toUpperCase();
+  var ln=document.getElementById('s-lastname').value.toUpperCase();
+  var av=document.getElementById('avatar-circle');
+  if(av) av.textContent=(fn||'?')+'-'+(ln||'?');
+}
+function studentIdentify(){
+  var fn=document.getElementById('s-firstname').value.trim().toUpperCase();
+  var ln=document.getElementById('s-lastname').value.trim().toUpperCase();
+  if(!fn||!ln){document.getElementById('identify-error').style.display='block';return;}
+  ST.student={id:fn+'-'+ln,classe:ST.classe};
+  ST.evals=[]; blockCounter=0;
+  document.getElementById('eval-hero-title').textContent=ST.session.titre;
+  document.getElementById('eval-hero-context').textContent=ST.filiere+' · '+ST.classe+' · '+ST.session.theme;
+  document.getElementById('student-badge-bar').innerHTML='<strong>🎓 '+(fn+'-'+ln)+'</strong><span style="opacity:.4">|</span>'+ST.classe+'<span style="opacity:.4">|</span>'+ST.session.titre;
+  document.getElementById('eval-blocks-container').innerHTML='';
+  addEvalBlock(); goTo('screen-student-eval');
+}
 
+// STUDENT EVAL BLOCKS
+var blockCounter=0;
+function addEvalBlock(){
+  blockCounter++;
+  var idx=blockCounter;
+  var isDouble=ST.session.double===true;
+  var evalObj={
+    presenterCode:'',codeCandidat:'',
+    criteria:ST.session.criteres.map(function(c){return {id:c.id,label:c.label,role:c.role||null,value:null};})
+  };
+  ST.evals.push(evalObj);
+  var eIdx=ST.evals.length-1;
+
+  function mkCBtns(gi){
+    return LEVELS.map(function(lv){
+      return '<button class="cbtn '+lv.cls+'" onclick="selectColor(this,'+eIdx+','+gi+','+lv.v+')">'+lv.label+'</button>';
+    }).join('');
+  }
+  function mkCol(role,icon,col){
+    var items=ST.session.criteres.filter(function(c){return c.role===role;});
+    var rows=items.map(function(c){
+      var gi=ST.session.criteres.indexOf(c);
+      return '<div class="criteria-item" style="margin-bottom:10px">'
+        +'<div class="criteria-label" style="font-size:.76rem">'+c.label+'</div>'
+        +'<div style="display:flex;flex-direction:column;gap:3px">'+mkCBtns(gi)+'</div>'
+        +'</div>';
+    }).join('');
+    return '<div style="flex:1;min-width:0;background:#f8fafc;border:2px solid '+col+';border-radius:10px;padding:11px 9px">'
+      +'<div style="font-size:.76rem;font-weight:800;text-transform:uppercase;color:'+col+';margin-bottom:9px">'+icon+' '+role+'</div>'
+      +rows+'</div>';
+  }
+
+  var cHTML='';
+  if(isDouble){
+    cHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">'
+      +'<div><label>Code Recruteur</label><input type="text" maxlength="8" placeholder="Ex : R1" class="code-input" oninput="ST.evals['+eIdx+'].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()"></div>'
+      +'<div><label>Code Candidat</label><input type="text" maxlength="8" placeholder="Ex : C1" class="code-input" oninput="ST.evals['+eIdx+'].codeCandidat=this.value.toUpperCase();this.value=this.value.toUpperCase()"></div>'
+      +'</div>'
+      +'<div style="display:flex;gap:10px;align-items:flex-start">'
+      +mkCol('Recruteur','🧑','var(--primary)')
+      +mkCol('Candidat','👤','#27ae60')
+      +'</div>';
+  } else {
+    cHTML='<label>Code du présentateur</label>'
+      +'<input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:14px" oninput="ST.evals['+eIdx+'].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">'
+      +ST.session.criteres.map(function(c,ci){
+        return '<div class="criteria-item"><div class="criteria-label">'+c.label+'</div>'
+          +'<div class="color-btns">'+mkCBtns(ci)+'</div></div>';
+      }).join('');
+  }
+
+  var rmBtn=idx>1?'<button class="btn-remove" onclick="removeBlock('+idx+','+eIdx+')">✕</button>':'';
+  var div=document.createElement('div');
+  div.className='eval-block'; div.id='eb-'+idx;
+  div.innerHTML='<div class="eval-block-header"><div class="eval-block-num">🎤 '+(isDouble?'Binôme':'Présentateur')+' #'+idx+'</div>'+rmBtn+'</div>'+cHTML;
+  document.getElementById('eval-blocks-container').appendChild(div);
+  updateProgress(); div.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function selectColor(btn,eIdx,ci,val){
+  var wrap=btn.parentElement;
+  wrap.querySelectorAll('.cbtn').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  ST.evals[eIdx].criteria[ci].value=val; updateProgress();
+}
+function removeBlock(blockId,eIdx){
+  var el=document.getElementById('eb-'+blockId); if(el) el.remove();
+  ST.evals[eIdx]=null; updateProgress();
+}
+function updateProgress(){
+  var active=ST.evals.filter(function(e){return e!==null;});
+  var total=active.reduce(function(s,e){return s+e.criteria.length;},0);
+  var filled=active.reduce(function(s,e){return s+e.criteria.filter(function(c){return c.value!==null;}).length;},0);
+  var pct=total>0?Math.round(filled/total*100):0;
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-note').textContent='Progression : '+filled+' / '+total+' critères renseignés';
+}
+
+// MODAL
 function confirmReset(){document.getElementById('modal-reset').classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 function doReset(){closeModal('modal-reset');ST.evals=[];blockCounter=0;goTo('screen-home');}
 
-// ── PDF HELPERS ──────────────────────────────────────
-const LTXT={1:'Insuffisant',2:'Pas OK',3:'Moyen',4:'Bien',5:'Très bien'};
-
-// Niveaux de gris pour impression N&B + contour épais si sélectionné
-function cellStyle(val){
-  const grays={1:'#1a1a1a',2:'#555',3:'#888',4:'#aaa',5:'#ccc'};
-  return val
-    ? `background:${grays[val]};color:#fff;border:2px solid #000;border-radius:5px;padding:2px 8px;font-weight:700;font-size:11px;display:inline-block`
-    : `color:#bbb;font-size:11px`;
-}
-
-function buildStudentBlock(ev, num){
-  const rows=ev.criteria.map(cr=>`
-    <tr>
-      <td style="padding:5px 8px;font-size:11px;border-bottom:1px solid #ddd;width:70%">${cr.label}</td>
-      <td style="padding:5px 8px;text-align:center;border-bottom:1px solid #ddd;width:30%">
-        ${cr.value?`<span style="${cellStyle(cr.value)}">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:11px">—</span>'}
-      </td>
-    </tr>`).join('');
-  return `
-    <div style="margin-bottom:6px;border-radius:8px;overflow:hidden;border:1.5px solid #333;">
-      <div style="background:#1a3a5c;color:#fff;padding:7px 12px;font-weight:700;font-size:12px;display:flex;justify-content:space-between">
-        <span>🎤 Présentateur #${num} — Code : <strong>${ev.presenterCode||'—'}</strong></span>
-      </div>
-      <table style="width:100%;border-collapse:collapse;background:#fff">${rows}</table>
-    </div>`;
-}
-
-function buildProfBlock(ev, num, session){
-  const commonRows=ev.criteria.map(cr=>`
-    <tr>
-      <td style="padding:5px 8px;font-size:11px;border-bottom:1px solid #ddd;width:70%">${cr.label}</td>
-      <td style="padding:5px 8px;text-align:center;border-bottom:1px solid #ddd">
-        ${cr.value?`<span style="${cellStyle(cr.value)}">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:11px">—</span>'}
-      </td>
-    </tr>`).join('');
-  const profRows=ev.criteriaProf.map(cr=>`
-    <tr style="background:#f8f8f8">
-      <td style="padding:5px 8px;font-size:11px;border-bottom:1px solid #ddd;font-style:italic">${cr.label}</td>
-      <td style="padding:5px 8px;text-align:center;border-bottom:1px solid #ddd">
-        ${cr.value?`<span style="${cellStyle(cr.value)}">${LTXT[cr.value]}</span>`:'<span style="color:#bbb;font-size:11px">—</span>'}
-      </td>
-    </tr>`).join('');
-  return `
-    <div style="border:2px solid #1a3a5c;border-radius:8px;overflow:hidden;margin-bottom:4px">
-      <div style="background:#1a3a5c;color:#fff;padding:7px 12px;font-weight:700;font-size:12px;display:flex;justify-content:space-between;align-items:center">
-        <span>Élève #${num} — Code : <strong>${ev.presenterCode||'—'}</strong></span>
-        <span style="background:#fff;color:#1a3a5c;border-radius:4px;padding:2px 8px;font-size:11px">Note : ${ev.note||'___'}</span>
-      </div>
-      <div style="padding:4px 0;background:#eef2f7;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-left:10px;color:#555">Critères communs</div>
-      <table style="width:100%;border-collapse:collapse;background:#fff">${commonRows}</table>
-      <div style="padding:4px 0;background:#f0e8e8;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-left:10px;color:#7b0000">Critères supplémentaires prof</div>
-      <table style="width:100%;border-collapse:collapse;background:#fff">${profRows}</table>
-      <div style="padding:8px 10px;background:#fffbe6;border-top:1px solid #ddd">
-        <div style="font-size:10px;font-weight:700;color:#555;margin-bottom:3px;text-transform:uppercase">Appréciation générale</div>
-        <div style="font-size:11px;color:#333;min-height:30px">${ev.appreciation||'&nbsp;'}</div>
-      </div>
-    </div>`;
-}
-
-// ── STUDENT PDF ──────────────────────────────────────
+// STUDENT PDF
 function generateStudentPDF(){
-  const active=ST.evals.filter(e=>e!==null);
+  var active=ST.evals.filter(function(e){return e!==null;});
   if(!active.length){alert('Ajoutez au moins une évaluation.');return;}
-  const dateStr=new Date().toLocaleDateString('fr-FR');
-  const blocks=active.map((ev,i)=>buildStudentBlock(ev,i+1)).join('');
-  const legend=LEVELS.map(lv=>`<span style="margin-right:10px;font-size:10px"><span style="${cellStyle(lv.v)}">${lv.txt}</span></span>`).join('');
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <title>OralCheck – ${ST.student.id}</title>
-  <style>body{font-family:'Segoe UI',Arial,sans-serif;max-width:680px;margin:0 auto;padding:16px;color:#1e2d3d;font-size:12px;}
-  @media print{body{padding:0;max-width:100%;}}</style></head><body>
-  <div style="background:#1a3a5c;color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
-    <div><div style="font-size:18px;font-weight:900">OralCheck</div><div style="font-size:11px;opacity:.8">Rapport élève</div></div>
-    <div style="text-align:right;font-size:11px;opacity:.85">${dateStr}</div>
-  </div>
-  <div style="background:#f0f4f8;border-radius:7px;padding:9px 14px;margin-bottom:10px;display:flex;gap:16px;flex-wrap:wrap;font-size:11px">
-    <span>🎓 <strong>${ST.student.id}</strong></span>
-    <span>📚 ${ST.classe}</span>
-    <span>📋 ${ST.session.titre} — ${ST.session.theme}</span>
-  </div>
-  <div style="margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-    <span style="font-size:10px;font-weight:700;color:#555;text-transform:uppercase">Légende :</span>${legend}
-  </div>
-  ${blocks}
-  <div style="background:#fff3e0;border-left:3px solid #e67e22;border-radius:5px;padding:9px 12px;margin-top:10px;font-size:11px">
-    ⚠️ <strong>Ce travail sera noté.</strong> Envoyez ce rapport via <strong>Ecole Directe → Messages → Pièce jointe</strong>.
-  </div>
-  <p style="text-align:center;color:#bbb;font-size:10px;margin-top:14px">Créé par C. Iemfre — OralCheck</p>
-  <script>window.onload=function(){window.print();}<\/script>
-  </body></html>`;
-  openPrint(html,`OralCheck_${ST.student.id}_${ST.classe}`);
+  var dateStr=new Date().toLocaleDateString('fr-FR');
+  var leg=LEVELS.map(function(lv){
+    return '<span style="margin-right:8px"><span style="background:'+GRAYS[lv.v-1]+';color:#fff;border:2px solid #000;border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700">'+lv.txt+'</span></span>';
+  }).join('');
+  var blocks=active.map(function(ev,i){
+    var rows=ev.criteria.map(function(cr){
+      return '<tr><td style="padding:5px 8px;font-size:11px;border-bottom:1px solid #eee;width:72%">'+cr.label+'</td>'
+        +'<td style="padding:5px 8px;text-align:center;border-bottom:1px solid #eee">'
+        +(cr.value?'<span style="background:'+GRAYS[cr.value-1]+';color:#fff;border:2px solid #000;border-radius:5px;padding:2px 10px;font-weight:700;font-size:11px">'+LTXT[cr.value]+'</span>':'<span style="color:#bbb">—</span>')
+        +'</td></tr>';
+    }).join('');
+    return '<div style="margin-bottom:8px;border-radius:8px;overflow:hidden;border:1.5px solid #333">'
+      +'<div style="background:#1a3a5c;color:#fff;padding:7px 12px;font-weight:700;font-size:12px">🎤 Présentateur #'+(i+1)+' — Code : '+(ev.presenterCode||'—')+'</div>'
+      +'<table style="width:100%;border-collapse:collapse;background:#fff">'+rows+'</table></div>';
+  }).join('');
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>OralCheck</title>'
+    +'<style>body{font-family:\'Segoe UI\',Arial,sans-serif;max-width:680px;margin:0 auto;padding:16px;color:#1e2d3d;font-size:12px;}@media print{body{padding:0;max-width:100%;}}</style>'
+    +'</head><body>'
+    +'<div style="background:#1a3a5c;color:#fff;border-radius:8px;padding:13px 18px;margin-bottom:12px;display:flex;justify-content:space-between">'
+    +'<div><div style="font-size:17px;font-weight:900">OralCheck</div><div style="font-size:11px;opacity:.8">Rapport élève</div></div>'
+    +'<div style="font-size:11px;opacity:.85">'+dateStr+'</div></div>'
+    +'<div style="background:#f0f4f8;border-radius:7px;padding:8px 13px;margin-bottom:9px;font-size:11px;display:flex;gap:14px;flex-wrap:wrap">'
+    +'<span>🎓 <strong>'+ST.student.id+'</strong></span><span>📚 '+ST.classe+'</span><span>📋 '+ST.session.titre+' — '+ST.session.theme+'</span></div>'
+    +'<div style="margin-bottom:9px;font-size:10px;display:flex;align-items:center;gap:5px;flex-wrap:wrap"><strong>Légende :</strong>'+leg+'</div>'
+    +blocks
+    +'<div style="background:#fff3e0;border-left:3px solid #e67e22;padding:8px 12px;margin-top:9px;font-size:11px;border-radius:5px">'
+    +'⚠️ <strong>Ce travail sera noté.</strong> Envoyez via <strong>Ecole Directe → Messages → Pièce jointe</strong>.</div>'
+    +'<p style="text-align:center;color:#bbb;font-size:10px;margin-top:12px">Créé par C. Iemfre — OralCheck</p>'
+    +'<scr'+'ipt>window.onload=function(){window.print();};<'+'/scr'+'ipt></body></html>';
+  openPrint(html,'OralCheck_'+ST.student.id+'_'+ST.classe);
   goTo('screen-done');
 }
 
-// ── PROF PDF — 1 page par élève (ou 2 pages par binôme) ─
+// PROF PDF
 function generateProfPDF(){
-  const active=ST.profEvals.filter(e=>e!==null);
+  var active=ST.profEvals.filter(function(e){return e!==null;});
   if(!active.length){alert('Aucune évaluation à exporter.');return;}
-  const isDouble=ST.profSession.double===true;
-  const dateStr=new Date().toLocaleDateString('fr-FR');
-  const sessionInfo=`${ST.profSession.filiere} · ${ST.profSession.classe} · ${ST.profSession.titre} · ${ST.profSession.theme}`;
-  const grays=['#1a1a1a','#555','#888','#aaa','#ccc'];
-  const legend=LEVELS.map(lv=>`<span style="margin-right:6px"><span style="background:${grays[lv.v-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 6px;font-size:9px;font-weight:700">${lv.txt}</span></span>`).join('');
+  var isDouble=ST.profSession.double===true;
+  var dateStr=new Date().toLocaleDateString('fr-FR');
+  var sInfo=ST.profSession.filiere+' · '+ST.profSession.classe+' · '+ST.profSession.titre+' · '+ST.profSession.theme;
 
-  const makeRows=(items,vals)=>items.map(c=>{
-    const v=vals.find(x=>x.id===c.id);
-    return `<tr>
-      <td style="padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;width:68%">${c.label}</td>
-      <td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd">
-        ${v&&v.value?`<span style="background:${grays[v.value-1]};color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 8px;font-size:9px;font-weight:700">${LTXT[v.value]}</span>`:'<span style="color:#bbb;font-size:9px">—</span>'}
-      </td></tr>`;}).join('');
+  function mkLegend(){
+    return LEVELS.map(function(lv){
+      return '<span style="margin-right:5px"><span style="background:'+GRAYS[lv.v-1]+';color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 5px;font-size:9px;font-weight:700">'+lv.txt+'</span></span>';
+    }).join('');
+  }
+  function mkRows(items,vals){
+    var hdr='<tr style="background:#e8edf3">'
+      +'<th style="padding:4px 7px;font-size:9px;text-align:left;font-weight:700;text-transform:uppercase">Critère</th>'
+      +'<th style="padding:4px 7px;font-size:9px;text-align:center;font-weight:700;text-transform:uppercase">Appréciation</th>'
+      +'<th style="padding:4px 7px;font-size:9px;text-align:center;font-weight:700;text-transform:uppercase">Note</th></tr>';
+    var rows=items.map(function(c){
+      var v=vals.filter(function(x){return x.id===c.id;})[0];
+      var col=v&&v.value?'<span style="background:'+GRAYS[v.value-1]+';color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 7px;font-size:9px;font-weight:700">'+LTXT[v.value]+'</span>':'<span style="color:#bbb;font-size:9px">—</span>';
+      var sc=v&&v.score!=null?v.score+'/'+c.max:'—/'+(c.max||'?');
+      return '<tr><td style="padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;width:55%">'+c.label+'</td>'
+        +'<td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd;width:25%">'+col+'</td>'
+        +'<td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd;width:20%;font-size:10px;font-weight:700;color:#1a3a5c">'+sc+'</td></tr>';
+    }).join('');
+    return '<table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">'+hdr+rows+'</table>';
+  }
+  function calcTot(cr,crp){
+    var all=cr.concat(crp);
+    return {
+      obt:all.reduce(function(s,c){return s+(c.score||0);},0),
+      max:all.reduce(function(s,c){return s+(c.max||0);},0)
+    };
+  }
+  function mkHdr(sub,code,obt,max){
+    return '<div style="background:#1a3a5c;color:#fff;padding:7px 11px;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;border-radius:5px">'
+      +'<div><div style="font-size:12px;font-weight:900">OralCheck — Rapport Professeur</div>'
+      +'<div style="font-size:8px;opacity:.85">'+sInfo+(sub?' · '+sub:'')+'</div></div>'
+      +'<div style="text-align:right;font-size:8px;opacity:.85">'+dateStr+'</div></div>'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4f8;border-radius:5px;padding:5px 11px;margin-bottom:5px;border:1.5px solid #1a3a5c">'
+      +'<div style="font-size:10px;font-weight:700">Code : <span style="letter-spacing:2px;font-size:12px">'+(code||'—')+'</span></div>'
+      +'<div style="font-size:12px;font-weight:900;color:#1a3a5c">Total : <span style="font-size:15px">'+obt+'</span> / '+max+'</div></div>'
+      +'<div style="margin-bottom:4px;font-size:8px;display:flex;align-items:center;gap:3px;flex-wrap:wrap"><strong>Légende :</strong>'+mkLegend()+'</div>';
+  }
+  function mkSecTitle(txt,bg){
+    return '<div style="font-size:8px;font-weight:700;text-transform:uppercase;color:#fff;background:'+bg+';padding:3px 7px;border-radius:3px 3px 0 0">'+txt+'</div>';
+  }
+  function mkApp(txt){
+    return '<div style="font-size:8px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px">Appréciation</div>'
+      +'<div style="border:1.5px solid #999;border-radius:4px;padding:6px 9px;min-height:48px;font-size:10px;background:#fff">'+(txt||'')+'</div>';
+  }
 
-  const makePageHeader=(subtitle,code,note)=>`
-    <div style="background:#1a3a5c;color:#fff;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;border-radius:5px">
-      <div><div style="font-size:13px;font-weight:900">OralCheck — Rapport Professeur</div>
-      <div style="font-size:9px;opacity:.85">${sessionInfo} · ${subtitle}</div></div>
-      <div style="text-align:right;font-size:9px;opacity:.85">${dateStr}</div>
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4f8;border-radius:5px;padding:6px 12px;margin-bottom:6px;border:1.5px solid #1a3a5c">
-      <div style="font-size:11px;font-weight:700">Code : <span style="letter-spacing:2px;font-size:13px">${code||'—'}</span></div>
-      <div style="font-size:11px;font-weight:700">Note : <span style="border-bottom:1.5px solid #333;padding:0 16px">${note||''}</span> / 20</div>
-    </div>
-    <div style="margin-bottom:5px;font-size:9px;display:flex;align-items:center;gap:4px;flex-wrap:wrap">
-      <strong style="color:#555;text-transform:uppercase;letter-spacing:.4px">Légende :</strong>${legend}
-    </div>`;
-
-  let pages='';
-  active.forEach((ev,i)=>{
+  var pages='';
+  active.forEach(function(ev){
     if(isDouble){
-      // Page Recruteur
-      const rCommon=ev.criteria.filter(c=>c.role==='Recruteur');
-      const rProf=ev.criteriaProf.filter(c=>c.role==='Recruteur');
-      pages+=`<div class="page">
-        ${makePageHeader('🧑‍💼 Recruteur',ev.presenterCode,ev.note)}
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#2e5f8a;padding:3px 8px;border-radius:3px 3px 0 0">Critères communs</div>
-        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${makeRows(rCommon,ev.criteria)}</table>
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#7b0000;padding:3px 8px;border-radius:3px 3px 0 0">Critères supplémentaires prof</div>
-        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${makeRows(rProf,ev.criteriaProf)}</table>
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px">Appréciation générale</div>
-        <div style="border:1.5px solid #999;border-radius:4px;padding:7px 10px;min-height:52px;font-size:10px;background:#fff">${ev.appreciation||''}</div>
-        <div style="margin-top:8px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div>
-      </div>`;
-      // Page Candidat
-      const cCommon=ev.criteria.filter(c=>c.role==='Candidat');
-      const cProf=ev.criteriaProf.filter(c=>c.role==='Candidat');
-      pages+=`<div class="page">
-        ${makePageHeader('👤 Candidat',ev.codeCandidat,ev.noteCandidat)}
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#2e5f8a;padding:3px 8px;border-radius:3px 3px 0 0">Critères communs</div>
-        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${makeRows(cCommon,ev.criteria)}</table>
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#7b0000;padding:3px 8px;border-radius:3px 3px 0 0">Critères supplémentaires prof</div>
-        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${makeRows(cProf,ev.criteriaProf)}</table>
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px">Appréciation générale</div>
-        <div style="border:1.5px solid #999;border-radius:4px;padding:7px 10px;min-height:52px;font-size:10px;background:#fff">${ev.appreciationCandidat||''}</div>
-        <div style="margin-top:8px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div>
-      </div>`;
+      var rC=ev.criteria.filter(function(c){return c.role==='Recruteur';});
+      var rP=ev.criteriaProf.filter(function(c){return c.role==='Recruteur';});
+      var cC=ev.criteria.filter(function(c){return c.role==='Candidat';});
+      var cP=ev.criteriaProf.filter(function(c){return c.role==='Candidat';});
+      var rT=calcTot(rC,rP); var cT=calcTot(cC,cP);
+      pages+='<div class="page">'+mkHdr('Recruteur',ev.presenterCode,rT.obt,rT.max)
+        +mkSecTitle('Critères communs','#2e5f8a')+mkRows(rC,ev.criteria)
+        +mkSecTitle('Critères prof','#7b0000')+mkRows(rP,ev.criteriaProf)
+        +mkApp(ev.appreciation)
+        +'<div style="margin-top:7px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div></div>';
+      pages+='<div class="page">'+mkHdr('Candidat',ev.codeCandidat,cT.obt,cT.max)
+        +mkSecTitle('Critères communs','#2e5f8a')+mkRows(cC,ev.criteria)
+        +mkSecTitle('Critères prof','#7b0000')+mkRows(cP,ev.criteriaProf)
+        +mkApp(ev.appreciationCandidat)
+        +'<div style="margin-top:7px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div></div>';
     } else {
-      const commonRows=makeRows(ST.profSession.criteres,ev.criteria);
-      const profRows=makeRows(ST.profSession.criteresProf,ev.criteriaProf);
-      pages+=`<div class="page">
-        ${makePageHeader('',ev.presenterCode,ev.note)}
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#2e5f8a;padding:3px 8px;border-radius:3px 3px 0 0">Critères communs élèves / professeur</div>
-        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${commonRows}</table>
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#fff;background:#7b0000;padding:3px 8px;border-radius:3px 3px 0 0">Critères supplémentaires professeur</div>
-        <table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">${profRows}</table>
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px">Appréciation générale &amp; remarques</div>
-        <div style="border:1.5px solid #999;border-radius:4px;padding:7px 10px;min-height:52px;font-size:10px;background:#fff">${ev.appreciation||''}</div>
-        <div style="margin-top:8px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div>
-      </div>`;
+      var t=calcTot(ev.criteria,ev.criteriaProf);
+      pages+='<div class="page">'+mkHdr('',ev.presenterCode,t.obt,t.max)
+        +mkSecTitle('Critères communs élèves / professeur','#2e5f8a')+mkRows(ST.profSession.criteres,ev.criteria)
+        +mkSecTitle('Critères supplémentaires professeur','#7b0000')+mkRows(ST.profSession.criteresProf,ev.criteriaProf)
+        +mkApp(ev.appreciation)
+        +'<div style="margin-top:7px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div></div>';
     }
   });
 
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <title>OralCheck – Rapport Professeur</title>
-  <style>
-    *{box-sizing:border-box;}
-    body{font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:0;color:#1e2d3d;}
-    .page{width:190mm;min-height:267mm;max-height:267mm;margin:0 auto;padding:8mm 10mm;overflow:hidden;page-break-after:always;page-break-inside:avoid;}
-    @page{size:A4 portrait;margin:10mm;}
-    @media print{body{margin:0;padding:0;}.page{margin:0;width:100%;padding:6mm 8mm;page-break-after:always;page-break-inside:avoid;}}
-  </style></head><body>
-  ${pages}
-  <script>window.onload=function(){window.print();}<\/script>
-  </body></html>`;
+  var css='*{box-sizing:border-box;}body{font-family:\'Segoe UI\',Arial,sans-serif;margin:0;padding:0;color:#1e2d3d;}'
+    +'.page{width:190mm;min-height:267mm;max-height:267mm;margin:0 auto;padding:8mm 10mm;overflow:hidden;page-break-after:always;page-break-inside:avoid;}'
+    +'@page{size:A4 portrait;margin:10mm;}'
+    +'@media print{body{margin:0;padding:0;}.page{margin:0;width:100%;padding:6mm 8mm;page-break-after:always;page-break-inside:avoid;}}';
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>OralCheck Rapport Professeur</title>'
+    +'<style>'+css+'</style></head><body>'+pages
+    +'<scr'+'ipt>window.onload=function(){window.print();};<'+'/scr'+'ipt></body></html>';
   openPrint(html,'OralCheck_Rapport_Professeur');
 }
 
-function openPrint(html, fname){
-  const blob=new Blob([html],{type:'text/html'});
-  const url=URL.createObjectURL(blob);
-  const w=window.open(url,'_blank');
-  if(!w){
-    const a=document.createElement('a');
-    a.href=url; a.download=fname+'.html'; a.click();
-  }
+function openPrint(html,fname){
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var w=window.open(url,'_blank');
+  if(!w){var a=document.createElement('a');a.href=url;a.download=fname+'.html';a.click();}
 }
 </script>
 </body>
