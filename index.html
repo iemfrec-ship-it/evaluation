@@ -5,12 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OralCheck</title>
 <style>
-:root{
-  --primary:#1a3a5c;--accent:#2e86de;--bg:#f0f4f8;--card:#fff;
-  --text:#1e2d3d;--muted:#6b7c93;
-  --c1:#7b0000;--c2:#c0392b;--c3:#e67e22;--c4:#27ae60;--c5:#1a6b3c;
-  --radius:14px;--shadow:0 4px 20px rgba(0,0,0,.10);
-}
+:root{--primary:#1a3a5c;--accent:#2e86de;--bg:#f0f4f8;--card:#fff;--text:#1e2d3d;--muted:#6b7c93;--c1:#7b0000;--c2:#c0392b;--c3:#e67e22;--c4:#27ae60;--c5:#1a6b3c;--radius:14px;--shadow:0 4px 20px rgba(0,0,0,.10);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 .screen{display:none;min-height:100vh;padding-bottom:40px;}
@@ -57,10 +52,8 @@ textarea{resize:vertical;min-height:80px;}
 .btn-green{background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;}
 .btn-secondary{background:#f0f4f8;color:var(--primary);border:2px solid #dde3ec;margin-top:8px;}
 .btn-danger{background:#c0392b;color:#fff;}
-.btn-small{padding:7px 12px;font-size:.8rem;width:auto;}
 .btn-add{background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border-radius:50px;padding:12px 22px;font-size:.9rem;margin-bottom:14px;border:none;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:8px;}
 .alert{border-radius:9px;padding:11px 14px;font-size:.86rem;margin-bottom:12px;}
-.alert-info{background:#e8f4fd;color:#1a6ea8;border-left:4px solid var(--accent);}
 .alert-warn{background:#fff3e0;color:#b05f00;border-left:4px solid #e67e22;}
 .alert-error{background:#fdecea;color:#c0392b;border-left:4px solid #c0392b;}
 .alert-success{background:#e6f9ef;color:#1a6b3c;border-left:4px solid #27ae60;}
@@ -78,14 +71,10 @@ textarea{resize:vertical;min-height:80px;}
 .criteria-item{margin-bottom:13px;}
 .criteria-label{font-size:.87rem;font-weight:600;color:var(--text);margin-bottom:6px;}
 .color-btns{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
-.cbtn{padding:8px 3px;border:3px solid transparent;border-radius:8px;font-size:.66rem;font-weight:700;color:#fff;cursor:pointer;opacity:.28;transition:opacity .15s,transform .15s,box-shadow .15s;text-align:center;line-height:1.3;position:relative;}
+.cbtn{padding:8px 3px;border:3px solid transparent;border-radius:8px;font-size:.66rem;font-weight:700;color:#fff;cursor:pointer;opacity:.28;transition:opacity .15s,transform .15s;text-align:center;line-height:1.3;position:relative;}
 .cbtn.selected{opacity:1;transform:scale(1.07);box-shadow:0 3px 10px rgba(0,0,0,.25);border-color:#000 !important;}
-.cbtn.selected::after{content:'✓';position:absolute;bottom:2px;right:3px;font-size:.6rem;color:rgba(255,255,255,.9);font-weight:900;}
-.cbtn-1{background:var(--c1);}
-.cbtn-2{background:var(--c2);}
-.cbtn-3{background:var(--c3);}
-.cbtn-4{background:var(--c4);}
-.cbtn-5{background:var(--c5);}
+.cbtn.selected::after{content:'v';position:absolute;bottom:2px;right:3px;font-size:.6rem;color:rgba(255,255,255,.9);font-weight:900;}
+.cbtn-1{background:var(--c1);}.cbtn-2{background:var(--c2);}.cbtn-3{background:var(--c3);}.cbtn-4{background:var(--c4);}.cbtn-5{background:var(--c5);}
 .s-badge{background:linear-gradient(135deg,#1a3a5c,#2e86de);color:#fff;border-radius:10px;padding:10px 15px;font-size:.84rem;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;width:100%;}
 .breadcrumb{font-size:.78rem;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
 .breadcrumb span{color:var(--accent);font-weight:600;}
@@ -102,870 +91,796 @@ textarea{resize:vertical;min-height:80px;}
 </style>
 </head>
 <body>
-
-<!-- HOME -->
 <div id="screen-home" class="screen active">
-  <div class="hero hero-blue">
-    <span class="hero-icon">🎤</span>
-    <div class="hero-logo">Oral<span>Check</span></div>
-    <div class="hero-sub">Évaluation des présentations orales</div>
-  </div>
+  <div class="hero hero-blue"><span class="hero-icon">&#127908;</span><div class="hero-logo">Oral<span>Check</span></div><div class="hero-sub">Evaluation des presentations orales</div></div>
   <div class="home-cards">
-    <div class="hcard" onclick="goTo('screen-prof-login')">
-      <div class="hcard-icon ic-blue">🎓</div>
-      <div><div class="hcard-label">Espace Professeur</div><div class="hcard-desc">Évaluer et gérer les paramètres</div></div>
-      <div class="hcard-arrow">›</div>
-    </div>
-    <div class="hcard" onclick="goTo('screen-student-login')">
-      <div class="hcard-icon ic-green">📝</div>
-      <div><div class="hcard-label">Espace Élève</div><div class="hcard-desc">Évaluer les présentations</div></div>
-      <div class="hcard-arrow">›</div>
-    </div>
-    <div class="footer">
-      <div>Créé par <strong>C. Iemfre</strong></div>
-      <button class="btn-rgpd" onclick="goTo('screen-rgpd')">🔒 Politique RGPD</button>
-    </div>
+    <div class="hcard" onclick="goTo('screen-prof-login')"><div class="hcard-icon ic-blue">&#127891;</div><div><div class="hcard-label">Espace Professeur</div><div class="hcard-desc">Evaluer et gerer les parametres</div></div><div class="hcard-arrow">&#8250;</div></div>
+    <div class="hcard" onclick="goTo('screen-student-login')"><div class="hcard-icon ic-green">&#128221;</div><div><div class="hcard-label">Espace Eleve</div><div class="hcard-desc">Evaluer les presentations</div></div><div class="hcard-arrow">&#8250;</div></div>
+    <div class="footer"><div>Cree par <strong>C. Iemfre</strong></div><button class="btn-rgpd" onclick="goTo('screen-rgpd')">&#128274; Politique RGPD</button></div>
   </div>
 </div>
-
-<!-- RGPD -->
 <div id="screen-rgpd" class="screen">
-  <div class="hero hero-blue" style="padding:26px 20px 42px">
-    <div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div>
-    <div class="hero-sub">Politique de confidentialité</div>
-  </div>
-  <div class="content">
-    <div class="card"><h2>🔒 RGPD</h2>
-      <p style="color:var(--muted);font-size:.88rem;line-height:1.6"><em>Cette page sera complétée ultérieurement.</em></p>
-    </div>
-    <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
-  </div>
+  <div class="hero hero-blue" style="padding:26px 20px 42px"><div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div><div class="hero-sub">Politique de confidentialite</div></div>
+  <div class="content"><div class="card"><h2>&#128274; RGPD</h2><p style="color:var(--muted);font-size:.88rem;line-height:1.6"><em>Cette page sera completee ulterieurement.</em></p></div><button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button></div>
 </div>
-
-<!-- PROF LOGIN -->
 <div id="screen-prof-login" class="screen">
-  <div class="hero hero-blue" style="padding:26px 20px 42px">
-    <div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div>
-    <div class="hero-sub">Espace Professeur</div>
-  </div>
-  <div class="content">
-    <div class="card"><h2>🔐 Connexion</h2>
-      <label>Code professeur</label>
-      <input id="prof-pin-input" type="password" maxlength="6" placeholder="••••" class="code-input">
-      <div id="prof-login-error" class="alert alert-error" style="display:none">Code incorrect.</div>
-      <button class="btn btn-primary" onclick="profLogin()">Accéder →</button>
-      <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
-    </div>
-  </div>
+  <div class="hero hero-blue" style="padding:26px 20px 42px"><div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div><div class="hero-sub">Espace Professeur</div></div>
+  <div class="content"><div class="card"><h2>&#128274; Connexion</h2><label>Code professeur</label><input id="prof-pin-input" type="password" maxlength="6" placeholder="&bull;&bull;&bull;&bull;" class="code-input"><div id="prof-login-error" class="alert alert-error" style="display:none">Code incorrect.</div><button class="btn btn-primary" onclick="profLogin()">Acceder</button><button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button></div></div>
 </div>
-
-<!-- PROF DASHBOARD -->
 <div id="screen-prof-dashboard" class="screen">
-  <div class="hero hero-blue" style="padding:22px 20px 38px">
-    <div class="hero-logo" style="font-size:1.4rem">Oral<span>Check</span></div>
-    <div class="hero-sub">Tableau de bord professeur</div>
-  </div>
+  <div class="hero hero-blue" style="padding:22px 20px 38px"><div class="hero-logo" style="font-size:1.4rem">Oral<span>Check</span></div><div class="hero-sub">Tableau de bord professeur</div></div>
   <div class="content">
-    <div class="card"><h2>⚙️ Codes d'accès</h2>
-      <label>Nouveau code professeur (vide = inchangé)</label>
-      <input id="new-prof-code" type="password" maxlength="6" placeholder="••••" class="code-input">
-      <label>Code élèves (actuel : <span id="display-student-code"></span>)</label>
-      <input id="new-student-code" type="text" maxlength="10" placeholder="Code élèves" class="code-input">
-      <button class="btn btn-primary" onclick="saveCodes()">💾 Enregistrer</button>
-      <div id="codes-saved-msg" class="alert alert-success" style="display:none;margin-top:10px">Codes mis à jour ✓</div>
-    </div>
-    <div class="card"><h2>📋 Mes évaluations</h2>
-      <p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Sélectionnez une session.</p>
-      <div id="prof-session-list"></div>
-    </div>
-    <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
+    <div class="card"><h2>&#9881; Codes d'acces</h2><label>Nouveau code professeur (vide = inchange)</label><input id="new-prof-code" type="password" maxlength="6" placeholder="&bull;&bull;&bull;&bull;" class="code-input"><label>Code eleves (actuel : <span id="display-student-code"></span>)</label><input id="new-student-code" type="text" maxlength="10" placeholder="Code eleves" class="code-input"><button class="btn btn-primary" onclick="saveCodes()">Enregistrer</button><div id="codes-saved-msg" class="alert alert-success" style="display:none;margin-top:10px">Codes mis a jour</div></div>
+    <div class="card"><h2>&#128203; Mes evaluations</h2><p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Selectionnez une session.</p><div id="prof-session-list"></div></div>
+    <button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button>
   </div>
 </div>
-
-<!-- PROF EVAL -->
 <div id="screen-prof-eval" class="screen">
-  <div class="hero hero-blue" style="padding:20px 20px 40px">
-    <div class="hero-title" style="font-size:1.15rem" id="prof-eval-hero-title"></div>
-    <div class="hero-context" id="prof-eval-hero-context"></div>
-  </div>
+  <div class="hero hero-blue" style="padding:20px 20px 40px"><div class="hero-title" style="font-size:1.15rem" id="prof-eval-hero-title"></div><div class="hero-context" id="prof-eval-hero-context"></div></div>
   <div class="content">
-    <div class="s-badge" id="prof-badge-bar">🎓 Évaluateur : Professeur</div>
-    <div class="progress-wrap">
-      <div class="progress-note" id="prof-progress-note"></div>
-      <div class="progress-bar"><div class="progress-fill" id="prof-progress-fill" style="width:0%"></div></div>
-    </div>
+    <div class="s-badge" id="prof-badge-bar">Evaluateur : Professeur</div>
+    <div class="progress-wrap"><div class="progress-note" id="prof-progress-note"></div><div class="progress-bar"><div class="progress-fill" id="prof-progress-fill" style="width:0%"></div></div></div>
     <div id="prof-eval-blocks-container"></div>
-    <button class="btn-add" onclick="addProfEvalBlock()">+ Évaluer un autre élève</button>
-    <button class="btn btn-primary" style="margin-bottom:8px" onclick="generateProfPDF()">🖨️ Télécharger le rapport PDF</button>
-    <button class="btn btn-secondary" onclick="goTo('screen-prof-dashboard')">← Retour</button>
+    <button class="btn-add" onclick="addProfEvalBlock()">+ Evaluer un autre eleve</button>
+    <button class="btn btn-primary" style="margin-bottom:8px" onclick="generateProfPDF()">Telecharger le rapport PDF</button>
+    <button class="btn btn-secondary" onclick="goTo('screen-prof-dashboard')">Retour</button>
   </div>
 </div>
-
-<!-- STUDENT LOGIN -->
 <div id="screen-student-login" class="screen">
-  <div class="hero hero-green">
-    <span class="hero-icon">📝</span>
-    <div class="hero-title">Espace Élève</div>
-    <div class="hero-sub">Évaluation des présentations orales</div>
-  </div>
-  <div class="content">
-    <div class="card"><h2>🔑 Code d'accès</h2>
-      <label>Code fourni par votre professeur</label>
-      <input id="student-access-code" type="text" maxlength="10" placeholder="Code d'accès" class="code-input">
-      <div id="student-access-error" class="alert alert-error" style="display:none">Code incorrect.</div>
-      <button class="btn btn-green" onclick="studentAccessCheck()">Continuer →</button>
-      <button class="btn btn-secondary" onclick="goTo('screen-home')">← Retour</button>
-    </div>
-  </div>
+  <div class="hero hero-green"><span class="hero-icon">&#128221;</span><div class="hero-title">Espace Eleve</div><div class="hero-sub">Evaluation des presentations orales</div></div>
+  <div class="content"><div class="card"><h2>&#128273; Code d'acces</h2><label>Code fourni par votre professeur</label><input id="student-access-code" type="text" maxlength="10" placeholder="Code d'acces" class="code-input"><div id="student-access-error" class="alert alert-error" style="display:none">Code incorrect.</div><button class="btn btn-green" onclick="studentAccessCheck()">Continuer</button><button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button></div></div>
 </div>
-
-<!-- FILIERE -->
 <div id="screen-choose-filiere" class="screen">
-  <div class="hero hero-green" style="padding:22px 20px 38px">
-    <div class="hero-title">Ma filière</div>
-  </div>
-  <div class="content">
-    <div class="card"><h2>🏫 Votre filière</h2>
-      <div class="sel-grid" id="filiere-grid"></div>
-    </div>
-    <button class="btn btn-secondary" onclick="goTo('screen-student-login')">← Retour</button>
-  </div>
+  <div class="hero hero-green" style="padding:22px 20px 38px"><div class="hero-title">Ma filiere</div></div>
+  <div class="content"><div class="card"><h2>Ma filiere</h2><div class="sel-grid" id="filiere-grid"></div></div><button class="btn btn-secondary" onclick="goTo('screen-student-login')">Retour</button></div>
 </div>
-
-<!-- CLASSE -->
 <div id="screen-choose-classe" class="screen">
-  <div class="hero hero-green" style="padding:22px 20px 38px">
-    <div class="hero-title">Ma classe</div>
-    <div class="hero-context" id="sub-filiere-selected"></div>
-  </div>
-  <div class="content">
-    <div class="card"><h2>🎒 Votre classe</h2>
-      <div class="sel-grid" id="classe-grid"></div>
-    </div>
-    <button class="btn btn-secondary" onclick="goTo('screen-choose-filiere')">← Retour</button>
-  </div>
+  <div class="hero hero-green" style="padding:22px 20px 38px"><div class="hero-title">Ma classe</div><div class="hero-context" id="sub-filiere-selected"></div></div>
+  <div class="content"><div class="card"><h2>Votre classe</h2><div class="sel-grid" id="classe-grid"></div></div><button class="btn btn-secondary" onclick="goTo('screen-choose-filiere')">Retour</button></div>
 </div>
-
-<!-- SESSION -->
 <div id="screen-choose-session" class="screen">
-  <div class="hero hero-green" style="padding:22px 20px 38px">
-    <div class="hero-title">Mon évaluation</div>
-    <div class="hero-context" id="sub-classe-selected"></div>
-  </div>
-  <div class="content">
-    <div class="card"><h2>📋 Quelle évaluation ?</h2>
-      <div id="session-list"></div>
-    </div>
-    <button class="btn btn-secondary" onclick="goTo('screen-choose-classe')">← Retour</button>
-  </div>
+  <div class="hero hero-green" style="padding:22px 20px 38px"><div class="hero-title">Mon evaluation</div><div class="hero-context" id="sub-classe-selected"></div></div>
+  <div class="content"><div class="card"><h2>Quelle evaluation ?</h2><div id="session-list"></div></div><button class="btn btn-secondary" onclick="goTo('screen-choose-classe')">Retour</button></div>
 </div>
-
-<!-- IDENTIFICATION -->
 <div id="screen-student-identify" class="screen">
-  <div class="hero hero-green" style="padding:22px 20px 38px">
-    <span class="hero-icon" style="font-size:2rem">👤</span>
-    <div class="hero-title">Identification</div>
-    <div class="hero-sub">Ces initiales figureront dans votre rapport</div>
-  </div>
+  <div class="hero hero-green" style="padding:22px 20px 38px"><span class="hero-icon" style="font-size:2rem">&#128100;</span><div class="hero-title">Identification</div><div class="hero-sub">Ces initiales figureront dans votre rapport</div></div>
   <div class="content">
     <div class="breadcrumb" id="id-breadcrumb" style="margin-bottom:10px"></div>
-    <div style="display:flex;justify-content:center;margin-bottom:18px">
-      <div id="avatar-circle" style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#27ae60,#1a6b3c);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:#fff;letter-spacing:2px">??</div>
-    </div>
+    <div style="display:flex;justify-content:center;margin-bottom:18px"><div id="avatar-circle" style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#27ae60,#1a6b3c);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:#fff;letter-spacing:2px">??</div></div>
     <div class="card" style="padding:24px 20px">
-      <p style="font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:20px">Saisissez les <strong>2 premières lettres</strong> de votre prénom et de votre nom.</p>
+      <p style="font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:20px">Saisissez les <strong>2 premieres lettres</strong> de votre prenom et de votre nom.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
         <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center" id="box-fn">
-          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Prénom</div>
-          <input id="s-firstname" type="text" maxlength="2" placeholder="MA"
-            style="width:100%;border:1.5px solid transparent;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:4px 0;margin:0;border-radius:6px"
-            oninput="this.value=this.value.toUpperCase();updateAvatar()"
-            onfocus="document.getElementById('box-fn').style.borderColor='#27ae60'"
-            onblur="document.getElementById('box-fn').style.borderColor='#dde3ec'">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Prenom</div>
+          <input id="s-firstname" type="text" maxlength="2" placeholder="MA" style="width:100%;border:1.5px solid transparent;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:4px 0;margin:0;border-radius:6px" oninput="this.value=this.value.toUpperCase();updateAvatar()" onfocus="document.getElementById('box-fn').style.borderColor='#27ae60'" onblur="document.getElementById('box-fn').style.borderColor='#dde3ec'">
           <div style="margin-top:6px;font-size:.72rem;color:var(--muted)">ex : MA</div>
         </div>
         <div style="background:#f8fafc;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 12px;text-align:center" id="box-ln">
-          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Nom</div>
-          <input id="s-lastname" type="text" maxlength="2" placeholder="DU"
-            style="width:100%;border:1.5px solid transparent;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:4px 0;margin:0;border-radius:6px"
-            oninput="this.value=this.value.toUpperCase();updateAvatar()"
-            onfocus="document.getElementById('box-ln').style.borderColor='#27ae60'"
-            onblur="document.getElementById('box-ln').style.borderColor='#dde3ec'">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Nom</div>
+          <input id="s-lastname" type="text" maxlength="2" placeholder="DU" style="width:100%;border:1.5px solid transparent;background:transparent;text-align:center;font-size:1.8rem;font-weight:900;color:var(--primary);letter-spacing:6px;outline:none;text-transform:uppercase;padding:4px 0;margin:0;border-radius:6px" oninput="this.value=this.value.toUpperCase();updateAvatar()" onfocus="document.getElementById('box-ln').style.borderColor='#27ae60'" onblur="document.getElementById('box-ln').style.borderColor='#dde3ec'">
           <div style="margin-top:6px;font-size:.72rem;color:var(--muted)">ex : DU</div>
         </div>
       </div>
       <div id="identify-error" class="alert alert-error" style="display:none">Veuillez remplir les deux champs.</div>
-      <button class="btn btn-green" onclick="studentIdentify()">Accéder à l'évaluation →</button>
-      <button class="btn btn-secondary" onclick="goTo('screen-choose-session')">← Retour</button>
+      <button class="btn btn-green" onclick="studentIdentify()">Acceder a l'evaluation</button>
+      <button class="btn btn-secondary" onclick="goTo('screen-choose-session')">Retour</button>
     </div>
   </div>
 </div>
-
-<!-- STUDENT EVAL -->
 <div id="screen-student-eval" class="screen">
-  <div class="hero hero-green" style="padding:18px 20px 40px">
-    <div class="hero-title" style="font-size:1.15rem" id="eval-hero-title"></div>
-    <div class="hero-context" id="eval-hero-context"></div>
-  </div>
+  <div class="hero hero-green" style="padding:18px 20px 40px"><div class="hero-title" style="font-size:1.15rem" id="eval-hero-title"></div><div class="hero-context" id="eval-hero-context"></div></div>
   <div class="content">
     <div class="s-badge" id="student-badge-bar"></div>
-    <div class="progress-wrap">
-      <div class="progress-note" id="progress-note"></div>
-      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-    </div>
+    <div class="progress-wrap"><div class="progress-note" id="progress-note"></div><div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div></div>
     <div id="eval-blocks-container"></div>
-    <button class="btn-add" onclick="addEvalBlock()">+ Évaluer un autre camarade</button>
-    <div class="alert alert-warn" style="margin-bottom:14px">
-      <strong>📬 Rappel :</strong> Ce travail sera <strong>noté</strong>. Générez votre rapport et envoyez-le via <strong>Ecole Directe</strong>.
-    </div>
-    <button class="btn btn-primary" onclick="generateStudentPDF()">📄 Générer mon rapport PDF</button>
-    <button class="btn btn-secondary" onclick="confirmReset()">← Recommencer</button>
+    <button class="btn-add" onclick="addEvalBlock()">+ Evaluer un autre camarade</button>
+    <div class="alert alert-warn" style="margin-bottom:14px"><strong>Rappel :</strong> Ce travail sera <strong>note</strong>. Generez votre rapport et envoyez-le via <strong>Ecole Directe</strong>.</div>
+    <button class="btn btn-primary" onclick="generateStudentPDF()">Generer mon rapport PDF</button>
+    <button class="btn btn-secondary" onclick="confirmReset()">Recommencer</button>
   </div>
 </div>
-
-<!-- DONE -->
 <div id="screen-done" class="screen">
-  <div class="done-hero">
-    <span style="font-size:3rem;display:block;margin-bottom:8px">✅</span>
-    <div style="font-size:1.5rem;font-weight:900;color:#fff">Rapport généré !</div>
-    <div style="color:rgba(255,255,255,.8);font-size:.88rem;margin-top:4px">Pensez à l'envoyer sur Ecole Directe</div>
-  </div>
-  <div class="content" style="margin-top:30px">
-    <div class="card">
-      <div class="alert alert-warn" style="margin-bottom:0">
-        📬 <strong>Ecole Directe → Messages → Pièce jointe</strong><br>
-        <span style="font-size:.82rem">Envoyez le fichier à votre professeur. Ce travail sera noté.</span>
-      </div>
-    </div>
-    <button class="btn btn-primary" onclick="goTo('screen-home')">🏠 Retour à l'accueil</button>
-  </div>
+  <div class="done-hero"><span style="font-size:3rem;display:block;margin-bottom:8px">&#9989;</span><div style="font-size:1.5rem;font-weight:900;color:#fff">Rapport genere !</div><div style="color:rgba(255,255,255,.8);font-size:.88rem;margin-top:4px">Pensez a l'envoyer sur Ecole Directe</div></div>
+  <div class="content" style="margin-top:30px"><div class="card"><div class="alert alert-warn" style="margin-bottom:0">Ecole Directe &rarr; Messages &rarr; Piece jointe<br><span style="font-size:.82rem">Envoyez le fichier a votre professeur. Ce travail sera note.</span></div></div><button class="btn btn-primary" onclick="goTo('screen-home')">Retour a l'accueil</button></div>
 </div>
-
-<!-- MODAL RESET -->
 <div class="modal-overlay" id="modal-reset">
-  <div class="modal">
-    <h3>⚠️ Recommencer ?</h3>
-    <p style="font-size:.88rem;color:var(--muted)">Toutes vos évaluations seront perdues.</p>
-    <div class="modal-actions">
-      <button class="btn btn-danger" style="flex:1" onclick="doReset()">Oui</button>
-      <button class="btn btn-secondary" style="flex:1;margin:0" onclick="closeModal('modal-reset')">Annuler</button>
-    </div>
-  </div>
+  <div class="modal"><h3>Recommencer ?</h3><p style="font-size:.88rem;color:var(--muted)">Toutes vos evaluations seront perdues.</p><div class="modal-actions"><button class="btn btn-danger" style="flex:1" onclick="doReset()">Oui</button><button class="btn btn-secondary" style="flex:1;margin:0" onclick="closeModal('modal-reset')">Annuler</button></div></div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-// SESSIONS
-// ═══════════════════════════════════════════
 var SESSIONS = [
-  {
-    filiere:'AEPA', classe:'2nde', theme:'Talking about me (TF1)', titre:'Final task',
+  { filiere:"AEPA", classe:"2nde", theme:"Talking about me (TF1)", titre:"Final task",
     criteres:[
-      {id:'c1',label:'1/ Présentation personnelle',min:0,max:2},
-      {id:'c2',label:'2/ Présentation de la famille',min:0,max:2},
-      {id:'c3',label:'3/ Animaux',min:0,max:1},
-      {id:'c4',label:'4/ Hobbies / intérêts / talent',min:0,max:2},
-      {id:'c5',label:"5/ Utilisation de 4 adjectifs d'apparence",min:0,max:4},
-      {id:'c6',label:'6/ Utilisation de 3 adjectifs de personnalité',min:0,max:3}
+      {id:"c1",label:"1/ Presentation personnelle",min:0,max:2},
+      {id:"c2",label:"2/ Presentation de la famille",min:0,max:2},
+      {id:"c3",label:"3/ Animaux",min:0,max:1},
+      {id:"c4",label:"4/ Hobbies / interets / talent",min:0,max:2},
+      {id:"c5",label:"5/ Utilisation de 4 adjectifs apparence",min:0,max:4},
+      {id:"c6",label:"6/ Utilisation de 3 adjectifs personnalite",min:0,max:3}
     ],
     criteresProf:[
-      {id:'a',label:"a/ Respect de la durée (1'30)",min:0,max:1},
-      {id:'b',label:'b/ Conjugaison To Be',min:0,max:2},
-      {id:'c',label:'c/ Conjugaison To Have',min:0,max:2},
-      {id:'d',label:'d/ Présent simple',min:0,max:3},
-      {id:'e',label:'e/ Créativité et originalité',min:0,max:2}
+      {id:"a",label:"a/ Respect de la duree (1 min 30)",min:0,max:1},
+      {id:"b",label:"b/ Conjugaison To Be",min:0,max:2},
+      {id:"c",label:"c/ Conjugaison To Have",min:0,max:2},
+      {id:"d",label:"d/ Present simple",min:0,max:3},
+      {id:"e",label:"e/ Creativite et originalite",min:0,max:2}
     ]
   },
-  {
-    filiere:'AEPA', classe:'2nde', theme:'My work placement', titre:'Final task',
+  { filiere:"AEPA", classe:"2nde", theme:"My work placement", titre:"Final task",
     criteres:[
-      {id:'c1',label:"1/ Présentation de l'entreprise : nom, lieu, type d'activité, nombre d'employés",min:0,max:4},
-      {id:'c2',label:'2/ Présentation mission 1',min:0,max:2},
-      {id:'c3',label:'3/ Présentation mission 2',min:0,max:2},
-      {id:'c4',label:'4/ Présentation mission 3',min:0,max:2},
-      {id:'c5',label:"5/ Ce que l'élève a apprécié et pas apprécié (4 verbes de goût différents)",min:0,max:4}
+      {id:"c1",label:"1/ Presentation entreprise : nom, lieu, activite, employes",min:0,max:4},
+      {id:"c2",label:"2/ Presentation mission 1",min:0,max:2},
+      {id:"c3",label:"3/ Presentation mission 2",min:0,max:2},
+      {id:"c4",label:"4/ Presentation mission 3",min:0,max:2},
+      {id:"c5",label:"5/ Apprecie et pas apprecie (4 verbes de gout)",min:0,max:4}
     ],
     criteresProf:[
-      {id:'a',label:'a/ Structure des phrases (syntaxe)',min:0,max:3},
-      {id:'b',label:'b/ Respect du prétérit',min:0,max:2},
-      {id:'c',label:'c/ Construction du prétérit',min:0,max:3},
-      {id:'d',label:'d/ Anglais intelligible / compréhensible (prononciation)',min:0,max:3},
-      {id:'e',label:'e/ Vocabulaire adapté',min:0,max:2},
-      {id:'f',label:'f/ Fluidité',min:0,max:2}
+      {id:"a",label:"a/ Structure des phrases (syntaxe)",min:0,max:3},
+      {id:"b",label:"b/ Respect du preterit",min:0,max:2},
+      {id:"c",label:"c/ Construction du preterit",min:0,max:3},
+      {id:"d",label:"d/ Anglais intelligible (prononciation)",min:0,max:3},
+      {id:"e",label:"e/ Vocabulaire adapte",min:0,max:2},
+      {id:"f",label:"f/ Fluidite",min:0,max:2}
     ]
   },
-  {
-    filiere:'AEPA', classe:'Terminale', theme:'Gap years', titre:'Final task',
+  { filiere:"AEPA", classe:"Terminale", theme:"Gap years", titre:"Final task",
     criteres:[
-      {id:'c1',label:'1/ Présentation du pays',min:0,max:1},
-      {id:'c2',label:'2/ Les raisons de ce choix',min:0,max:2},
-      {id:'c3',label:"3/ Ce que l'élève souhaite y faire",min:0,max:2},
-      {id:'c4',label:'4/ Les motivations',min:0,max:2},
-      {id:'c5',label:'5/ Les expériences',min:0,max:3},
-      {id:'c6',label:'6/ Avantages',min:0,max:2},
-      {id:'c7',label:'7/ Inquiétudes',min:0,max:2},
-      {id:'c8',label:'8/ Clarté de la carte mentale',min:0,max:2}
+      {id:"c1",label:"1/ Presentation du pays",min:0,max:1},
+      {id:"c2",label:"2/ Les raisons de ce choix",min:0,max:2},
+      {id:"c3",label:"3/ Ce que l eleve souhaite y faire",min:0,max:2},
+      {id:"c4",label:"4/ Les motivations",min:0,max:2},
+      {id:"c5",label:"5/ Les experiences",min:0,max:3},
+      {id:"c6",label:"6/ Avantages",min:0,max:2},
+      {id:"c7",label:"7/ Inquietudes",min:0,max:2},
+      {id:"c8",label:"8/ Clarte de la carte mentale",min:0,max:2}
     ],
     criteresProf:[
-      {id:'a',label:'a/ Structure des phrases (syntaxe)',min:0,max:3},
-      {id:'b',label:'b/ Respect des temps (conjugaison)',min:0,max:4},
-      {id:'c',label:'c/ Anglais intelligible / compréhensible (prononciation)',min:0,max:4},
-      {id:'d',label:'d/ Vocabulaire adapté',min:0,max:3},
-      {id:'e',label:'e/ Fluidité',min:0,max:3}
+      {id:"a",label:"a/ Structure des phrases (syntaxe)",min:0,max:3},
+      {id:"b",label:"b/ Respect des temps (conjugaison)",min:0,max:4},
+      {id:"c",label:"c/ Anglais intelligible (prononciation)",min:0,max:4},
+      {id:"d",label:"d/ Vocabulaire adapte",min:0,max:3},
+      {id:"e",label:"e/ Fluidite",min:0,max:3}
     ]
   },
-  {
-    filiere:'CVA', classe:'1ère', theme:'Working conditions', titre:'Final task',
+  { filiere:"CVA", classe:"1ere", theme:"Working conditions", titre:"Final task",
     criteres:[
-      {id:'c1',label:"1/ Présentation de l'entreprise",min:0,max:2},
-      {id:'c2',label:'2/ Description des conditions de travail',min:0,max:2},
-      {id:'c3',label:'3/ Points positifs',min:0,max:2},
-      {id:'c4',label:'4/ Points négatifs',min:0,max:2},
-      {id:'c5',label:"5/ Ce qui se passe dans l'entreprise (actions qui démontrent les conditions de travail)",min:0,max:2},
-      {id:'c6',label:'6/ Améliorations possibles',min:0,max:2},
-      {id:'c7',label:'7/ Respect du temps de parole',min:0,max:1},
-      {id:'c8',label:'8/ Clarté du diaporama',min:0,max:2},
-      {id:'c9',label:'9/ Respect du nombre de mots dans le diapo',min:0,max:2}
+      {id:"c1",label:"1/ Presentation de l entreprise",min:0,max:2},
+      {id:"c2",label:"2/ Description des conditions de travail",min:0,max:2},
+      {id:"c3",label:"3/ Points positifs",min:0,max:2},
+      {id:"c4",label:"4/ Points negatifs",min:0,max:2},
+      {id:"c5",label:"5/ Ce qui se passe dans l entreprise",min:0,max:2},
+      {id:"c6",label:"6/ Ameliorations possibles",min:0,max:2},
+      {id:"c7",label:"7/ Respect du temps de parole",min:0,max:1},
+      {id:"c8",label:"8/ Clarte du diaporama",min:0,max:2},
+      {id:"c9",label:"9/ Respect nombre de mots dans le diapo",min:0,max:2}
     ],
     criteresProf:[
-      {id:'a',label:'a/ Structure des phrases (syntaxe)',min:0,max:4},
-      {id:'b',label:'b/ Respect des temps (conjugaison présent et présent be+ing)',min:0,max:4},
-      {id:'c',label:'c/ Anglais intelligible / compréhensible (prononciation)',min:0,max:4},
-      {id:'d',label:'d/ Vocabulaire adapté',min:0,max:3},
-      {id:'e',label:'e/ Fluidité',min:0,max:2}
+      {id:"a",label:"a/ Structure des phrases (syntaxe)",min:0,max:4},
+      {id:"b",label:"b/ Respect des temps (present et be+ing)",min:0,max:4},
+      {id:"c",label:"c/ Anglais intelligible (prononciation)",min:0,max:4},
+      {id:"d",label:"d/ Vocabulaire adapte",min:0,max:3},
+      {id:"e",label:"e/ Fluidite",min:0,max:2}
     ]
   },
-  {
-    filiere:'MDA', classe:'1ère', theme:'Working conditions', titre:'Final task',
+  { filiere:"MDA", classe:"1ere", theme:"Working conditions", titre:"Final task",
     criteres:[
-      {id:'c1',label:"1/ Présentation de l'entreprise",min:0,max:2},
-      {id:'c2',label:'2/ Description des conditions de travail',min:0,max:2},
-      {id:'c3',label:'3/ Points positifs',min:0,max:2},
-      {id:'c4',label:'4/ Points négatifs',min:0,max:2},
-      {id:'c5',label:"5/ Ce qui se passe dans l'entreprise (actions qui démontrent les conditions de travail)",min:0,max:2},
-      {id:'c6',label:'6/ Améliorations possibles',min:0,max:2},
-      {id:'c7',label:'7/ Respect du temps de parole',min:0,max:1},
-      {id:'c8',label:'8/ Clarté du diaporama',min:0,max:2},
-      {id:'c9',label:'9/ Respect du nombre de mots dans le diapo',min:0,max:2}
+      {id:"c1",label:"1/ Presentation de l entreprise",min:0,max:2},
+      {id:"c2",label:"2/ Description des conditions de travail",min:0,max:2},
+      {id:"c3",label:"3/ Points positifs",min:0,max:2},
+      {id:"c4",label:"4/ Points negatifs",min:0,max:2},
+      {id:"c5",label:"5/ Ce qui se passe dans l entreprise",min:0,max:2},
+      {id:"c6",label:"6/ Ameliorations possibles",min:0,max:2},
+      {id:"c7",label:"7/ Respect du temps de parole",min:0,max:1},
+      {id:"c8",label:"8/ Clarte du diaporama",min:0,max:2},
+      {id:"c9",label:"9/ Respect nombre de mots dans le diapo",min:0,max:2}
     ],
     criteresProf:[
-      {id:'a',label:'a/ Structure des phrases (syntaxe)',min:0,max:4},
-      {id:'b',label:'b/ Respect des temps (conjugaison présent et présent be+ing)',min:0,max:4},
-      {id:'c',label:'c/ Anglais intelligible / compréhensible (prononciation)',min:0,max:4},
-      {id:'d',label:'d/ Vocabulaire adapté',min:0,max:3},
-      {id:'e',label:'e/ Fluidité',min:0,max:2}
+      {id:"a",label:"a/ Structure des phrases (syntaxe)",min:0,max:4},
+      {id:"b",label:"b/ Respect des temps (present et be+ing)",min:0,max:4},
+      {id:"c",label:"c/ Anglais intelligible (prononciation)",min:0,max:4},
+      {id:"d",label:"d/ Vocabulaire adapte",min:0,max:3},
+      {id:"e",label:"e/ Fluidite",min:0,max:2}
     ]
   },
-  {
-    filiere:'MOS', classe:'MOS1', theme:'Job interview', titre:'Final task', double:true,
+  { filiere:"MOS", classe:"MOS1", theme:"Job interview", titre:"Final task", double:true,
     criteres:[
-      {id:'r1',label:'1/ Accueil du candidat',role:'Recruteur',min:0,max:2},
-      {id:'r2',label:'2/ Description du poste',role:'Recruteur',min:0,max:3},
-      {id:'r3',label:'3/ Missions principales (au moins 4)',role:'Recruteur',min:0,max:4},
-      {id:'r4',label:'4/ Responsabilités',role:'Recruteur',min:0,max:3},
-      {id:'r5',label:'5/ Compétences et qualités',role:'Recruteur',min:0,max:4},
-      {id:'r6',label:'6/ Attitude professionnelle',role:'Recruteur',min:0,max:2},
-      {id:'c1',label:'1/ Présentation personnelle',role:'Candidat',min:0,max:2},
-      {id:'c2',label:'2/ Parcours scolaire et professionnel',role:'Candidat',min:0,max:4},
-      {id:'c3',label:'3/ Exposé des compétences et qualités',role:'Candidat',min:0,max:4},
-      {id:'c4',label:'4/ Attitude professionnelle',role:'Candidat',min:0,max:2},
-      {id:'c5',label:'5/ Réactivité aux questions',role:'Candidat',min:0,max:3}
+      {id:"r1",label:"1/ Accueil du candidat",role:"Recruteur",min:0,max:2},
+      {id:"r2",label:"2/ Description du poste",role:"Recruteur",min:0,max:3},
+      {id:"r3",label:"3/ Missions principales (au moins 4)",role:"Recruteur",min:0,max:4},
+      {id:"r4",label:"4/ Responsabilites",role:"Recruteur",min:0,max:3},
+      {id:"r5",label:"5/ Competences et qualites",role:"Recruteur",min:0,max:4},
+      {id:"r6",label:"6/ Attitude professionnelle",role:"Recruteur",min:0,max:2},
+      {id:"c1",label:"1/ Presentation personnelle",role:"Candidat",min:0,max:2},
+      {id:"c2",label:"2/ Parcours scolaire et professionnel",role:"Candidat",min:0,max:4},
+      {id:"c3",label:"3/ Expose des competences et qualites",role:"Candidat",min:0,max:4},
+      {id:"c4",label:"4/ Attitude professionnelle",role:"Candidat",min:0,max:2},
+      {id:"c5",label:"5/ Reactivite aux questions",role:"Candidat",min:0,max:3}
     ],
     criteresProf:[
-      {id:'ra',label:'a/ Construction des phrases',role:'Recruteur',min:0,max:4},
-      {id:'rb',label:'b/ Construction des questions',role:'Recruteur',min:0,max:4},
-      {id:'rc',label:'c/ Vocabulaire adapté',role:'Recruteur',min:0,max:3},
-      {id:'rd',label:'d/ Pertinence',role:'Recruteur',min:0,max:3},
-      {id:'re',label:'e/ Intelligibilité (anglais compréhensible)',role:'Recruteur',min:0,max:4},
-      {id:'rf',label:'f/ Attitude professionnelle',role:'Recruteur',min:0,max:2},
-      {id:'rg',label:'g/ Réactivité',role:'Recruteur',min:0,max:3},
-      {id:'ca',label:'a/ Construction des phrases',role:'Candidat',min:0,max:4},
-      {id:'cb',label:'b/ Construction des questions',role:'Candidat',min:0,max:4},
-      {id:'cc',label:'c/ Vocabulaire adapté',role:'Candidat',min:0,max:3},
-      {id:'cd',label:'d/ Pertinence',role:'Candidat',min:0,max:3},
-      {id:'ce',label:'e/ Intelligibilité (anglais compréhensible)',role:'Candidat',min:0,max:4},
-      {id:'cf',label:'f/ Attitude professionnelle',role:'Candidat',min:0,max:2},
-      {id:'cg',label:'g/ Réactivité',role:'Candidat',min:0,max:3}
+      {id:"ra",label:"a/ Construction des phrases",role:"Recruteur",min:0,max:4},
+      {id:"rb",label:"b/ Construction des questions",role:"Recruteur",min:0,max:4},
+      {id:"rc",label:"c/ Vocabulaire adapte",role:"Recruteur",min:0,max:3},
+      {id:"rd",label:"d/ Pertinence",role:"Recruteur",min:0,max:3},
+      {id:"re",label:"e/ Intelligibilite (anglais comprehensible)",role:"Recruteur",min:0,max:4},
+      {id:"rf",label:"f/ Attitude professionnelle",role:"Recruteur",min:0,max:2},
+      {id:"rg",label:"g/ Reactivite",role:"Recruteur",min:0,max:3},
+      {id:"ca",label:"a/ Construction des phrases",role:"Candidat",min:0,max:4},
+      {id:"cb",label:"b/ Construction des questions",role:"Candidat",min:0,max:4},
+      {id:"cc",label:"c/ Vocabulaire adapte",role:"Candidat",min:0,max:3},
+      {id:"cd",label:"d/ Pertinence",role:"Candidat",min:0,max:3},
+      {id:"ce",label:"e/ Intelligibilite (anglais comprehensible)",role:"Candidat",min:0,max:4},
+      {id:"cf",label:"f/ Attitude professionnelle",role:"Candidat",min:0,max:2},
+      {id:"cg",label:"g/ Reactivite",role:"Candidat",min:0,max:3}
+    ]
+  },
+  { filiere:"MOS", classe:"2MOS", theme:"New technologies", titre:"Final task",
+    criteres:[
+      {id:"c1",label:"1/ Presentation des outils",min:0,max:3},
+      {id:"c2",label:"2/ Objectifs detailles",min:0,max:3},
+      {id:"c3",label:"3/ Ameliorations",min:0,max:4},
+      {id:"c4",label:"4/ Risques",min:0,max:3},
+      {id:"c5",label:"5/ Limites",min:0,max:3},
+      {id:"c6",label:"6/ Qualite diapo",min:0,max:2}
+    ],
+    criteresProf:[
+      {id:"a",label:"a/ Vocabulaire adapte",min:0,max:4},
+      {id:"b",label:"b/ Construction des phrases",min:0,max:4},
+      {id:"c",label:"c/ Intelligibilite (anglais comprehensible)",min:0,max:4},
+      {id:"d",label:"d/ Fluidite",min:0,max:2}
+    ]
+  },
+  { filiere:"MOS", classe:"2MOS", theme:"Summer reviews", titre:"Final task", groupe:true, maxIndiv:5,
+    criteres:[
+      {id:"g1",label:"1/ Introduction",scope:"groupe",min:0,max:2},
+      {id:"g2",label:"2/ Who what where when why",scope:"groupe",min:0,max:5},
+      {id:"g3",label:"3/ Key facts",scope:"groupe",min:0,max:3},
+      {id:"g4",label:"4/ Analysis of impact",scope:"groupe",min:0,max:3},
+      {id:"g5",label:"5/ Respect consignes diapo",scope:"groupe",min:0,max:2},
+      {id:"g6",label:"6/ Equilibre temps de parole",scope:"groupe",min:0,max:2},
+      {id:"i1",label:"a/ Vocabulaire adapte",scope:"indiv",min:0,max:5},
+      {id:"i2",label:"b/ Construction des phrases",scope:"indiv",min:0,max:4},
+      {id:"i3",label:"c/ Respect du preterit",scope:"indiv",min:0,max:4},
+      {id:"i4",label:"d/ Intelligibilite (anglais comprehensible)",scope:"indiv",min:0,max:4},
+      {id:"i5",label:"e/ Fluidite",scope:"indiv",min:0,max:2}
+    ],
+    criteresProf:[
+      {id:"a",label:"a/ Vocabulaire adapte",scope:"groupe",min:0,max:5},
+      {id:"b",label:"b/ Construction des phrases",scope:"groupe",min:0,max:4},
+      {id:"c",label:"c/ Respect du preterit",scope:"groupe",min:0,max:4},
+      {id:"d",label:"d/ Intelligibilite (anglais comprehensible)",scope:"groupe",min:0,max:4},
+      {id:"e",label:"e/ Fluidite",scope:"groupe",min:0,max:2}
+    ]
+  },
+  { filiere:"NDRC", classe:"1NDRC LT", theme:"New technologies at work", titre:"Final task", groupe:true, maxIndiv:5,
+    criteres:[
+      {id:"g1",label:"1/ Les nouvelles technologies dans le monde du travail",scope:"groupe",min:0,max:2},
+      {id:"g2",label:"2/ Les avantages",scope:"groupe",min:0,max:4},
+      {id:"g3",label:"3/ Justification (avantages)",scope:"groupe",min:0,max:5},
+      {id:"g4",label:"4/ Les inconvenients",scope:"groupe",min:0,max:4},
+      {id:"g5",label:"5/ Justification (inconvenients)",scope:"groupe",min:0,max:5},
+      {id:"i1",label:"6/ Les nouvelles tech dans l entreprise (alternance)",scope:"indiv",min:0,max:2},
+      {id:"i2",label:"7/ Ce qui existe",scope:"indiv",min:0,max:4},
+      {id:"i3",label:"8/ Ce qui pourrait etre mis en place",scope:"indiv",min:0,max:4}
+    ],
+    criteresProf:[
+      {id:"a",label:"a/ Pertinence",scope:"groupe",min:0,max:2},
+      {id:"b",label:"b/ Repartition du temps de parole",scope:"groupe",min:0,max:2},
+      {id:"c",label:"c/ Justification / argumentation",scope:"groupe",min:0,max:3},
+      {id:"d",label:"d/ Construction des phrases",scope:"indiv",min:0,max:5},
+      {id:"e",label:"e/ Vocabulaire adapte",scope:"indiv",min:0,max:4},
+      {id:"f",label:"f/ Intelligibilite (anglais comprehensible)",scope:"indiv",min:0,max:4}
     ]
   }
 ];
 
 var LEVELS=[
-  {cls:'cbtn-1',label:'✗✗ Insuffisant',v:1,txt:'Insuffisant'},
-  {cls:'cbtn-2',label:'✗ Pas OK',v:2,txt:'Pas OK'},
-  {cls:'cbtn-3',label:'~ Moyen',v:3,txt:'Moyen'},
-  {cls:'cbtn-4',label:'✓ Bien',v:4,txt:'Bien'},
-  {cls:'cbtn-5',label:'★ Très bien',v:5,txt:'Très bien'}
+  {cls:"cbtn-1",label:"XX Insuffisant",v:1,txt:"Insuffisant"},
+  {cls:"cbtn-2",label:"X Pas OK",v:2,txt:"Pas OK"},
+  {cls:"cbtn-3",label:"~ Moyen",v:3,txt:"Moyen"},
+  {cls:"cbtn-4",label:"OK Bien",v:4,txt:"Bien"},
+  {cls:"cbtn-5",label:"★ Tres bien",v:5,txt:"Tres bien"}
 ];
-var LTXT={1:'Insuffisant',2:'Pas OK',3:'Moyen',4:'Bien',5:'Très bien'};
-var GRAYS=['#1a1a1a','#555','#888','#aaa','#ccc'];
+var LTXT={1:"Insuffisant",2:"Pas OK",3:"Moyen",4:"Bien",5:"Tres bien"};
+var GRAYS=["#1a1a1a","#555","#888","#aaa","#ccc"];
+var ST={profCode:"0504",studentCode:"ELEVE01",filiere:"",classe:"",session:null,student:{id:"",classe:""},evals:[],profEvals:[],profSession:null};
 
-var ST={
-  profCode:'0504',studentCode:'ELEVE01',
-  filiere:'',classe:'',session:null,
-  student:{id:'',classe:''},
-  evals:[],profEvals:[],profSession:null
-};
+function goTo(id){document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("active");});document.getElementById(id).classList.add("active");window.scrollTo(0,0);}
+function unique(a){return a.filter(function(v,i,arr){return arr.indexOf(v)===i;});}
 
-// NAV
-function goTo(id){
-  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-function unique(arr){return arr.filter(function(v,i,a){return a.indexOf(v)===i;});}
-
-// PROF LOGIN
 function profLogin(){
-  var v=document.getElementById('prof-pin-input').value.trim();
+  var v=document.getElementById("prof-pin-input").value.trim();
   if(v===ST.profCode){
-    document.getElementById('prof-login-error').style.display='none';
-    document.getElementById('prof-pin-input').value='';
-    document.getElementById('display-student-code').textContent=ST.studentCode;
-    document.getElementById('new-student-code').value=ST.studentCode;
-    renderProfSessionList();
-    goTo('screen-prof-dashboard');
-  } else {
-    document.getElementById('prof-login-error').style.display='block';
-  }
+    document.getElementById("prof-login-error").style.display="none";
+    document.getElementById("prof-pin-input").value="";
+    document.getElementById("display-student-code").textContent=ST.studentCode;
+    document.getElementById("new-student-code").value=ST.studentCode;
+    renderProfSessionList();goTo("screen-prof-dashboard");
+  } else {document.getElementById("prof-login-error").style.display="block";}
 }
 function saveCodes(){
-  var np=document.getElementById('new-prof-code').value.trim();
-  var ns=document.getElementById('new-student-code').value.trim();
+  var np=document.getElementById("new-prof-code").value.trim();
+  var ns=document.getElementById("new-student-code").value.trim();
   if(np) ST.profCode=np;
   if(ns) ST.studentCode=ns;
-  document.getElementById('new-prof-code').value='';
-  document.getElementById('display-student-code').textContent=ST.studentCode;
-  var m=document.getElementById('codes-saved-msg');
-  m.style.display='block';
-  setTimeout(function(){m.style.display='none';},2500);
+  document.getElementById("new-prof-code").value="";
+  document.getElementById("display-student-code").textContent=ST.studentCode;
+  var m=document.getElementById("codes-saved-msg");
+  m.style.display="block";setTimeout(function(){m.style.display="none";},2500);
 }
 function renderProfSessionList(){
-  var el=document.getElementById('prof-session-list');
-  if(!SESSIONS.length){el.innerHTML='<p style="color:var(--muted);font-size:.85rem">Aucune session.</p>';return;}
+  var el=document.getElementById("prof-session-list");
   el.innerHTML=SESSIONS.map(function(s,i){
-    return '<div class="session-card" onclick="startProfEval('+i+')">'
-      +'<div class="session-theme">'+s.filiere+' · '+s.classe+'</div>'
-      +'<div class="session-title">'+s.titre+'</div>'
-      +'<div class="session-meta">'+s.theme+' · '+s.criteres.length+' critère(s) + '+s.criteresProf.length+' prof</div>'
-      +'</div>';
-  }).join('');
+    return "<div class='session-card' onclick='startProfEval("+i+")'><div class='session-theme'>"+s.filiere+" &middot; "+s.classe+"</div><div class='session-title'>"+s.titre+"</div><div class='session-meta'>"+s.theme+"</div></div>";
+  }).join("");
 }
 
-// PROF EVAL
 var profBlockCounter=0;
+
+function profColorBtns(eIdx,type,gi){
+  return LEVELS.map(function(lv){
+    return "<button class='cbtn "+lv.cls+"' style='padding:4px 3px;font-size:.6rem;border-radius:4px' onclick='selectProfColor(this,"+eIdx+",\""+type+"\","+gi+","+lv.v+")'>"+lv.label+"</button>";
+  }).join("");
+}
+function profScoreBtns(eIdx,type,gi,min,max){
+  var s="<div style='display:flex;align-items:center;gap:2px;margin-top:3px;flex-wrap:wrap'><span style='font-size:.62rem;color:var(--muted);font-weight:600'>Note:</span>";
+  for(var v=min;v<=max;v+=0.5) s+="<button onclick='setProfScore(this,"+eIdx+",\""+type+"\","+gi+","+v+")' style='padding:2px 4px;border-radius:4px;border:1.5px solid #ccd3de;background:#f8fafc;font-size:.65rem;font-weight:700;cursor:pointer'>"+v+"</button>";
+  s+="<span style='font-size:.62rem;color:var(--muted)'>/ "+max+"</span></div>";
+  return s;
+}
+function profCriteriaBlock(c,type,gi,eIdx,italic){
+  return "<div class='criteria-item' style='margin-bottom:8px'>"
+    +"<div class='criteria-label' style='font-size:.72rem"+(italic?";font-style:italic":"")+"'>"+c.label+(c.max?" <span style='color:var(--muted);font-weight:400'>(/ "+c.max+")</span>":"")+"</div>"
+    +"<div style='display:flex;flex-direction:column;gap:2px'>"+profColorBtns(eIdx,type,gi)+"</div>"
+    +(c.max?profScoreBtns(eIdx,type,gi,c.min||0,c.max):"")
+    +"</div>";
+}
+function membreColorBtns(eIdx,mIdx,type,ci){
+  return LEVELS.map(function(lv){
+    return "<button class='cbtn "+lv.cls+"' style='padding:4px 3px;font-size:.6rem;border-radius:4px' onclick='selectProfColorMembre(this,"+eIdx+","+mIdx+",\""+type+"\","+ci+","+lv.v+")'>"+lv.label+"</button>";
+  }).join("");
+}
+function membreScoreBtns(eIdx,mIdx,type,ci,min,max){
+  var s="<div style='display:flex;align-items:center;gap:2px;margin-top:3px;flex-wrap:wrap'><span style='font-size:.62rem;color:var(--muted);font-weight:600'>Note:</span>";
+  for(var v=min;v<=max;v+=0.5) s+="<button onclick='setProfScoreMembre(this,"+eIdx+","+mIdx+",\""+type+"\","+ci+","+v+")' style='padding:2px 4px;border-radius:4px;border:1.5px solid #ccd3de;background:#f8fafc;font-size:.65rem;font-weight:700;cursor:pointer'>"+v+"</button>";
+  s+="<span style='font-size:.62rem;color:var(--muted)'>/ "+max+"</span></div>";
+  return s;
+}
+
 function startProfEval(idx){
-  ST.profSession=SESSIONS[idx];
-  ST.profEvals=[];
-  profBlockCounter=0;
-  document.getElementById('prof-eval-hero-title').textContent=ST.profSession.titre;
-  document.getElementById('prof-eval-hero-context').textContent=ST.profSession.filiere+' · '+ST.profSession.classe+' · '+ST.profSession.theme;
-  document.getElementById('prof-eval-blocks-container').innerHTML='';
-  addProfEvalBlock();
-  goTo('screen-prof-eval');
+  ST.profSession=SESSIONS[idx];ST.profEvals=[];profBlockCounter=0;
+  document.getElementById("prof-eval-hero-title").textContent=ST.profSession.titre;
+  document.getElementById("prof-eval-hero-context").textContent=ST.profSession.filiere+" - "+ST.profSession.classe+" - "+ST.profSession.theme;
+  document.getElementById("prof-eval-blocks-container").innerHTML="";
+  addProfEvalBlock();goTo("screen-prof-eval");
 }
 
 function addProfEvalBlock(){
   profBlockCounter++;
   var idx=profBlockCounter;
-  var isDouble=ST.profSession.double===true;
+  var sess=ST.profSession;
+  var isDouble=sess.double===true;
+  var isGroupe=sess.groupe===true;
+  var maxM=sess.maxIndiv||5;
   var evalObj={
-    presenterCode:'',codeCandidat:'',
-    criteria:ST.profSession.criteres.map(function(c){return {id:c.id,label:c.label,role:c.role||null,value:null,score:null,min:c.min||0,max:c.max||0};}),
-    criteriaProf:ST.profSession.criteresProf.map(function(c){return {id:c.id,label:c.label,role:c.role||null,value:null,score:null,min:c.min||0,max:c.max||0};}),
-    appreciation:'',appreciationCandidat:''
+    presenterCode:"",codeCandidat:"",groupeName:"",
+    criteria:sess.criteres.map(function(c){return {id:c.id,label:c.label,role:c.role||null,scope:c.scope||null,value:null,score:null,min:c.min||0,max:c.max||0};}),
+    criteriaProf:sess.criteresProf.map(function(c){return {id:c.id,label:c.label,role:c.role||null,scope:c.scope||null,value:null,score:null,min:c.min||0,max:c.max||0};}),
+    membres:[],appreciation:"",appreciationCandidat:""
   };
+  if(isGroupe){for(var m=0;m<maxM;m++) evalObj.membres.push({code:"",criteriaIndiv:[],criteriaIndivProf:[]});}
   ST.profEvals.push(evalObj);
   var eIdx=ST.profEvals.length-1;
+  var bodyHTML="";
 
-  function mkColorBtns(type,gi){
-    return LEVELS.map(function(lv){
-      return '<button class="cbtn '+lv.cls+'" style="padding:5px 4px;font-size:.62rem;border-radius:5px;text-align:left;padding-left:5px" onclick="selectProfColor(this,'+eIdx+',\''+type+'\','+gi+','+lv.v+')">'+lv.label+'</button>';
-    }).join('');
-  }
-  function mkScoreBtns(type,gi,min,max){
-    var s='<div style="display:flex;align-items:center;gap:3px;margin-top:4px;flex-wrap:wrap"><span style="font-size:.65rem;color:var(--muted);font-weight:600">Note:</span>';
-    for(var v=min;v<=max;v+=0.5){
-      s+='<button onclick="setProfScore(this,'+eIdx+',\''+type+'\','+gi+','+v+')" style="padding:2px 5px;border-radius:4px;border:1.5px solid #ccd3de;background:#f8fafc;font-size:.68rem;font-weight:700;cursor:pointer" data-score="'+v+'">'+v+'</button>';
+  if(isGroupe){
+    var grpC=sess.criteres.filter(function(c){return c.scope==="groupe";});
+    var grpP=sess.criteresProf.filter(function(c){return c.scope==="groupe";});
+    var indC=sess.criteres.filter(function(c){return c.scope==="indiv";});
+    var indP=sess.criteresProf.filter(function(c){return c.scope==="indiv";});
+    var grpMax=grpC.concat(grpP).reduce(function(s,c){return s+(c.max||0);},0);
+    var indMax=indC.concat(indP).reduce(function(s,c){return s+(c.max||0);},0);
+    var grpRows="";
+    for(var gi=0;gi<grpC.length;gi++) grpRows+=profCriteriaBlock(grpC[gi],"common",sess.criteres.indexOf(grpC[gi]),eIdx,false);
+    var grpPRows="";
+    for(var gp=0;gp<grpP.length;gp++) grpPRows+=profCriteriaBlock(grpP[gp],"prof",sess.criteresProf.indexOf(grpP[gp]),eIdx,true);
+    var grpSection="<div style='background:#eef4fb;border:2px solid var(--primary);border-radius:10px;padding:12px;margin-bottom:14px'>"
+      +"<div style='font-size:.78rem;font-weight:800;color:var(--primary);margin-bottom:8px'>Evaluation commune du groupe</div>"
+      +"<label style='font-size:.7rem'>Nom du groupe</label>"
+      +"<input type='text' maxlength='25' placeholder='ex : CA-LU-MA' class='code-input' style='margin-bottom:10px;font-size:.85rem;padding:6px 10px' oninput='ST.profEvals["+eIdx+"].groupeName=this.value.toUpperCase();this.value=this.value.toUpperCase()'>"
+      +"<div style='font-size:.68rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin-bottom:5px'>Criteres communs</div>"+grpRows
+      +"<div style='font-size:.68rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:8px 0 5px'>Criteres prof groupe</div>"+grpPRows
+      +"<div id='prof-grp-total-"+eIdx+"' style='background:var(--primary);color:#fff;border-radius:6px;padding:7px 12px;margin-top:8px;font-weight:800;font-size:.88rem;text-align:center'>Score groupe : 0 / "+grpMax+"</div>"
+      +"</div>";
+    var membresSection="<div style='font-size:.78rem;font-weight:800;color:#27ae60;margin-bottom:8px'>Evaluations individuelles</div>";
+    for(var mi=0;mi<maxM;mi++){
+      var indivRows="";
+      for(var ic=0;ic<indC.length;ic++) indivRows+="<div class='criteria-item' style='margin-bottom:7px'><div class='criteria-label' style='font-size:.7rem'>"+indC[ic].label+(indC[ic].max?" <span style='color:var(--muted);font-weight:400'>(/ "+indC[ic].max+")</span>":"")+"</div><div style='display:flex;flex-direction:column;gap:2px'>"+membreColorBtns(eIdx,mi,"common",ic)+"</div>"+(indC[ic].max?membreScoreBtns(eIdx,mi,"common",ic,indC[ic].min||0,indC[ic].max):"")+"</div>";
+      var indivPRows="";
+      for(var ip=0;ip<indP.length;ip++) indivPRows+="<div class='criteria-item' style='margin-bottom:7px'><div class='criteria-label' style='font-size:.7rem;font-style:italic'>"+indP[ip].label+(indP[ip].max?" <span style='color:var(--muted);font-weight:400'>(/ "+indP[ip].max+")</span>":"")+"</div><div style='display:flex;flex-direction:column;gap:2px'>"+membreColorBtns(eIdx,mi,"prof",ip)+"</div>"+(indP[ip].max?membreScoreBtns(eIdx,mi,"prof",ip,indP[ip].min||0,indP[ip].max):"")+"</div>";
+      membresSection+="<div style='background:#f8fafc;border:1.5px solid #dde3ec;border-radius:9px;padding:10px;margin-bottom:10px'>"
+        +"<label style='font-size:.7rem'>Eleve "+(mi+1)+"</label>"
+        +"<input type='text' maxlength='2' placeholder='ex : MA' class='code-input' style='margin-bottom:9px;font-size:.9rem;padding:6px 10px' oninput='ST.profEvals["+eIdx+"].membres["+mi+"].code=this.value.toUpperCase();this.value=this.value.toUpperCase()'>"
+        +"<div style='font-size:.66rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin-bottom:4px'>Criteres individuels</div>"+indivRows
+        +"<div style='font-size:.66rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:6px 0 4px'>Criteres prof individuels</div>"+indivPRows
+        +"<div id='prof-membre-total-"+eIdx+"-"+mi+"' style='background:#27ae60;color:#fff;border-radius:5px;padding:5px 10px;margin-top:6px;font-weight:700;font-size:.8rem;text-align:center'>Score individuel : 0 / "+indMax+"</div>"
+        +"<div id='prof-membre-grand-total-"+eIdx+"-"+mi+"' style='background:#1a3a5c;color:#fff;border-radius:5px;padding:5px 10px;margin-top:4px;font-weight:800;font-size:.85rem;text-align:center'>Total eleve : 0 / "+(grpMax+indMax)+"</div>"
+        +"</div>";
     }
-    s+='<span style="font-size:.65rem;color:var(--muted)">/ '+max+'</span></div>';
-    return s;
-  }
-  function mkCriteria(items,type,italic){
-    return items.map(function(c){
-      var gi=type==='common'?ST.profSession.criteres.indexOf(c):ST.profSession.criteresProf.indexOf(c);
-      return '<div class="criteria-item" style="margin-bottom:9px">'
-        +'<div class="criteria-label" style="font-size:.74rem'+(italic?';font-style:italic':'')+'">'+c.label+(c.max?' <span style="color:var(--muted);font-weight:400">(/' +c.max+')</span>':'')+'</div>'
-        +'<div style="display:flex;flex-direction:column;gap:2px">'+mkColorBtns(type,gi)+'</div>'
-        +(c.max?mkScoreBtns(type,gi,c.min||0,c.max):'')
-        +'</div>';
-    }).join('');
-  }
-
-  var maxTotal=ST.profSession.criteres.concat(ST.profSession.criteresProf).reduce(function(s,c){return s+(c.max||0);},0);
-  var bodyHTML='';
-
-  if(isDouble){
-    function mkCol(role,icon,col){
-      var ci=ST.profSession.criteres.filter(function(c){return c.role===role;});
-      var pi=ST.profSession.criteresProf.filter(function(c){return c.role===role;});
-      var cf=role==='Recruteur'?'presenterCode':'codeCandidat';
-      var af=role==='Recruteur'?'appreciation':'appreciationCandidat';
-      var ph=role==='Recruteur'?'Ex : R1':'Ex : C1';
-      return '<div style="flex:1;min-width:0;background:#f8fafc;border:2px solid '+col+';border-radius:10px;padding:10px 9px">'
-        +'<div style="font-size:.76rem;font-weight:800;text-transform:uppercase;color:'+col+';margin-bottom:7px">'+icon+' '+role+'</div>'
-        +'<label style="font-size:.68rem">Code</label>'
-        +'<input type="text" maxlength="8" placeholder="'+ph+'" class="code-input" style="margin-bottom:8px;font-size:.82rem;padding:6px 8px" oninput="ST.profEvals['+eIdx+'].'+cf+'=this.value.toUpperCase();this.value=this.value.toUpperCase()">'
-        +'<div style="font-size:.68rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin:6px 0 4px">Critères communs</div>'
-        +mkCriteria(ci,'common',false)
-        +'<div style="font-size:.68rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:6px 0 4px">Critères prof</div>'
-        +mkCriteria(pi,'prof',true)
-        +'<div style="font-size:.68rem;font-weight:700;text-transform:uppercase;color:#555;margin:6px 0 3px">Appréciation</div>'
-        +'<textarea placeholder="Appréciation '+role.toLowerCase()+'..." style="font-size:.78rem;min-height:55px" oninput="ST.profEvals['+eIdx+'].'+af+'=this.value"></textarea>'
-        +'</div>';
-    }
-    bodyHTML='<div style="display:flex;gap:8px;align-items:flex-start">'
-      +mkCol('Recruteur','🧑','var(--primary)')
-      +mkCol('Candidat','👤','#27ae60')
-      +'</div>'
-      +'<div id="prof-total-'+eIdx+'" style="background:#1a3a5c;color:#fff;border-radius:8px;padding:9px 14px;margin-top:10px;font-weight:800;font-size:.95rem;text-align:center">Total : 0 / '+maxTotal+'</div>';
+    membresSection+="<div style='font-size:.7rem;font-weight:700;text-transform:uppercase;color:#555;margin:8px 0 4px'>Appreciation generale</div><textarea placeholder='Saisissez votre appreciation...' oninput='ST.profEvals["+eIdx+"].appreciation=this.value'></textarea>";
+    bodyHTML=grpSection+membresSection;
+  } else if(isDouble){
+    var rCrit=sess.criteres.filter(function(c){return c.role==="Recruteur";});
+    var rProf=sess.criteresProf.filter(function(c){return c.role==="Recruteur";});
+    var cCrit=sess.criteres.filter(function(c){return c.role==="Candidat";});
+    var cProf=sess.criteresProf.filter(function(c){return c.role==="Candidat";});
+    var mt2=sess.criteres.concat(sess.criteresProf).reduce(function(s,c){return s+(c.max||0);},0);
+    var rRows="";for(var ri=0;ri<rCrit.length;ri++) rRows+=profCriteriaBlock(rCrit[ri],"common",sess.criteres.indexOf(rCrit[ri]),eIdx,false);
+    var rpRows="";for(var rpi=0;rpi<rProf.length;rpi++) rpRows+=profCriteriaBlock(rProf[rpi],"prof",sess.criteresProf.indexOf(rProf[rpi]),eIdx,true);
+    var cRows="";for(var ci2=0;ci2<cCrit.length;ci2++) cRows+=profCriteriaBlock(cCrit[ci2],"common",sess.criteres.indexOf(cCrit[ci2]),eIdx,false);
+    var cpRows="";for(var cpi=0;cpi<cProf.length;cpi++) cpRows+=profCriteriaBlock(cProf[cpi],"prof",sess.criteresProf.indexOf(cProf[cpi]),eIdx,true);
+    var colR="<div style='flex:1;min-width:0;background:#f8fafc;border:2px solid var(--primary);border-radius:10px;padding:10px 9px'>"
+      +"<div style='font-size:.76rem;font-weight:800;text-transform:uppercase;color:var(--primary);margin-bottom:7px'>Recruteur</div>"
+      +"<label style='font-size:.68rem'>Code</label><input type='text' maxlength='8' placeholder='Ex : R1' class='code-input' style='margin-bottom:8px;font-size:.82rem;padding:6px 8px' oninput='ST.profEvals["+eIdx+"].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()'>"
+      +"<div style='font-size:.68rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin:6px 0 4px'>Criteres communs</div>"+rRows
+      +"<div style='font-size:.68rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:6px 0 4px'>Criteres prof</div>"+rpRows
+      +"<div style='font-size:.68rem;font-weight:700;text-transform:uppercase;color:#555;margin:6px 0 3px'>Appreciation</div>"
+      +"<textarea placeholder='Appreciation recruteur...' style='font-size:.78rem;min-height:55px' oninput='ST.profEvals["+eIdx+"].appreciation=this.value'></textarea></div>";
+    var colC="<div style='flex:1;min-width:0;background:#f8fafc;border:2px solid #27ae60;border-radius:10px;padding:10px 9px'>"
+      +"<div style='font-size:.76rem;font-weight:800;text-transform:uppercase;color:#27ae60;margin-bottom:7px'>Candidat</div>"
+      +"<label style='font-size:.68rem'>Code</label><input type='text' maxlength='8' placeholder='Ex : C1' class='code-input' style='margin-bottom:8px;font-size:.82rem;padding:6px 8px' oninput='ST.profEvals["+eIdx+"].codeCandidat=this.value.toUpperCase();this.value=this.value.toUpperCase()'>"
+      +"<div style='font-size:.68rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin:6px 0 4px'>Criteres communs</div>"+cRows
+      +"<div style='font-size:.68rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:6px 0 4px'>Criteres prof</div>"+cpRows
+      +"<div style='font-size:.68rem;font-weight:700;text-transform:uppercase;color:#555;margin:6px 0 3px'>Appreciation</div>"
+      +"<textarea placeholder='Appreciation candidat...' style='font-size:.78rem;min-height:55px' oninput='ST.profEvals["+eIdx+"].appreciationCandidat=this.value'></textarea></div>";
+    bodyHTML="<div style='display:flex;gap:8px;align-items:flex-start'>"+colR+colC+"</div>"
+      +"<div id='prof-total-"+eIdx+"' style='background:#1a3a5c;color:#fff;border-radius:8px;padding:9px 14px;margin-top:10px;font-weight:800;font-size:.95rem;text-align:center'>Total : 0 / "+mt2+"</div>";
   } else {
-    bodyHTML='<div class="section-divider">Critères communs élèves / prof</div>'
-      +mkCriteria(ST.profSession.criteres,'common',false)
-      +'<div class="section-divider prof-extra">Critères supplémentaires professeur</div>'
-      +mkCriteria(ST.profSession.criteresProf,'prof',true)
-      +'<div id="prof-total-'+eIdx+'" style="background:#1a3a5c;color:#fff;border-radius:8px;padding:9px 14px;margin:10px 0 8px;font-weight:800;font-size:.95rem;text-align:center">Total : 0 / '+maxTotal+'</div>'
-      +'<div class="section-divider">Appréciation générale</div>'
-      +'<textarea placeholder="Saisissez votre appréciation..." oninput="ST.profEvals['+eIdx+'].appreciation=this.value"></textarea>';
+    var mt3=sess.criteres.concat(sess.criteresProf).reduce(function(s,c){return s+(c.max||0);},0);
+    var stdRows="";for(var si=0;si<sess.criteres.length;si++) stdRows+=profCriteriaBlock(sess.criteres[si],"common",si,eIdx,false);
+    var stdPRows="";for(var spi=0;spi<sess.criteresProf.length;spi++) stdPRows+=profCriteriaBlock(sess.criteresProf[spi],"prof",spi,eIdx,true);
+    bodyHTML="<div class='section-divider'>Criteres communs eleves / prof</div>"+stdRows
+      +"<div class='section-divider prof-extra'>Criteres supplementaires professeur</div>"+stdPRows
+      +"<div id='prof-total-"+eIdx+"' style='background:#1a3a5c;color:#fff;border-radius:8px;padding:9px 14px;margin:10px 0 8px;font-weight:800;font-size:.95rem;text-align:center'>Total : 0 / "+mt3+"</div>"
+      +"<div class='section-divider'>Appreciation generale</div>"
+      +"<textarea placeholder='Saisissez votre appreciation...' oninput='ST.profEvals["+eIdx+"].appreciation=this.value'></textarea>";
   }
-
-  var codeF=isDouble?'':'<label>Code participant</label><input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:14px" oninput="ST.profEvals['+eIdx+'].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">';
-  var rmBtn=idx>1?'<button class="btn-remove" onclick="removeProfBlock('+idx+','+eIdx+')">✕</button>':'';
-  var div=document.createElement('div');
-  div.className='eval-block prof-block';
-  div.id='peb-'+idx;
-  div.innerHTML='<div class="eval-block-header"><div class="eval-block-num">🎤 '+(isDouble?'Binôme':'Élève')+' #'+idx+'</div>'+rmBtn+'</div>'+codeF+bodyHTML;
-  document.getElementById('prof-eval-blocks-container').appendChild(div);
-  updateProfProgress();
-  div.scrollIntoView({behavior:'smooth',block:'start'});
+  var codeF=(!isDouble&&!isGroupe)?"<label>Code participant</label><input type='text' maxlength='8' placeholder='Ex : P01' class='code-input' style='margin-bottom:14px' oninput='ST.profEvals["+eIdx+"].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()'>":"";
+  var rmBtn=idx>1?"<button class='btn-remove' onclick='removeProfBlock("+idx+","+eIdx+")'>&#x2715;</button>":"";
+  var lbl=isGroupe?"Groupe":isDouble?"Binome":"Eleve";
+  var div=document.createElement("div");
+  div.className="eval-block prof-block";div.id="peb-"+idx;
+  div.innerHTML="<div class='eval-block-header'><div class='eval-block-num'>"+lbl+" #"+idx+"</div>"+rmBtn+"</div>"+codeF+bodyHTML;
+  document.getElementById("prof-eval-blocks-container").appendChild(div);
+  updateProfProgress();div.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 function selectProfColor(btn,eIdx,type,ci,val){
-  var wrap=btn.parentElement;
-  wrap.querySelectorAll('.cbtn').forEach(function(b){b.classList.remove('selected');});
-  btn.classList.add('selected');
-  if(type==='common') ST.profEvals[eIdx].criteria[ci].value=val;
+  var wrap=btn.parentElement;wrap.querySelectorAll(".cbtn").forEach(function(b){b.classList.remove("selected");});btn.classList.add("selected");
+  if(type==="common") ST.profEvals[eIdx].criteria[ci].value=val;
   else ST.profEvals[eIdx].criteriaProf[ci].value=val;
   updateProfProgress();
 }
 function setProfScore(btn,eIdx,type,ci,val){
-  var wrap=btn.parentElement;
-  wrap.querySelectorAll('button').forEach(function(b){b.style.background='#f8fafc';b.style.color='#1e2d3d';b.style.borderColor='#ccd3de';});
-  btn.style.background='#1a3a5c';btn.style.color='#fff';btn.style.borderColor='#1a3a5c';
-  if(type==='common') ST.profEvals[eIdx].criteria[ci].score=val;
+  var wrap=btn.parentElement;wrap.querySelectorAll("button").forEach(function(b){b.style.background="#f8fafc";b.style.color="#1e2d3d";b.style.borderColor="#ccd3de";});
+  btn.style.background="#1a3a5c";btn.style.color="#fff";btn.style.borderColor="#1a3a5c";
+  if(type==="common") ST.profEvals[eIdx].criteria[ci].score=val;
   else ST.profEvals[eIdx].criteriaProf[ci].score=val;
-  updateProfTotal(eIdx);
+  if(ST.profSession&&ST.profSession.groupe) updateGrpTotal(eIdx);
+  else updateProfTotal(eIdx);
 }
 function updateProfTotal(eIdx){
-  var ev=ST.profEvals[eIdx]; if(!ev) return;
+  var ev=ST.profEvals[eIdx];if(!ev) return;
   var all=ev.criteria.concat(ev.criteriaProf);
   var maxT=all.reduce(function(s,c){return s+(c.max||0);},0);
   var obt=all.reduce(function(s,c){return s+(c.score||0);},0);
-  var el=document.getElementById('prof-total-'+eIdx);
-  if(el) el.textContent='Total : '+obt+' / '+maxT;
+  var el=document.getElementById("prof-total-"+eIdx);
+  if(el) el.textContent="Total : "+obt+" / "+maxT;
+}
+function selectProfColorMembre(btn,eIdx,mIdx,type,ci,val){
+  var wrap=btn.parentElement;wrap.querySelectorAll(".cbtn").forEach(function(b){b.classList.remove("selected");});btn.classList.add("selected");
+  var ev=ST.profEvals[eIdx];
+  if(type==="common"){if(!ev.membres[mIdx].criteriaIndiv[ci]) ev.membres[mIdx].criteriaIndiv[ci]={value:null,score:null};ev.membres[mIdx].criteriaIndiv[ci].value=val;}
+  else{if(!ev.membres[mIdx].criteriaIndivProf[ci]) ev.membres[mIdx].criteriaIndivProf[ci]={value:null,score:null};ev.membres[mIdx].criteriaIndivProf[ci].value=val;}
+  updateProfProgress();
+}
+function setProfScoreMembre(btn,eIdx,mIdx,type,ci,val){
+  var wrap=btn.parentElement;wrap.querySelectorAll("button").forEach(function(b){b.style.background="#f8fafc";b.style.color="#1e2d3d";b.style.borderColor="#ccd3de";});
+  btn.style.background="#27ae60";btn.style.color="#fff";btn.style.borderColor="#27ae60";
+  var ev=ST.profEvals[eIdx];
+  if(type==="common"){if(!ev.membres[mIdx].criteriaIndiv[ci]) ev.membres[mIdx].criteriaIndiv[ci]={value:null,score:null};ev.membres[mIdx].criteriaIndiv[ci].score=val;}
+  else{if(!ev.membres[mIdx].criteriaIndivProf[ci]) ev.membres[mIdx].criteriaIndivProf[ci]={value:null,score:null};ev.membres[mIdx].criteriaIndivProf[ci].score=val;}
+  updateMembreTotal(eIdx,mIdx);
+}
+function updateGrpTotal(eIdx){
+  var ev=ST.profEvals[eIdx];if(!ev) return;
+  var sess=ST.profSession;
+  var grpC=sess.criteres.filter(function(c){return c.scope==="groupe";});
+  var grpP=sess.criteresProf.filter(function(c){return c.scope==="groupe";});
+  var grpMax=grpC.concat(grpP).reduce(function(s,c){return s+(c.max||0);},0);
+  var grpScore=ev.criteria.filter(function(c){return c.scope==="groupe";}).concat(ev.criteriaProf.filter(function(c){return c.scope==="groupe";})).reduce(function(s,c){return s+(c.score||0);},0);
+  var el=document.getElementById("prof-grp-total-"+eIdx);
+  if(el) el.textContent="Score groupe : "+grpScore+" / "+grpMax;
+  for(var m=0;m<(sess.maxIndiv||5);m++) updateMembreTotal(eIdx,m);
+}
+function updateMembreTotal(eIdx,mIdx){
+  var ev=ST.profEvals[eIdx];if(!ev||!ev.membres[mIdx]) return;
+  var sess=ST.profSession;
+  var indC=sess.criteres.filter(function(c){return c.scope==="indiv";});
+  var indP=sess.criteresProf.filter(function(c){return c.scope==="indiv";});
+  var indMax=indC.concat(indP).reduce(function(s,c){return s+(c.max||0);},0);
+  var grpMax=sess.criteres.filter(function(c){return c.scope==="groupe";}).concat(sess.criteresProf.filter(function(c){return c.scope==="groupe";})).reduce(function(s,c){return s+(c.max||0);},0);
+  var mb=ev.membres[mIdx];
+  var indScore=mb.criteriaIndiv.concat(mb.criteriaIndivProf).reduce(function(s,c){return s+(c&&c.score?c.score:0);},0);
+  var grpScore=ev.criteria.filter(function(c){return c.scope==="groupe";}).concat(ev.criteriaProf.filter(function(c){return c.scope==="groupe";})).reduce(function(s,c){return s+(c.score||0);},0);
+  var el1=document.getElementById("prof-membre-total-"+eIdx+"-"+mIdx);
+  var el2=document.getElementById("prof-membre-grand-total-"+eIdx+"-"+mIdx);
+  if(el1) el1.textContent="Score individuel : "+indScore+" / "+indMax;
+  if(el2) el2.textContent="Total eleve : "+(indScore+grpScore)+" / "+(indMax+grpMax);
 }
 function updateProfProgress(){
   var active=ST.profEvals.filter(function(e){return e!==null;});
   var total=active.reduce(function(s,e){return s+e.criteria.length+e.criteriaProf.length;},0);
-  var filled=active.reduce(function(s,e){
-    return s+e.criteria.filter(function(c){return c.value!==null;}).length
-            +e.criteriaProf.filter(function(c){return c.value!==null;}).length;
-  },0);
+  var filled=active.reduce(function(s,e){return s+e.criteria.filter(function(c){return c.value!==null;}).length+e.criteriaProf.filter(function(c){return c.value!==null;}).length;},0);
   var pct=total>0?Math.round(filled/total*100):0;
-  document.getElementById('prof-progress-fill').style.width=pct+'%';
-  document.getElementById('prof-progress-note').textContent='Progression : '+filled+' / '+total+' critères renseignés';
+  document.getElementById("prof-progress-fill").style.width=pct+"%";
+  document.getElementById("prof-progress-note").textContent="Progression : "+filled+" / "+total+" criteres renseignes";
 }
-function removeProfBlock(blockId,eIdx){
-  var el=document.getElementById('peb-'+blockId); if(el) el.remove();
-  ST.profEvals[eIdx]=null; updateProfProgress();
-}
+function removeProfBlock(blockId,eIdx){var el=document.getElementById("peb-"+blockId);if(el) el.remove();ST.profEvals[eIdx]=null;updateProfProgress();}
 
-// STUDENT FLOW
 function studentAccessCheck(){
-  var v=document.getElementById('student-access-code').value.trim().toUpperCase();
-  if(v===ST.studentCode.toUpperCase()){
-    document.getElementById('student-access-error').style.display='none';
-    buildFiliereScreen(); goTo('screen-choose-filiere');
-  } else { document.getElementById('student-access-error').style.display='block'; }
+  var v=document.getElementById("student-access-code").value.trim().toUpperCase();
+  if(v===ST.studentCode.toUpperCase()){document.getElementById("student-access-error").style.display="none";buildFiliereScreen();goTo("screen-choose-filiere");}
+  else document.getElementById("student-access-error").style.display="block";
 }
 function buildFiliereScreen(){
   var filieres=unique(SESSIONS.map(function(s){return s.filiere;}));
-  document.getElementById('filiere-grid').innerHTML=filieres.map(function(f){
-    return '<div class="sel-btn" onclick="selectFiliere(\''+f+'\')"><span class="sb-icon">🏫</span>'+f+'</div>';
-  }).join('');
+  document.getElementById("filiere-grid").innerHTML=filieres.map(function(f){return "<div class='sel-btn' onclick='selectFiliere(\""+f+"\")'><span class='sb-icon'>&#127979;</span>"+f+"</div>";}).join("");
 }
 function selectFiliere(f){
-  ST.filiere=f;
-  document.getElementById('sub-filiere-selected').textContent=f;
+  ST.filiere=f;document.getElementById("sub-filiere-selected").textContent=f;
   var classes=unique(SESSIONS.filter(function(s){return s.filiere===f;}).map(function(s){return s.classe;}));
-  document.getElementById('classe-grid').innerHTML=classes.map(function(c){
-    return '<div class="sel-btn" onclick="selectClasse(\''+c+'\')"><span class="sb-icon">🎒</span>'+c+'</div>';
-  }).join('');
-  goTo('screen-choose-classe');
+  document.getElementById("classe-grid").innerHTML=classes.map(function(c){return "<div class='sel-btn' onclick='selectClasse(\""+c+"\")'><span class='sb-icon'>&#127890;</span>"+c+"</div>";}).join("");
+  goTo("screen-choose-classe");
 }
 function selectClasse(c){
-  ST.classe=c;
-  document.getElementById('sub-classe-selected').textContent=ST.filiere+' · '+c;
+  ST.classe=c;document.getElementById("sub-classe-selected").textContent=ST.filiere+" - "+c;
   var sessions=SESSIONS.filter(function(s){return s.filiere===ST.filiere&&s.classe===c;});
-  document.getElementById('session-list').innerHTML=sessions.map(function(s){
+  document.getElementById("session-list").innerHTML=sessions.map(function(s){
     var i=SESSIONS.indexOf(s);
-    return '<div class="session-card" onclick="selectSession('+i+')">'
-      +'<div class="session-theme">'+s.theme+'</div>'
-      +'<div class="session-title">'+s.titre+'</div>'
-      +'<div class="session-meta">'+s.criteres.length+' critère(s)</div>'
-      +'</div>';
-  }).join('');
-  goTo('screen-choose-session');
+    return "<div class='session-card' onclick='selectSession("+i+")'><div class='session-theme'>"+s.theme+"</div><div class='session-title'>"+s.titre+"</div><div class='session-meta'>"+s.criteres.length+" critere(s)</div></div>";
+  }).join("");
+  goTo("screen-choose-session");
 }
 function selectSession(idx){
   ST.session=SESSIONS[idx];
-  document.getElementById('id-breadcrumb').innerHTML=ST.filiere+' <span>›</span> '+ST.classe+' <span>›</span> '+ST.session.titre;
-  goTo('screen-student-identify');
+  document.getElementById("id-breadcrumb").innerHTML=ST.filiere+" &rsaquo; "+ST.classe+" &rsaquo; "+ST.session.titre;
+  goTo("screen-student-identify");
 }
 function updateAvatar(){
-  var fn=document.getElementById('s-firstname').value.toUpperCase();
-  var ln=document.getElementById('s-lastname').value.toUpperCase();
-  var av=document.getElementById('avatar-circle');
-  if(av) av.textContent=(fn||'?')+'-'+(ln||'?');
+  var fn=document.getElementById("s-firstname").value.toUpperCase();
+  var ln=document.getElementById("s-lastname").value.toUpperCase();
+  var av=document.getElementById("avatar-circle");
+  if(av) av.textContent=(fn||"?")+" - "+(ln||"?");
 }
 function studentIdentify(){
-  var fn=document.getElementById('s-firstname').value.trim().toUpperCase();
-  var ln=document.getElementById('s-lastname').value.trim().toUpperCase();
-  if(!fn||!ln){document.getElementById('identify-error').style.display='block';return;}
-  ST.student={id:fn+'-'+ln,classe:ST.classe};
-  ST.evals=[]; blockCounter=0;
-  document.getElementById('eval-hero-title').textContent=ST.session.titre;
-  document.getElementById('eval-hero-context').textContent=ST.filiere+' · '+ST.classe+' · '+ST.session.theme;
-  document.getElementById('student-badge-bar').innerHTML='<strong>🎓 '+(fn+'-'+ln)+'</strong><span style="opacity:.4">|</span>'+ST.classe+'<span style="opacity:.4">|</span>'+ST.session.titre;
-  document.getElementById('eval-blocks-container').innerHTML='';
-  addEvalBlock(); goTo('screen-student-eval');
+  var fn=document.getElementById("s-firstname").value.trim().toUpperCase();
+  var ln=document.getElementById("s-lastname").value.trim().toUpperCase();
+  if(!fn||!ln){document.getElementById("identify-error").style.display="block";return;}
+  ST.student={id:fn+"-"+ln,classe:ST.classe};ST.evals=[];blockCounter=0;
+  document.getElementById("eval-hero-title").textContent=ST.session.titre;
+  document.getElementById("eval-hero-context").textContent=ST.filiere+" - "+ST.classe+" - "+ST.session.theme;
+  document.getElementById("student-badge-bar").innerHTML="<strong>"+fn+"-"+ln+"</strong><span style='opacity:.4'>|</span>"+ST.classe+"<span style='opacity:.4'>|</span>"+ST.session.titre;
+  document.getElementById("eval-blocks-container").innerHTML="";
+  addEvalBlock();goTo("screen-student-eval");
 }
 
-// STUDENT EVAL BLOCKS
 var blockCounter=0;
+function studentColorBtns(eIdx,gi){
+  return LEVELS.map(function(lv){return "<button class='cbtn "+lv.cls+"' onclick='selectColor(this,"+eIdx+","+gi+","+lv.v+")'>"+lv.label+"</button>";}).join("");
+}
+function membreStudentColorBtns(eIdx,mIdx,ci){
+  return LEVELS.map(function(lv){return "<button class='cbtn "+lv.cls+"' onclick='selectColorMembre(this,"+eIdx+","+mIdx+","+ci+","+lv.v+")'>"+lv.label+"</button>";}).join("");
+}
+
 function addEvalBlock(){
   blockCounter++;
   var idx=blockCounter;
-  var isDouble=ST.session.double===true;
-  var evalObj={
-    presenterCode:'',codeCandidat:'',
-    criteria:ST.session.criteres.map(function(c){return {id:c.id,label:c.label,role:c.role||null,value:null};})
-  };
+  var sess=ST.session;
+  var isDouble=sess.double===true;
+  var isGroupe=sess.groupe===true;
+  var maxM=sess.maxIndiv||5;
+  var evalObj={presenterCode:"",codeCandidat:"",groupeName:"",membres:[],criteria:sess.criteres.map(function(c){return {id:c.id,label:c.label,role:c.role||null,scope:c.scope||null,value:null};})};
+  if(isGroupe){for(var m=0;m<maxM;m++) evalObj.membres.push({code:"",criteria:[]});}
   ST.evals.push(evalObj);
   var eIdx=ST.evals.length-1;
+  var cHTML="";
 
-  function mkCBtns(gi){
-    return LEVELS.map(function(lv){
-      return '<button class="cbtn '+lv.cls+'" onclick="selectColor(this,'+eIdx+','+gi+','+lv.v+')">'+lv.label+'</button>';
-    }).join('');
-  }
-  function mkCol(role,icon,col){
-    var items=ST.session.criteres.filter(function(c){return c.role===role;});
-    var rows=items.map(function(c){
-      var gi=ST.session.criteres.indexOf(c);
-      return '<div class="criteria-item" style="margin-bottom:10px">'
-        +'<div class="criteria-label" style="font-size:.76rem">'+c.label+'</div>'
-        +'<div style="display:flex;flex-direction:column;gap:3px">'+mkCBtns(gi)+'</div>'
-        +'</div>';
-    }).join('');
-    return '<div style="flex:1;min-width:0;background:#f8fafc;border:2px solid '+col+';border-radius:10px;padding:11px 9px">'
-      +'<div style="font-size:.76rem;font-weight:800;text-transform:uppercase;color:'+col+';margin-bottom:9px">'+icon+' '+role+'</div>'
-      +rows+'</div>';
-  }
-
-  var cHTML='';
-  if(isDouble){
-    cHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">'
-      +'<div><label>Code Recruteur</label><input type="text" maxlength="8" placeholder="Ex : R1" class="code-input" oninput="ST.evals['+eIdx+'].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()"></div>'
-      +'<div><label>Code Candidat</label><input type="text" maxlength="8" placeholder="Ex : C1" class="code-input" oninput="ST.evals['+eIdx+'].codeCandidat=this.value.toUpperCase();this.value=this.value.toUpperCase()"></div>'
-      +'</div>'
-      +'<div style="display:flex;gap:10px;align-items:flex-start">'
-      +mkCol('Recruteur','🧑','var(--primary)')
-      +mkCol('Candidat','👤','#27ae60')
-      +'</div>';
+  if(isGroupe){
+    var grpCriteres=sess.criteres.filter(function(c){return c.scope==="groupe";});
+    var indivCriteres=sess.criteres.filter(function(c){return c.scope==="indiv";});
+    var grpRows="";
+    for(var gi=0;gi<grpCriteres.length;gi++){var gc=grpCriteres[gi];var gci=sess.criteres.indexOf(gc);grpRows+="<div class='criteria-item'><div class='criteria-label'>"+gc.label+"</div><div class='color-btns'>"+studentColorBtns(eIdx,gci)+"</div></div>";}
+    var indivBlocks="";
+    for(var mi=0;mi<maxM;mi++){
+      var iRows="";
+      for(var ii=0;ii<indivCriteres.length;ii++){var ic=indivCriteres[ii];iRows+="<div class='criteria-item'><div class='criteria-label'>"+ic.label+"</div><div class='color-btns'>"+membreStudentColorBtns(eIdx,mi,ii)+"</div></div>";}
+      indivBlocks+="<div style='background:#f8fafc;border:1.5px solid #dde3ec;border-radius:9px;padding:12px;margin-bottom:10px'>"
+        +"<label style='font-size:.75rem'>Eleve "+(mi+1)+" - 2 premieres lettres du prenom</label>"
+        +"<input type='text' maxlength='2' placeholder='ex : MA' class='code-input' style='margin-bottom:10px;font-size:.9rem' oninput='ST.evals["+eIdx+"].membres["+mi+"].code=this.value.toUpperCase();this.value=this.value.toUpperCase()'>"
+        +iRows+"</div>";
+    }
+    cHTML="<div class='section-divider'>Nom du groupe (ex : CA-LU-MA)</div>"
+      +"<input type='text' maxlength='20' placeholder='ex : CA-LU-MA' class='code-input' style='margin-bottom:14px' oninput='ST.evals["+eIdx+"].groupeName=this.value.toUpperCase();this.value=this.value.toUpperCase()'>"
+      +"<div class='section-divider'>Evaluation commune du groupe</div>"+grpRows
+      +"<div class='section-divider'>Evaluations individuelles</div>"+indivBlocks;
+  } else if(isDouble){
+    var rItems=sess.criteres.filter(function(c){return c.role==="Recruteur";});
+    var cItems=sess.criteres.filter(function(c){return c.role==="Candidat";});
+    var rRowsS="";for(var ri=0;ri<rItems.length;ri++){var gi2=sess.criteres.indexOf(rItems[ri]);rRowsS+="<div class='criteria-item' style='margin-bottom:10px'><div class='criteria-label' style='font-size:.76rem'>"+rItems[ri].label+"</div><div style='display:flex;flex-direction:column;gap:3px'>"+studentColorBtns(eIdx,gi2)+"</div></div>";}
+    var cRowsS="";for(var ci3=0;ci3<cItems.length;ci3++){var gi3=sess.criteres.indexOf(cItems[ci3]);cRowsS+="<div class='criteria-item' style='margin-bottom:10px'><div class='criteria-label' style='font-size:.76rem'>"+cItems[ci3].label+"</div><div style='display:flex;flex-direction:column;gap:3px'>"+studentColorBtns(eIdx,gi3)+"</div></div>";}
+    var colRS="<div style='flex:1;min-width:0;background:#f8fafc;border:2px solid var(--primary);border-radius:10px;padding:11px 9px'><div style='font-size:.76rem;font-weight:800;text-transform:uppercase;color:var(--primary);margin-bottom:9px'>Recruteur</div>"+rRowsS+"</div>";
+    var colCS="<div style='flex:1;min-width:0;background:#f8fafc;border:2px solid #27ae60;border-radius:10px;padding:11px 9px'><div style='font-size:.76rem;font-weight:800;text-transform:uppercase;color:#27ae60;margin-bottom:9px'>Candidat</div>"+cRowsS+"</div>";
+    cHTML="<div style='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px'><div><label>Code Recruteur</label><input type='text' maxlength='8' placeholder='Ex : R1' class='code-input' oninput='ST.evals["+eIdx+"].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()'></div><div><label>Code Candidat</label><input type='text' maxlength='8' placeholder='Ex : C1' class='code-input' oninput='ST.evals["+eIdx+"].codeCandidat=this.value.toUpperCase();this.value=this.value.toUpperCase()'></div></div>"
+      +"<div style='display:flex;gap:10px;align-items:flex-start'>"+colRS+colCS+"</div>";
   } else {
-    cHTML='<label>Code du présentateur</label>'
-      +'<input type="text" maxlength="8" placeholder="Ex : P01" class="code-input" style="margin-bottom:14px" oninput="ST.evals['+eIdx+'].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()">'
-      +ST.session.criteres.map(function(c,ci){
-        return '<div class="criteria-item"><div class="criteria-label">'+c.label+'</div>'
-          +'<div class="color-btns">'+mkCBtns(ci)+'</div></div>';
-      }).join('');
+    var sCrit="";for(var sci=0;sci<sess.criteres.length;sci++) sCrit+="<div class='criteria-item'><div class='criteria-label'>"+sess.criteres[sci].label+"</div><div class='color-btns'>"+studentColorBtns(eIdx,sci)+"</div></div>";
+    cHTML="<label>Code du presentateur</label><input type='text' maxlength='8' placeholder='Ex : P01' class='code-input' style='margin-bottom:14px' oninput='ST.evals["+eIdx+"].presenterCode=this.value.toUpperCase();this.value=this.value.toUpperCase()'>"+sCrit;
   }
+  var rmBtn=idx>1?"<button class='btn-remove' onclick='removeBlock("+idx+","+eIdx+")'>&#x2715;</button>":"";
+  var lbl=isGroupe?"Groupe":isDouble?"Binome":"Presentateur";
+  var div=document.createElement("div");
+  div.className="eval-block";div.id="eb-"+idx;
+  div.innerHTML="<div class='eval-block-header'><div class='eval-block-num'>"+lbl+" #"+idx+"</div>"+rmBtn+"</div>"+cHTML;
+  document.getElementById("eval-blocks-container").appendChild(div);
+  updateProgress();div.scrollIntoView({behavior:"smooth",block:"start"});
+}
 
-  var rmBtn=idx>1?'<button class="btn-remove" onclick="removeBlock('+idx+','+eIdx+')">✕</button>':'';
-  var div=document.createElement('div');
-  div.className='eval-block'; div.id='eb-'+idx;
-  div.innerHTML='<div class="eval-block-header"><div class="eval-block-num">🎤 '+(isDouble?'Binôme':'Présentateur')+' #'+idx+'</div>'+rmBtn+'</div>'+cHTML;
-  document.getElementById('eval-blocks-container').appendChild(div);
-  updateProgress(); div.scrollIntoView({behavior:'smooth',block:'start'});
-}
 function selectColor(btn,eIdx,ci,val){
-  var wrap=btn.parentElement;
-  wrap.querySelectorAll('.cbtn').forEach(function(b){b.classList.remove('selected');});
-  btn.classList.add('selected');
-  ST.evals[eIdx].criteria[ci].value=val; updateProgress();
+  var wrap=btn.parentElement;wrap.querySelectorAll(".cbtn").forEach(function(b){b.classList.remove("selected");});btn.classList.add("selected");
+  ST.evals[eIdx].criteria[ci].value=val;updateProgress();
 }
-function removeBlock(blockId,eIdx){
-  var el=document.getElementById('eb-'+blockId); if(el) el.remove();
-  ST.evals[eIdx]=null; updateProgress();
+function selectColorMembre(btn,eIdx,mIdx,ci,val){
+  var wrap=btn.parentElement;wrap.querySelectorAll(".cbtn").forEach(function(b){b.classList.remove("selected");});btn.classList.add("selected");
+  if(!ST.evals[eIdx].membres[mIdx].criteria[ci]) ST.evals[eIdx].membres[mIdx].criteria[ci]={value:null};
+  ST.evals[eIdx].membres[mIdx].criteria[ci].value=val;updateProgress();
 }
+function removeBlock(blockId,eIdx){var el=document.getElementById("eb-"+blockId);if(el) el.remove();ST.evals[eIdx]=null;updateProgress();}
 function updateProgress(){
   var active=ST.evals.filter(function(e){return e!==null;});
   var total=active.reduce(function(s,e){return s+e.criteria.length;},0);
   var filled=active.reduce(function(s,e){return s+e.criteria.filter(function(c){return c.value!==null;}).length;},0);
   var pct=total>0?Math.round(filled/total*100):0;
-  document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('progress-note').textContent='Progression : '+filled+' / '+total+' critères renseignés';
+  document.getElementById("progress-fill").style.width=pct+"%";
+  document.getElementById("progress-note").textContent="Progression : "+filled+" / "+total+" criteres renseignes";
 }
+function confirmReset(){document.getElementById("modal-reset").classList.add("open");}
+function closeModal(id){document.getElementById(id).classList.remove("open");}
+function doReset(){closeModal("modal-reset");ST.evals=[];blockCounter=0;goTo("screen-home");}
 
-// MODAL
-function confirmReset(){document.getElementById('modal-reset').classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-function doReset(){closeModal('modal-reset');ST.evals=[];blockCounter=0;goTo('screen-home');}
-
-// STUDENT PDF
 function generateStudentPDF(){
   var active=ST.evals.filter(function(e){return e!==null;});
-  if(!active.length){alert('Ajoutez au moins une évaluation.');return;}
-  var dateStr=new Date().toLocaleDateString('fr-FR');
-  var leg=LEVELS.map(function(lv){
-    return '<span style="margin-right:8px"><span style="background:'+GRAYS[lv.v-1]+';color:#fff;border:2px solid #000;border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700">'+lv.txt+'</span></span>';
-  }).join('');
+  if(!active.length){alert("Ajoutez au moins une evaluation.");return;}
+  var dateStr=new Date().toLocaleDateString("fr-FR");
+  var leg=LEVELS.map(function(lv){return "<span style='margin-right:8px'><span style='background:"+GRAYS[lv.v-1]+";color:#fff;border:2px solid #000;border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700'>"+lv.txt+"</span></span>";}).join("");
   var blocks=active.map(function(ev,i){
     var rows=ev.criteria.map(function(cr){
-      return '<tr><td style="padding:5px 8px;font-size:11px;border-bottom:1px solid #eee;width:72%">'+cr.label+'</td>'
-        +'<td style="padding:5px 8px;text-align:center;border-bottom:1px solid #eee">'
-        +(cr.value?'<span style="background:'+GRAYS[cr.value-1]+';color:#fff;border:2px solid #000;border-radius:5px;padding:2px 10px;font-weight:700;font-size:11px">'+LTXT[cr.value]+'</span>':'<span style="color:#bbb">—</span>')
-        +'</td></tr>';
-    }).join('');
-    return '<div style="margin-bottom:8px;border-radius:8px;overflow:hidden;border:1.5px solid #333">'
-      +'<div style="background:#1a3a5c;color:#fff;padding:7px 12px;font-weight:700;font-size:12px">🎤 Présentateur #'+(i+1)+' — Code : '+(ev.presenterCode||'—')+'</div>'
-      +'<table style="width:100%;border-collapse:collapse;background:#fff">'+rows+'</table></div>';
-  }).join('');
-  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>OralCheck</title>'
-    +'<style>body{font-family:\'Segoe UI\',Arial,sans-serif;max-width:680px;margin:0 auto;padding:16px;color:#1e2d3d;font-size:12px;}@media print{body{padding:0;max-width:100%;}}</style>'
-    +'</head><body>'
-    +'<div style="background:#1a3a5c;color:#fff;border-radius:8px;padding:13px 18px;margin-bottom:12px;display:flex;justify-content:space-between">'
-    +'<div><div style="font-size:17px;font-weight:900">OralCheck</div><div style="font-size:11px;opacity:.8">Rapport élève</div></div>'
-    +'<div style="font-size:11px;opacity:.85">'+dateStr+'</div></div>'
-    +'<div style="background:#f0f4f8;border-radius:7px;padding:8px 13px;margin-bottom:9px;font-size:11px;display:flex;gap:14px;flex-wrap:wrap">'
-    +'<span>🎓 <strong>'+ST.student.id+'</strong></span><span>📚 '+ST.classe+'</span><span>📋 '+ST.session.titre+' — '+ST.session.theme+'</span></div>'
-    +'<div style="margin-bottom:9px;font-size:10px;display:flex;align-items:center;gap:5px;flex-wrap:wrap"><strong>Légende :</strong>'+leg+'</div>'
+      return "<tr><td style='padding:5px 8px;font-size:11px;border-bottom:1px solid #eee;width:72%'>"+cr.label+"</td>"
+        +"<td style='padding:5px 8px;text-align:center;border-bottom:1px solid #eee'>"
+        +(cr.value?"<span style='background:"+GRAYS[cr.value-1]+";color:#fff;border:2px solid #000;border-radius:5px;padding:2px 10px;font-weight:700;font-size:11px'>"+LTXT[cr.value]+"</span>":"<span style='color:#bbb'>-</span>")
+        +"</td></tr>";
+    }).join("");
+    return "<div style='margin-bottom:8px;border-radius:8px;overflow:hidden;border:1.5px solid #333'>"
+      +"<div style='background:#1a3a5c;color:#fff;padding:7px 12px;font-weight:700;font-size:12px'>#"+(i+1)+" - Code : "+(ev.presenterCode||ev.groupeName||"-")+"</div>"
+      +"<table style='width:100%;border-collapse:collapse;background:#fff'>"+rows+"</table></div>";
+  }).join("");
+  var html="<!DOCTYPE html><html><head><meta charset='UTF-8'><title>OralCheck</title>"
+    +"<style>body{font-family:'Segoe UI',Arial,sans-serif;max-width:680px;margin:0 auto;padding:16px;color:#1e2d3d;font-size:12px;}@media print{body{padding:0;max-width:100%;}}</style></head><body>"
+    +"<div style='background:#1a3a5c;color:#fff;border-radius:8px;padding:13px 18px;margin-bottom:12px;display:flex;justify-content:space-between'>"
+    +"<div><div style='font-size:17px;font-weight:900'>OralCheck</div><div style='font-size:11px;opacity:.8'>Rapport eleve</div></div><div style='font-size:11px;opacity:.85'>"+dateStr+"</div></div>"
+    +"<div style='background:#f0f4f8;border-radius:7px;padding:8px 13px;margin-bottom:9px;font-size:11px;display:flex;gap:14px;flex-wrap:wrap'>"
+    +"<span><strong>"+ST.student.id+"</strong></span><span>"+ST.classe+"</span><span>"+ST.session.titre+" - "+ST.session.theme+"</span></div>"
+    +"<div style='margin-bottom:9px;font-size:10px;display:flex;align-items:center;gap:5px;flex-wrap:wrap'><strong>Legende :</strong>"+leg+"</div>"
     +blocks
-    +'<div style="background:#fff3e0;border-left:3px solid #e67e22;padding:8px 12px;margin-top:9px;font-size:11px;border-radius:5px">'
-    +'⚠️ <strong>Ce travail sera noté.</strong> Envoyez via <strong>Ecole Directe → Messages → Pièce jointe</strong>.</div>'
-    +'<p style="text-align:center;color:#bbb;font-size:10px;margin-top:12px">Créé par C. Iemfre — OralCheck</p>'
-    +'<scr'+'ipt>window.onload=function(){window.print();};<'+'/scr'+'ipt></body></html>';
-  openPrint(html,'OralCheck_'+ST.student.id+'_'+ST.classe);
-  goTo('screen-done');
+    +"<div style='background:#fff3e0;border-left:3px solid #e67e22;padding:8px 12px;margin-top:9px;font-size:11px;border-radius:5px'>Ce travail sera note. Envoyez via Ecole Directe.</div>"
+    +"<p style='text-align:center;color:#bbb;font-size:10px;margin-top:12px'>Cree par C. Iemfre - OralCheck</p>"
+    +"<scr"+"ipt>window.onload=function(){window.print();};<"+"/scr"+"ipt></body></html>";
+  openPrint(html,"OralCheck_"+ST.student.id+"_"+ST.classe);
+  goTo("screen-done");
 }
 
-// PROF PDF
 function generateProfPDF(){
   var active=ST.profEvals.filter(function(e){return e!==null;});
-  if(!active.length){alert('Aucune évaluation à exporter.');return;}
-  var isDouble=ST.profSession.double===true;
-  var dateStr=new Date().toLocaleDateString('fr-FR');
-  var sInfo=ST.profSession.filiere+' · '+ST.profSession.classe+' · '+ST.profSession.titre+' · '+ST.profSession.theme;
-
-  function mkLegend(){
-    return LEVELS.map(function(lv){
-      return '<span style="margin-right:5px"><span style="background:'+GRAYS[lv.v-1]+';color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 5px;font-size:9px;font-weight:700">'+lv.txt+'</span></span>';
-    }).join('');
+  if(!active.length){alert("Aucune evaluation a exporter.");return;}
+  var sess=ST.profSession;
+  var isDouble=sess.double===true;
+  var isGroupe=sess.groupe===true;
+  var dateStr=new Date().toLocaleDateString("fr-FR");
+  var sInfo=sess.filiere+" - "+sess.classe+" - "+sess.titre+" - "+sess.theme;
+  function mkLeg(){return LEVELS.map(function(lv){return "<span style='margin-right:5px'><span style='background:"+GRAYS[lv.v-1]+";color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 5px;font-size:9px;font-weight:700'>"+lv.txt+"</span></span>";}).join("");}
+  function mkRow(c,v){
+    var col=v&&v.value?"<span style='background:"+GRAYS[v.value-1]+";color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 7px;font-size:9px;font-weight:700'>"+LTXT[v.value]+"</span>":"<span style='color:#bbb;font-size:9px'>-</span>";
+    var sc=v&&v.score!=null?v.score+"/"+(c.max||"?"):"-/"+(c.max||"?");
+    return "<tr><td style='padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;width:55%'>"+c.label+"</td>"
+      +"<td style='padding:4px 7px;text-align:center;border-bottom:1px solid #ddd;width:25%'>"+col+"</td>"
+      +"<td style='padding:4px 7px;text-align:center;border-bottom:1px solid #ddd;width:20%;font-size:10px;font-weight:700;color:#1a3a5c'>"+sc+"</td></tr>";
   }
-  function mkRows(items,vals){
-    var hdr='<tr style="background:#e8edf3">'
-      +'<th style="padding:4px 7px;font-size:9px;text-align:left;font-weight:700;text-transform:uppercase">Critère</th>'
-      +'<th style="padding:4px 7px;font-size:9px;text-align:center;font-weight:700;text-transform:uppercase">Appréciation</th>'
-      +'<th style="padding:4px 7px;font-size:9px;text-align:center;font-weight:700;text-transform:uppercase">Note</th></tr>';
-    var rows=items.map(function(c){
-      var v=vals.filter(function(x){return x.id===c.id;})[0];
-      var col=v&&v.value?'<span style="background:'+GRAYS[v.value-1]+';color:#fff;border:1.5px solid #000;border-radius:3px;padding:1px 7px;font-size:9px;font-weight:700">'+LTXT[v.value]+'</span>':'<span style="color:#bbb;font-size:9px">—</span>';
-      var sc=v&&v.score!=null?v.score+'/'+c.max:'—/'+(c.max||'?');
-      return '<tr><td style="padding:4px 7px;font-size:10px;border-bottom:1px solid #ddd;width:55%">'+c.label+'</td>'
-        +'<td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd;width:25%">'+col+'</td>'
-        +'<td style="padding:4px 7px;text-align:center;border-bottom:1px solid #ddd;width:20%;font-size:10px;font-weight:700;color:#1a3a5c">'+sc+'</td></tr>';
-    }).join('');
-    return '<table style="width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px">'+hdr+rows+'</table>';
-  }
-  function calcTot(cr,crp){
-    var all=cr.concat(crp);
-    return {
-      obt:all.reduce(function(s,c){return s+(c.score||0);},0),
-      max:all.reduce(function(s,c){return s+(c.max||0);},0)
-    };
+  function mkTable(items,vals){
+    var hdr="<tr style='background:#e8edf3'><th style='padding:4px 7px;font-size:9px;text-align:left;font-weight:700;text-transform:uppercase'>Critere</th><th style='padding:4px 7px;font-size:9px;text-align:center;font-weight:700;text-transform:uppercase'>Appreciation</th><th style='padding:4px 7px;font-size:9px;text-align:center;font-weight:700;text-transform:uppercase'>Note</th></tr>";
+    var rows=items.map(function(c){var v=vals.filter(function(x){return x.id===c.id;})[0];return mkRow(c,v);}).join("");
+    return "<table style='width:100%;border-collapse:collapse;border:1px solid #ccc;margin-bottom:5px'>"+hdr+rows+"</table>";
   }
   function mkHdr(sub,code,obt,max){
-    return '<div style="background:#1a3a5c;color:#fff;padding:7px 11px;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;border-radius:5px">'
-      +'<div><div style="font-size:12px;font-weight:900">OralCheck — Rapport Professeur</div>'
-      +'<div style="font-size:8px;opacity:.85">'+sInfo+(sub?' · '+sub:'')+'</div></div>'
-      +'<div style="text-align:right;font-size:8px;opacity:.85">'+dateStr+'</div></div>'
-      +'<div style="display:flex;justify-content:space-between;align-items:center;background:#f0f4f8;border-radius:5px;padding:5px 11px;margin-bottom:5px;border:1.5px solid #1a3a5c">'
-      +'<div style="font-size:10px;font-weight:700">Code : <span style="letter-spacing:2px;font-size:12px">'+(code||'—')+'</span></div>'
-      +'<div style="font-size:12px;font-weight:900;color:#1a3a5c">Total : <span style="font-size:15px">'+obt+'</span> / '+max+'</div></div>'
-      +'<div style="margin-bottom:4px;font-size:8px;display:flex;align-items:center;gap:3px;flex-wrap:wrap"><strong>Légende :</strong>'+mkLegend()+'</div>';
+    return "<div style='background:#1a3a5c;color:#fff;padding:7px 11px;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;border-radius:5px'>"
+      +"<div><div style='font-size:12px;font-weight:900'>OralCheck - Rapport Professeur</div><div style='font-size:8px;opacity:.85'>"+sInfo+(sub?" - "+sub:"")+"</div></div>"
+      +"<div style='text-align:right;font-size:8px;opacity:.85'>"+dateStr+"</div></div>"
+      +"<div style='display:flex;justify-content:space-between;align-items:center;background:#f0f4f8;border-radius:5px;padding:5px 11px;margin-bottom:5px;border:1.5px solid #1a3a5c'>"
+      +"<div style='font-size:10px;font-weight:700'>Code : <span style='letter-spacing:2px;font-size:12px'>"+(code||"-")+"</span></div>"
+      +"<div style='font-size:12px;font-weight:900;color:#1a3a5c'>Total : <span style='font-size:15px'>"+obt+"</span> / "+max+"</div></div>"
+      +"<div style='margin-bottom:4px;font-size:8px;display:flex;align-items:center;gap:3px;flex-wrap:wrap'><strong>Legende :</strong>"+mkLeg()+"</div>";
   }
-  function mkSecTitle(txt,bg){
-    return '<div style="font-size:8px;font-weight:700;text-transform:uppercase;color:#fff;background:'+bg+';padding:3px 7px;border-radius:3px 3px 0 0">'+txt+'</div>';
-  }
-  function mkApp(txt){
-    return '<div style="font-size:8px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px">Appréciation</div>'
-      +'<div style="border:1.5px solid #999;border-radius:4px;padding:6px 9px;min-height:48px;font-size:10px;background:#fff">'+(txt||'')+'</div>';
-  }
-
-  var pages='';
+  function mkSec(txt,bg){return "<div style='font-size:8px;font-weight:700;text-transform:uppercase;color:#fff;background:"+bg+";padding:3px 7px;border-radius:3px 3px 0 0'>"+txt+"</div>";}
+  function mkApp(txt){return "<div style='font-size:8px;font-weight:700;text-transform:uppercase;color:#555;margin-bottom:3px'>Appreciation</div><div style='border:1.5px solid #999;border-radius:4px;padding:6px 9px;min-height:48px;font-size:10px;background:#fff'>"+(txt||"")+"</div>";}
+  function calcT(a,b){var all=a.concat(b);return{obt:all.reduce(function(s,c){return s+(c.score||0);},0),max:all.reduce(function(s,c){return s+(c.max||0);},0)};}
+  var pages="";
   active.forEach(function(ev){
-    if(isDouble){
-      var rC=ev.criteria.filter(function(c){return c.role==='Recruteur';});
-      var rP=ev.criteriaProf.filter(function(c){return c.role==='Recruteur';});
-      var cC=ev.criteria.filter(function(c){return c.role==='Candidat';});
-      var cP=ev.criteriaProf.filter(function(c){return c.role==='Candidat';});
-      var rT=calcTot(rC,rP); var cT=calcTot(cC,cP);
-      pages+='<div class="page">'+mkHdr('Recruteur',ev.presenterCode,rT.obt,rT.max)
-        +mkSecTitle('Critères communs','#2e5f8a')+mkRows(rC,ev.criteria)
-        +mkSecTitle('Critères prof','#7b0000')+mkRows(rP,ev.criteriaProf)
-        +mkApp(ev.appreciation)
-        +'<div style="margin-top:7px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div></div>';
-      pages+='<div class="page">'+mkHdr('Candidat',ev.codeCandidat,cT.obt,cT.max)
-        +mkSecTitle('Critères communs','#2e5f8a')+mkRows(cC,ev.criteria)
-        +mkSecTitle('Critères prof','#7b0000')+mkRows(cP,ev.criteriaProf)
-        +mkApp(ev.appreciationCandidat)
-        +'<div style="margin-top:7px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div></div>';
+    if(isGroupe){
+      var grpC=sess.criteres.filter(function(c){return c.scope==="groupe";});
+      var grpP=sess.criteresProf.filter(function(c){return c.scope==="groupe";});
+      var indC=sess.criteres.filter(function(c){return c.scope==="indiv";});
+      var indP=sess.criteresProf.filter(function(c){return c.scope==="indiv";});
+      var grpScore=ev.criteria.filter(function(c){return c.scope==="groupe";}).concat(ev.criteriaProf.filter(function(c){return c.scope==="groupe";})).reduce(function(s,c){return s+(c.score||0);},0);
+      var grpMax=grpC.concat(grpP).reduce(function(s,c){return s+(c.max||0);},0);
+      var indMax=indC.concat(indP).reduce(function(s,c){return s+(c.max||0);},0);
+      ev.membres.forEach(function(mb){
+        if(!mb.code) return;
+        var iV=indC.map(function(c,ci){return{id:c.id,value:mb.criteriaIndiv[ci]?mb.criteriaIndiv[ci].value:null,score:mb.criteriaIndiv[ci]?mb.criteriaIndiv[ci].score:null,max:c.max};});
+        var iPV=indP.map(function(c,ci){return{id:c.id,value:mb.criteriaIndivProf[ci]?mb.criteriaIndivProf[ci].value:null,score:mb.criteriaIndivProf[ci]?mb.criteriaIndivProf[ci].score:null,max:c.max};});
+        var indivScore=iV.concat(iPV).reduce(function(s,c){return s+(c.score||0);},0);
+        pages+="<div class='page'>"+mkHdr(mb.code+" - Groupe : "+(ev.groupeName||"-"),mb.code,grpScore+indivScore,grpMax+indMax)
+          +"<div style='background:#eef4fb;border-radius:5px;padding:5px 10px;margin-bottom:5px;font-size:9px'><strong>Score groupe : "+grpScore+" / "+grpMax+"</strong></div>"
+          +mkSec("Criteres communs groupe","#2e5f8a")+mkTable(grpC,ev.criteria)
+          +mkSec("Criteres prof groupe","#7b0000")+mkTable(grpP,ev.criteriaProf)
+          +"<div style='background:#e6f9ef;border-radius:5px;padding:5px 10px;margin:5px 0;font-size:9px'><strong>Score individuel : "+indivScore+" / "+indMax+"</strong></div>"
+          +mkSec("Criteres individuels","#2e5f8a")+mkTable(indC,iV)
+          +mkSec("Criteres prof individuels","#7b0000")+mkTable(indP,iPV)
+          +mkApp(ev.appreciation)
+          +"<div style='margin-top:7px;text-align:center;font-size:8px;color:#bbb'>Cree par C. Iemfre - OralCheck</div></div>";
+      });
+    } else if(isDouble){
+      var rC=sess.criteres.filter(function(c){return c.role==="Recruteur";});
+      var rP=sess.criteresProf.filter(function(c){return c.role==="Recruteur";});
+      var cC=sess.criteres.filter(function(c){return c.role==="Candidat";});
+      var cP=sess.criteresProf.filter(function(c){return c.role==="Candidat";});
+      var rTot=ev.criteria.filter(function(c){return c.role==="Recruteur";}).concat(ev.criteriaProf.filter(function(c){return c.role==="Recruteur";}));
+      var cTot=ev.criteria.filter(function(c){return c.role==="Candidat";}).concat(ev.criteriaProf.filter(function(c){return c.role==="Candidat";}));
+      var rO=rTot.reduce(function(s,c){return s+(c.score||0);},0);var rM=rTot.reduce(function(s,c){return s+(c.max||0);},0);
+      var cO=cTot.reduce(function(s,c){return s+(c.score||0);},0);var cM=cTot.reduce(function(s,c){return s+(c.max||0);},0);
+      pages+="<div class='page'>"+mkHdr("Recruteur",ev.presenterCode,rO,rM)+mkSec("Criteres communs","#2e5f8a")+mkTable(rC,ev.criteria)+mkSec("Criteres prof","#7b0000")+mkTable(rP,ev.criteriaProf)+mkApp(ev.appreciation)+"<div style='margin-top:7px;text-align:center;font-size:8px;color:#bbb'>Cree par C. Iemfre - OralCheck</div></div>";
+      pages+="<div class='page'>"+mkHdr("Candidat",ev.codeCandidat,cO,cM)+mkSec("Criteres communs","#2e5f8a")+mkTable(cC,ev.criteria)+mkSec("Criteres prof","#7b0000")+mkTable(cP,ev.criteriaProf)+mkApp(ev.appreciationCandidat)+"<div style='margin-top:7px;text-align:center;font-size:8px;color:#bbb'>Cree par C. Iemfre - OralCheck</div></div>";
     } else {
-      var t=calcTot(ev.criteria,ev.criteriaProf);
-      pages+='<div class="page">'+mkHdr('',ev.presenterCode,t.obt,t.max)
-        +mkSecTitle('Critères communs élèves / professeur','#2e5f8a')+mkRows(ST.profSession.criteres,ev.criteria)
-        +mkSecTitle('Critères supplémentaires professeur','#7b0000')+mkRows(ST.profSession.criteresProf,ev.criteriaProf)
-        +mkApp(ev.appreciation)
-        +'<div style="margin-top:7px;text-align:center;font-size:8px;color:#bbb">Créé par C. Iemfre — OralCheck</div></div>';
+      var t=calcT(ev.criteria,ev.criteriaProf);
+      pages+="<div class='page'>"+mkHdr("",ev.presenterCode,t.obt,t.max)+mkSec("Criteres communs eleves / professeur","#2e5f8a")+mkTable(sess.criteres,ev.criteria)+mkSec("Criteres supplementaires professeur","#7b0000")+mkTable(sess.criteresProf,ev.criteriaProf)+mkApp(ev.appreciation)+"<div style='margin-top:7px;text-align:center;font-size:8px;color:#bbb'>Cree par C. Iemfre - OralCheck</div></div>";
     }
   });
-
-  var css='*{box-sizing:border-box;}body{font-family:\'Segoe UI\',Arial,sans-serif;margin:0;padding:0;color:#1e2d3d;}'
-    +'.page{width:190mm;min-height:267mm;max-height:267mm;margin:0 auto;padding:8mm 10mm;overflow:hidden;page-break-after:always;page-break-inside:avoid;}'
-    +'@page{size:A4 portrait;margin:10mm;}'
-    +'@media print{body{margin:0;padding:0;}.page{margin:0;width:100%;padding:6mm 8mm;page-break-after:always;page-break-inside:avoid;}}';
-  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>OralCheck Rapport Professeur</title>'
-    +'<style>'+css+'</style></head><body>'+pages
-    +'<scr'+'ipt>window.onload=function(){window.print();};<'+'/scr'+'ipt></body></html>';
-  openPrint(html,'OralCheck_Rapport_Professeur');
+  var css="*{box-sizing:border-box;}body{font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:0;color:#1e2d3d;}"
+    +".page{width:190mm;min-height:267mm;max-height:267mm;margin:0 auto;padding:8mm 10mm;overflow:hidden;page-break-after:always;page-break-inside:avoid;}"
+    +"@page{size:A4 portrait;margin:10mm;}"
+    +"@media print{body{margin:0;padding:0;}.page{margin:0;width:100%;padding:6mm 8mm;page-break-after:always;page-break-inside:avoid;}}";
+  var html="<!DOCTYPE html><html><head><meta charset='UTF-8'><title>OralCheck Rapport Professeur</title><style>"+css+"</style></head><body>"+pages+"<scr"+"ipt>window.onload=function(){window.print();};<"+"/scr"+"ipt></body></html>";
+  openPrint(html,"OralCheck_Rapport_Professeur");
 }
 
 function openPrint(html,fname){
-  var blob=new Blob([html],{type:'text/html'});
+  var blob=new Blob([html],{type:"text/html;charset=utf-8"});
   var url=URL.createObjectURL(blob);
-  var w=window.open(url,'_blank');
-  if(!w){var a=document.createElement('a');a.href=url;a.download=fname+'.html';a.click();}
+  var w=window.open(url,"_blank");
+  if(!w){
+    var iframe=document.createElement("iframe");
+    iframe.style.cssText="position:fixed;width:0;height:0;border:none;left:-9999px;top:-9999px;";
+    document.body.appendChild(iframe);
+    iframe.onload=function(){setTimeout(function(){iframe.contentWindow.focus();iframe.contentWindow.print();setTimeout(function(){document.body.removeChild(iframe);URL.revokeObjectURL(url);},2000);},500);};
+    iframe.src=url;
+  }
 }
 </script>
 </body>
