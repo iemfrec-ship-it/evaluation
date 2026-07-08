@@ -101,7 +101,20 @@ textarea{resize:vertical;min-height:80px;}
 </div>
 <div id="screen-rgpd" class="screen">
   <div class="hero hero-blue" style="padding:26px 20px 42px"><div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div><div class="hero-sub">Politique de confidentialite</div></div>
-  <div class="content"><div class="card"><h2>&#128274; RGPD</h2><p style="color:var(--muted);font-size:.88rem;line-height:1.6"><em>Cette page sera completee ulterieurement.</em></p></div><button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button></div>
+  <div class="content">
+    <div class="card">
+      <h2>&#128274; Protection des donnees personnelles</h2>
+      <p style="font-size:.88rem;line-height:1.7;color:var(--text)">
+        Cette application est un outil pedagogique developpe pour un usage en classe.<br><br>
+        <strong>Aucune donnee n'est transmise a un serveur externe</strong> : toutes les informations (identifiant, reponses, score) restent uniquement dans la memoire de votre navigateur, le temps de la partie en cours.<br><br>
+        Aucun cookie tiers, aucun traceur publicitaire, aucun appel a une API externe n'est utilise.<br><br>
+        Les seules donnees saisies sont : les deux premieres lettres de votre prenom et de votre nom (utilisees uniquement pour generer un identifiant au format XX-YY, sans jamais collecter votre identite complete), ainsi que vos reponses aux exercices.<br><br>
+        <strong>Ces donnees ne sont jamais sauvegardees</strong> : elles disparaissent automatiquement si vous rechargez ou fermez la page. Pensez a telecharger votre PDF de resultats avant de quitter l'application.<br><br>
+        Le PDF genere est cree localement dans votre navigateur ; il n'est envoye a personne automatiquement. C'est a vous de le transmettre a votre professeur.
+      </p>
+    </div>
+    <button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button>
+  </div>
 </div>
 <div id="screen-prof-login" class="screen">
   <div class="hero hero-blue" style="padding:26px 20px 42px"><div class="hero-logo" style="font-size:1.5rem">Oral<span>Check</span></div><div class="hero-sub">Espace Professeur</div></div>
@@ -110,7 +123,10 @@ textarea{resize:vertical;min-height:80px;}
 <div id="screen-prof-dashboard" class="screen">
   <div class="hero hero-blue" style="padding:22px 20px 38px"><div class="hero-logo" style="font-size:1.4rem">Oral<span>Check</span></div><div class="hero-sub">Tableau de bord professeur</div></div>
   <div class="content">
-    <div class="card"><h2>&#9881; Codes d'acces</h2><label>Nouveau code professeur (vide = inchange)</label><input id="new-prof-code" type="password" maxlength="6" placeholder="&bull;&bull;&bull;&bull;" class="code-input"><label>Code eleves (actuel : <span id="display-student-code"></span>)</label><input id="new-student-code" type="text" maxlength="10" placeholder="Code eleves" class="code-input"><button class="btn btn-primary" onclick="saveCodes()">Enregistrer</button><div id="codes-saved-msg" class="alert alert-success" style="display:none;margin-top:10px">Codes mis a jour</div></div>
+    <div class="card"><h2>&#128273; Code d'acces eleves</h2>
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.6">Communiquez ce code a vos eleves pour qu'ils accedent a l'application :</p>
+      <div style="background:#1a3a5c;color:#fff;border-radius:10px;padding:14px 18px;text-align:center;margin-top:10px;letter-spacing:4px;font-size:1.3rem;font-weight:900">ORALCHECK2627</div>
+    </div>
     <div class="card"><h2>&#128203; Mes evaluations</h2><p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Selectionnez une session.</p><div id="prof-session-list"></div></div>
     <button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button>
   </div>
@@ -128,7 +144,7 @@ textarea{resize:vertical;min-height:80px;}
 </div>
 <div id="screen-student-login" class="screen">
   <div class="hero hero-green"><span class="hero-icon">&#128221;</span><div class="hero-title">Espace Eleve</div><div class="hero-sub">Evaluation des presentations orales</div></div>
-  <div class="content"><div class="card"><h2>&#128273; Code d'acces</h2><label>Code fourni par votre professeur</label><input id="student-access-code" type="text" maxlength="10" placeholder="Code d'acces" class="code-input"><div id="student-access-error" class="alert alert-error" style="display:none">Code incorrect.</div><button class="btn btn-green" onclick="studentAccessCheck()">Continuer</button><button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button></div></div>
+  <div class="content"><div class="card"><h2>&#128273; Code d'acces</h2><label>Code fourni par votre professeur</label><input id="student-access-code" type="text" maxlength="15" placeholder="Code d'acces" class="code-input"><div id="student-access-error" class="alert alert-error" style="display:none">Code incorrect.</div><button class="btn btn-green" onclick="studentAccessCheck()">Continuer</button><button class="btn btn-secondary" onclick="goTo('screen-home')">Retour</button></div></div>
 </div>
 <div id="screen-choose-filiere" class="screen">
   <div class="hero hero-green" style="padding:22px 20px 38px"><div class="hero-title">Ma filiere</div></div>
@@ -382,7 +398,7 @@ var LEVELS=[
 ];
 var LTXT={1:"Insuffisant",2:"Pas OK",3:"Moyen",4:"Bien",5:"Tres bien"};
 var GRAYS=["#1a1a1a","#555","#888","#aaa","#ccc"];
-var ST={profCode:"0504",studentCode:"ELEVE01",filiere:"",classe:"",session:null,student:{id:"",classe:""},evals:[],profEvals:[],profSession:null};
+var ST={profCode:"0504",studentCode:"ORALCHECK2627",filiere:"",classe:"",session:null,student:{id:"",classe:""},evals:[],profEvals:[],profSession:null};
 
 function goTo(id){document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("active");});document.getElementById(id).classList.add("active");window.scrollTo(0,0);}
 function unique(a){return a.filter(function(v,i,arr){return arr.indexOf(v)===i;});}
@@ -392,8 +408,6 @@ function profLogin(){
   if(v===ST.profCode){
     document.getElementById("prof-login-error").style.display="none";
     document.getElementById("prof-pin-input").value="";
-    document.getElementById("display-student-code").textContent=ST.studentCode;
-    document.getElementById("new-student-code").value=ST.studentCode;
     renderProfSessionList();goTo("screen-prof-dashboard");
   } else {document.getElementById("prof-login-error").style.display="block";}
 }
@@ -502,11 +516,13 @@ function addProfEvalBlock(){
         +"<input type='text' maxlength='2' placeholder='ex : MA' class='code-input' style='margin-bottom:9px;font-size:.9rem;padding:6px 10px' oninput='ST.profEvals["+eIdx+"].membres["+mi+"].code=this.value.toUpperCase();this.value=this.value.toUpperCase()'>"
         +"<div style='font-size:.66rem;font-weight:700;text-transform:uppercase;color:#2e5f8a;margin-bottom:4px'>Criteres individuels</div>"+indivRows
         +"<div style='font-size:.66rem;font-weight:700;text-transform:uppercase;color:#7b0000;margin:6px 0 4px'>Criteres prof individuels</div>"+indivPRows
+        +"<div style='font-size:.66rem;font-weight:700;text-transform:uppercase;color:#555;margin:6px 0 3px'>Observations individuelles</div>"
+        +"<textarea placeholder='Observations pour cet eleve...' style='min-height:50px;font-size:.8rem' oninput='ST.profEvals["+eIdx+"].membres["+mi+"].observation=this.value'></textarea>"
         +"<div id='prof-membre-total-"+eIdx+"-"+mi+"' style='background:#27ae60;color:#fff;border-radius:5px;padding:5px 10px;margin-top:6px;font-weight:700;font-size:.8rem;text-align:center'>Score individuel : 0 / "+indMax+"</div>"
         +"<div id='prof-membre-grand-total-"+eIdx+"-"+mi+"' style='background:#1a3a5c;color:#fff;border-radius:5px;padding:5px 10px;margin-top:4px;font-weight:800;font-size:.85rem;text-align:center'>Total eleve : 0 / "+(grpMax+indMax)+"</div>"
         +"</div>";
     }
-    membresSection+="<div style='font-size:.7rem;font-weight:700;text-transform:uppercase;color:#555;margin:8px 0 4px'>Appreciation generale</div><textarea placeholder='Saisissez votre appreciation...' oninput='ST.profEvals["+eIdx+"].appreciation=this.value'></textarea>";
+    membresSection+="<div style='font-size:.7rem;font-weight:700;text-transform:uppercase;color:#555;margin:8px 0 4px'>Observations generales du groupe</div><textarea placeholder='Observations pour tout le groupe...' oninput='ST.profEvals["+eIdx+"].appreciation=this.value'></textarea>";
     bodyHTML=grpSection+membresSection;
   } else if(isDouble){
     var rCrit=sess.criteres.filter(function(c){return c.role==="Recruteur";});
@@ -836,14 +852,17 @@ function generateProfPDF(){
         var iV=indC.map(function(c,ci){return{id:c.id,value:mb.criteriaIndiv[ci]?mb.criteriaIndiv[ci].value:null,score:mb.criteriaIndiv[ci]?mb.criteriaIndiv[ci].score:null,max:c.max};});
         var iPV=indP.map(function(c,ci){return{id:c.id,value:mb.criteriaIndivProf[ci]?mb.criteriaIndivProf[ci].value:null,score:mb.criteriaIndivProf[ci]?mb.criteriaIndivProf[ci].score:null,max:c.max};});
         var indivScore=iV.concat(iPV).reduce(function(s,c){return s+(c.score||0);},0);
+        var obsGroupe=ev.appreciation||"";
+        var obsIndiv=mb.observation||"";
         pages+="<div class='page'>"+mkHdr(mb.code+" - Groupe : "+(ev.groupeName||"-"),mb.code,grpScore+indivScore,grpMax+indMax)
           +"<div style='background:#eef4fb;border-radius:5px;padding:5px 10px;margin-bottom:5px;font-size:9px'><strong>Score groupe : "+grpScore+" / "+grpMax+"</strong></div>"
           +mkSec("Criteres communs groupe","#2e5f8a")+mkTable(grpC,ev.criteria)
           +mkSec("Criteres prof groupe","#7b0000")+mkTable(grpP,ev.criteriaProf)
+          +(obsGroupe?"<div style='font-size:8px;font-weight:700;text-transform:uppercase;color:#555;margin:4px 0 2px'>Observations groupe</div><div style='border:1.5px solid #aaa;border-radius:4px;padding:5px 8px;font-size:10px;background:#fffbe6;margin-bottom:5px'>"+obsGroupe+"</div>":"")
           +"<div style='background:#e6f9ef;border-radius:5px;padding:5px 10px;margin:5px 0;font-size:9px'><strong>Score individuel : "+indivScore+" / "+indMax+"</strong></div>"
           +mkSec("Criteres individuels","#2e5f8a")+mkTable(indC,iV)
           +mkSec("Criteres prof individuels","#7b0000")+mkTable(indP,iPV)
-          +mkApp(ev.appreciation)
+          +(obsIndiv?"<div style='font-size:8px;font-weight:700;text-transform:uppercase;color:#555;margin:4px 0 2px'>Observations individuelles</div><div style='border:1.5px solid #aaa;border-radius:4px;padding:5px 8px;font-size:10px;background:#fff;margin-bottom:5px'>"+obsIndiv+"</div>":"")
           +"<div style='margin-top:7px;text-align:center;font-size:8px;color:#bbb'>Cree par C. Iemfre - OralCheck</div></div>";
       });
     } else if(isDouble){
